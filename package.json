@@ -16,8 +16,8 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "eslint src test --ext .ts",
-    "test": "wtr test/*.ts"
+    "lint": "eslint src --ext .ts",
+    "test": "wtr src/test/*.ts"
   },
   "husky": {
     "hooks": {

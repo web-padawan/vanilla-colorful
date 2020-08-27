@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./lib",
+    "outDir": "./",
     "target": "esNext",
     "module": "esNext",
     "declaration": true,
@@ -18,5 +18,6 @@
     "strict": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src", "test"]
+  "include": ["src/**/*.ts"],
+  "exclude": []
 }
