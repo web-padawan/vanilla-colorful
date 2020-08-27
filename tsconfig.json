@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib",
+    "target": "esNext",
+    "module": "esNext",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "lib": ["esnext", "es2017", "dom"],
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src", "test"]
+}
