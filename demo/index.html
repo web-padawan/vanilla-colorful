@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+  <title>Color picker demo</title>
+</head>
+<body>
+  <style>
+    .container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      user-select: none;
+      cursor: default;
+    }
+  </style>
+  <div class="container">
+    <color-saturation></color-saturation>
+    <color-hue></color-hue>
+  </div>
+
+  <script type="module" src="../lib/components/hue.js"></script>
+  <script type="module" src="../lib/components/saturation.js"></script>
+</body>
+</html>
