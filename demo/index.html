@@ -1,27 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>vanilla-colorful</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Recursive&amp;family=PT+Mono&amp;display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wrapper" style="color: var(--contrast, #fff)">
+      <header class="header">
+        <div class="demo">
+          <color-picker-hex color="#1e88e5"></color-picker-hex>
+          <div class="field">
+            <hex-input></hex-input>
+          </div>
+        </div>
+        <div class="header-content">
+          <h1 class="header-title">Vanilla Colorful 🎨</h1>
+          <p class="header-description">
+            A tiny framework agnostic color picker. Port of
+            <a href="https://github.com/omgovich/react-colorful" target="_blank" rel="noreferrer">
+              React Colorful
+            </a>
+            to vanilla Custom Elements.
+          </p>
+          <nav class="links">
+            <a
+              href="https://github.com/web-padawan/vanilla-colorful"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://www.npmjs.com/package/vanilla-colorful"
+              target="_blank"
+              rel="noreferrer"
+            >
+              NPM
+            </a>
+          </nav>
+        </div>
+      </header>
+    </div>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-  <title>Color picker demo</title>
-</head>
-<body>
-  <style>
-    .container {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      user-select: none;
-      cursor: default;
-    }
-  </style>
-  <div class="container">
-    <color-saturation></color-saturation>
-    <color-hue></color-hue>
-  </div>
+    <script type="module">
+      import '../color-picker-hex.js';
+      import '../hex-input.js';
+      import { hexToRgb } from '../lib/utils/convert.js';
+      import { setFaviconColor } from './favicon.js';
 
-  <script type="module" src="../lib/components/hue.js"></script>
-  <script type="module" src="../lib/components/saturation.js"></script>
-</body>
+      // See http://www.w3.org/TR/AERT#color-contrast
+      const getBrightness = ({ r, g, b }) => (r * 299 + g * 587 + b * 114) / 1000;
+
+      const picker = document.querySelector('color-picker-hex');
+      const input = document.querySelector('hex-input');
+
+      const defaultColor = picker.color;
+      input.color = defaultColor;
+      setFaviconColor(defaultColor)();
+
+      const updateColor = (color) => {
+        document.body.style.backgroundColor = color;
+        const contrast = getBrightness(hexToRgb(color)) < 128 ? '#fff' : '#000';
+        document.body.style.setProperty('--contrast', contrast);
+        setFaviconColor(color)();
+      };
+
+      picker.addEventListener('color-changed', (event) => {
+        const color = event.detail.value;
+        input.color = color;
+        updateColor(color);
+      });
+
+      input.addEventListener('color-changed', (event) => {
+        const hex = event.detail.value;
+        picker.color = hex;
+        updateColor(hex);
+      });
+    </script>
+  </body>
 </html>

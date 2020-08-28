@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font: inherit;
+  outline: none;
+}
+
+body {
+  background-color: #1e88e5;
+  color: #fff;
+  font: normal 20px/1.4 "Recursive", Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+  transition: color 0.15s;
+}
+
+.demo {
+  position: relative;
+  width: 200px;
+  flex-shrink: 0;
+}
+
+color-picker-hex {
+  border-radius: 9px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.field {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: calc(50% - 45px);
+  width: 90px;
+  font-family: "PT Mono", monospace;
+}
+
+.field::before {
+  content: "#";
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.33;
+}
+
+hex-input {
+  color: inherit;
+}
+
+hex-input::part(input) {
+  display: block;
+  color: inherit;
+  width: 100%;
+  padding-left: 0.7em;
+  border: none;
+  background: none;
+  outline: none;
+  text-transform: uppercase;
+  opacity: 0.5;
+  font: inherit;
+  transition: opacity 0.2s;
+}
+
+hex-input::part(input):focus,
+hex-input::part(input):hover {
+  opacity: 1;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 120px 32px;
+}
+
+.header-content {
+  flex-grow: 1;
+  margin-left: 40px;
+}
+
+.header-title {
+  margin-bottom: 16px;
+  font-size: 44px;
+  line-height: 1;
+}
+
+.header-description {
+  max-width: 18em;
+}
+
+.links {
+  margin-top: 24px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+  opacity: 0.8;
+}
+
+a:hover {
+  opacity: 1;
+}
+
+.links a {
+  margin-right: 16px;
+}
+
+@media (max-width: 767px) {
+  .header {
+    max-width: 360px;
+    padding: 40px 20px;
+    flex-direction: column;
+  }
+
+  .header-content {
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 0;
+  }
+
+  .header-title {
+    font-size: 32px;
+  }
+
+  .header-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .field {
+    display: none;
+  }
+}
