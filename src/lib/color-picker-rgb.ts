@@ -14,7 +14,7 @@ const colorModel: ColorModel<RGB> = {
 };
 
 export class ColorPickerRgb extends ColorPicker<RGB> {
-  get colorModel(): ColorModel<RGB> {
+  protected get colorModel(): ColorModel<RGB> {
     return colorModel;
   }
 }

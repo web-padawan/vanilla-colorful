@@ -19,7 +19,7 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     return ['color'];
   }
 
-  abstract get colorModel(): ColorModel<C>;
+  protected abstract get colorModel(): ColorModel<C>;
 
   private $!: { h: ColorHue; s: ColorSaturation };
 

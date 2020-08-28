@@ -13,7 +13,7 @@ const colorModel: ColorModel<HSV> = {
 };
 
 export class ColorPickerHsv extends ColorPicker<HSV> {
-  get colorModel(): ColorModel<HSV> {
+  protected get colorModel(): ColorModel<HSV> {
     return colorModel;
   }
 }

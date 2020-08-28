@@ -14,7 +14,7 @@ const colorModel: ColorModel<string> = {
 };
 
 export class ColorPickerHex extends ColorPicker<string> {
-  get colorModel(): ColorModel<string> {
+  protected get colorModel(): ColorModel<string> {
     return colorModel;
   }
 }

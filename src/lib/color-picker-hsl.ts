@@ -14,7 +14,7 @@ const colorModel: ColorModel<HSL> = {
 };
 
 export class ColorPickerHsl extends ColorPicker<HSL> {
-  get colorModel(): ColorModel<HSL> {
+  protected get colorModel(): ColorModel<HSL> {
     return colorModel;
   }
 }
