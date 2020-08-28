@@ -4,3 +4,7 @@ node_modules
 /test/**/*.d.ts.map
 /test/**/*.js
 /test/**/*.js.map
+color-picker-*.js
+*.d.ts
+*.map
+custom-elements.json

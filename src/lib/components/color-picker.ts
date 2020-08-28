@@ -33,8 +33,8 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   private set hsv(hsv: HSV) {
     this._hsv = hsv;
-    this.$.s.hsv = hsv;
-    this.$.h.hue = hsv.h;
+    this.$.s.setHsv(hsv);
+    this.$.h.setHue(hsv.h);
   }
 
   get color(): C {
@@ -51,9 +51,7 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     super();
     const root = this.attachShadow({ mode: 'open' });
     root.appendChild(template.content.cloneNode(true));
-
     root.addEventListener('change', this);
-
     this.$ = {
       h: root.children[2] as ColorHue,
       s: root.children[1] as ColorSaturation
@@ -62,7 +60,9 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   connectedCallback(): void {
     const attr = this.getAttribute('color');
-    this.color = attr ? this.colorModel.fromAttr(attr) : this.colorModel.defaultColor;
+    window.requestAnimationFrame(() => {
+      this.color = attr ? this.colorModel.fromAttr(attr) : this.colorModel.defaultColor;
+    });
   }
 
   attributeChangedCallback(_attr: string, _oldVal: string, newVal: string): void {

@@ -3,7 +3,7 @@ import type { Constructor } from '../types';
 
 export interface PointerInterface {
   pointer: HTMLElement;
-  setProperties(properties: Record<string, string>): void;
+  setPointer(properties: Record<string, string>): void;
 }
 
 export const PointerMixin = <T extends Constructor<HTMLElement>>(
@@ -28,7 +28,7 @@ export const PointerMixin = <T extends Constructor<HTMLElement>>(
       this.pointer = root.getElementById('pointer') as HTMLElement;
     }
 
-    setProperties(properties: Record<keyof CSSStyleDeclaration, string>): void {
+    setPointer(properties: Record<keyof CSSStyleDeclaration, string>): void {
       for (const p in properties) {
         this.pointer.style[p] = properties[p];
       }
