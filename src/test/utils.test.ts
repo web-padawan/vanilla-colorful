@@ -1,23 +1,18 @@
 import { expect } from '@esm-bundle/chai';
-// HEX
-import { hexToHsv } from '../lib/utils/hexToHsv.js';
-import { hsvToHex } from '../lib/utils/hsvToHex.js';
-import { equalHex } from '../lib/utils/equalHex.js';
-import { validHex } from '../lib/utils/validHex.js';
-// HSL
-import { hsvToHsl } from '../lib/utils/hsvToHsl.js';
-import { hslToHsv } from '../lib/utils/hslToHsv.js';
-// HSL string
-import { hsvToHslString } from '../lib/utils/hsvToHslString.js';
-import { hslStringToHsv } from '../lib/utils/hslStringToHsv.js';
-// RGB
-import { hsvToRgb } from '../lib/utils/hsvToRgb.js';
-import { rgbToHsv } from '../lib/utils/rgbToHsv.js';
-// RGB string
-import { hsvToRgbString } from '../lib/utils/hsvToRgbString.js';
-import { rgbStringToHsv } from '../lib/utils/rgbStringToHsv.js';
-// Rest
-import { equalColorObjects } from '../lib/utils/equalColorObjects.js';
+import {
+  hexToHsv,
+  hsvToHex,
+  hsvToHsl,
+  hslToHsv,
+  hsvToHslString,
+  hslStringToHsv,
+  hsvToRgb,
+  hsvToRgbString,
+  rgbToHsv,
+  rgbStringToHsv
+} from '../lib/utils/convert.js';
+import { equalColorObjects, equalHex } from '../lib/utils/compare.js';
+import { validHex } from '../lib/utils/validate.js';
 
 describe('Utils', () => {
   it('Converts HEX to HSV', () => {

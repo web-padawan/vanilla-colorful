@@ -1,7 +1,7 @@
 import { colorPickerStyles } from '../styles.js';
 import './hue.js';
 import './saturation.js';
-import { equalColorObjects } from '../utils/equalColorObjects.js';
+import { equalColorObjects } from '../utils/compare.js';
 import type { ColorSaturation } from './saturation.js';
 import type { HSV, AnyColor, ColorModel } from '../types';
 import { ColorHue } from './hue.js';

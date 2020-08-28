@@ -1,8 +1,7 @@
 import type { ColorModel, RGB } from './types';
 import { ColorPicker } from './components/color-picker.js';
-import { rgbToHsv } from './utils/rgbToHsv.js';
-import { hsvToRgb } from './utils/hsvToRgb.js';
-import { equalColorObjects } from './utils/equalColorObjects.js';
+import { hsvToRgb, rgbToHsv } from './utils/convert.js';
+import { equalColorObjects } from './utils/compare.js';
 
 const colorModel: ColorModel<RGB> = {
   defaultColor: { r: 0, g: 0, b: 0 },

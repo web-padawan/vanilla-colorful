@@ -1,7 +1,7 @@
 import { Interactive, Interaction } from './interactive.js';
 import { PointerMixin } from './pointer-mixin.js';
 import { saturationStyles } from '../styles.js';
-import { hsvToHslString } from '../utils/hsvToHslString.js';
+import { hsvToHslString } from '../utils/convert.js';
 import type { HSV } from '../types';
 
 export class ColorSaturation extends PointerMixin(Interactive, saturationStyles) {

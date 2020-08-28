@@ -1,8 +1,7 @@
 import type { ColorModel } from './types';
 import { ColorPicker } from './components/color-picker.js';
-import { hslStringToHsv } from './utils/hslStringToHsv.js';
-import { hsvToHslString } from './utils/hsvToHslString.js';
-import { equalColorString } from './utils/equalColorString.js';
+import { hslStringToHsv, hsvToHslString } from './utils/convert.js';
+import { equalColorString } from './utils/compare.js';
 
 const colorModel: ColorModel<string> = {
   defaultColor: 'hsl(0, 0%, 0%)',

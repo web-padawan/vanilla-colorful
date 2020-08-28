@@ -1,7 +1,7 @@
 import { Interactive, Interaction } from './interactive.js';
 import { PointerMixin } from './pointer-mixin.js';
 import { hueStyles } from '../styles.js';
-import { hsvToHslString } from '../utils/hsvToHslString.js';
+import { hsvToHslString } from '../utils/convert.js';
 
 export class ColorHue extends PointerMixin(Interactive, hueStyles) {
   set hue(h: number) {
