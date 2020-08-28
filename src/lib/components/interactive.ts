@@ -36,6 +36,10 @@ export class Interactive extends HTMLElement {
     switch (event.type) {
       case 'mousedown':
       case 'touchstart':
+        // event.button is 0 in mousedown for left button activation
+        if (event instanceof MouseEvent && event.button !== 0) {
+          return;
+        }
         this.onMove(getRelativePosition(this, event));
         this.dragging = true;
         break;

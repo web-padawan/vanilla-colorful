@@ -4,13 +4,15 @@ import { hueStyles } from '../styles.js';
 import { hsvToHslString } from '../utils/hsvToHslString.js';
 
 export class ColorHue extends PointerMixin(Interactive, hueStyles) {
-  onMove({ left }: Interaction): void {
-    const h = 360 * left;
+  set hue(h: number) {
     this.setProperties({
       left: `${(h / 360) * 100}%`,
       backgroundColor: hsvToHslString({ h, s: 100, v: 100 })
     });
-    this.dispatchEvent(new CustomEvent('hue-changed', { bubbles: true, detail: { h } }));
+  }
+
+  onMove({ left }: Interaction): void {
+    this.dispatchEvent(new CustomEvent('change', { bubbles: true, detail: { h: 360 * left } }));
   }
 }
 

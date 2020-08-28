@@ -1,7 +1,5 @@
 import { interactiveStyles, pointerStyles } from '../styles.js';
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export type Constructor<T = unknown> = new (...args: any[]) => T;
+import type { Constructor } from '../types';
 
 export interface PointerInterface {
   pointer: HTMLElement;
@@ -22,6 +20,7 @@ export const PointerMixin = <T extends Constructor<HTMLElement>>(
   class Pointer extends base {
     pointer!: HTMLElement;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(...args: any[]) {
       super(...args);
       const root = this.attachShadow({ mode: 'open' });

@@ -1,3 +1,13 @@
+export const colorPickerStyles = `
+:host {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  user-select: none;
+  cursor: default;
+}`;
+
 export const interactiveStyles = `
 #interactive {
   position: absolute;
@@ -56,7 +66,6 @@ export const saturationStyles = `
   bottom: 20px;
   border-bottom: 10px solid #000;
   border-radius: 8px 8px 0 0;
-  background-color: var(--s-bg);
 }
 
 :host::after,
