@@ -5,6 +5,7 @@ node_modules
 /test/**/*.js
 /test/**/*.js.map
 color-picker-*.js
+hex-input.js
 *.d.ts
 *.map
 custom-elements.json
