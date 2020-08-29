@@ -1,4 +1,5 @@
-node_modules
+/node_modules/
+/coverage
 /lib
 /test/**/*.d.ts
 /test/**/*.d.ts.map

@@ -27,14 +27,15 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   private _color!: C;
 
+  private _readyPromise!: Promise<void[]>;
+
   private get hsv(): HSV {
     return this._hsv;
   }
 
   private set hsv(hsv: HSV) {
     this._hsv = hsv;
-    this.$.s.setHsv(hsv);
-    this.$.h.setHue(hsv.h);
+    this._update(hsv);
   }
 
   get color(): C {
@@ -52,6 +53,12 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     const root = this.attachShadow({ mode: 'open' });
     root.appendChild(template.content.cloneNode(true));
     root.addEventListener('change', this);
+
+    this._readyPromise = Promise.all([
+      customElements.whenDefined('color-hue'),
+      customElements.whenDefined('color-saturation')
+    ]);
+
     this.$ = {
       h: root.children[2] as ColorHue,
       s: root.children[1] as ColorSaturation
@@ -60,9 +67,7 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   connectedCallback(): void {
     const attr = this.getAttribute('color');
-    window.requestAnimationFrame(() => {
-      this.color = attr ? this.colorModel.fromAttr(attr) : this.colorModel.defaultColor;
-    });
+    this.color = attr ? this.colorModel.fromAttr(attr) : this.colorModel.defaultColor;
   }
 
   attributeChangedCallback(_attr: string, _oldVal: string, newVal: string): void {
@@ -80,7 +85,15 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     }
   }
 
-  protected _setProps(color: C, hsv: HSV): void {
+  private async _update(hsv: HSV) {
+    // Wait for custom elements to upgrade before setting properties.
+    // Otherwise these would shadow the accessors and break.
+    await this._readyPromise;
+    this.$.s.hsv = hsv;
+    this.$.h.hue = hsv.h;
+  }
+
+  private _setProps(color: C, hsv: HSV): void {
     this.hsv = hsv;
     this._color = color;
     const { reflect, toAttr } = this.colorModel;

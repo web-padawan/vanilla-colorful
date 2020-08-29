@@ -15,9 +15,15 @@
   "env": {
     "browser": true
   },
-  "rules": {
-    "@typescript-eslint/ban-ts-comment": ["error", {
-      "ts-expect-error": false
-    }]
-  }
+  "overrides": [
+    {
+      "files": [ "src/test/*.test.ts" ],
+      "rules": {
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/ban-ts-comment": ["error", {
+          "ts-expect-error": false
+        }]
+      }
+    }
+  ]
 }

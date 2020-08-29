@@ -4,7 +4,7 @@ import { hueStyles } from '../styles.js';
 import { hsvToHslString } from '../utils/convert.js';
 
 export class ColorHue extends PointerMixin(Interactive, hueStyles) {
-  setHue(h: number): void {
+  set hue(h: number) {
     this.setPointer({
       left: `${(h / 360) * 100}%`,
       backgroundColor: hsvToHslString({ h, s: 100, v: 100 })

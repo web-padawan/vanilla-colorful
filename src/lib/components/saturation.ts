@@ -5,7 +5,7 @@ import { hsvToHslString } from '../utils/convert.js';
 import type { HSV } from '../types';
 
 export class ColorSaturation extends PointerMixin(Interactive, saturationStyles) {
-  setHsv({ h, s, v }: HSV): void {
+  set hsv({ h, s, v }: HSV) {
     this.style.backgroundColor = hsvToHslString({ h, s: 100, v: 100 });
     this.setPointer({
       top: `${100 - v}%`,
