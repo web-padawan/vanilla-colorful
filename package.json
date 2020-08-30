@@ -4,6 +4,8 @@
   "description": "A tiny framework agnostic color picker element for modern web apps",
   "author": "Serhii Kulykov <iamkulykov@gmail.com>",
   "license": "MIT",
+  "main": "color-picker-hex.js",
+  "module": "color-picker-hex.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/web-padawan/vanilla-colorful.git"
@@ -12,7 +14,16 @@
     "url": "https://github.com/web-padawan/vanilla-colorful/issues"
   },
   "files": [
-    "lib/"
+    "/lib",
+    "/color-*.d.ts",
+    "/color-*.d.ts.map",
+    "/color-*.js",
+    "/color-*.js.map",
+    "/hex-input.d.ts",
+    "/hex-input.d.ts.map",
+    "/hex-input.js",
+    "/hex-input.js.map",
+    "custom-elements.json"
   ],
   "scripts": {
     "analyze": "wca analyze src/color-*.ts --format json --outFile custom-elements.json",
