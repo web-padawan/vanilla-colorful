@@ -3,6 +3,8 @@ import { ColorPicker } from './lib/components/color-picker.js';
 import { hsvToRgb, rgbToHsv } from './lib/utils/convert.js';
 import { equalColorObjects } from './lib/utils/compare.js';
 
+export { RGB };
+
 const colorModel: ColorModel<RGB> = {
   defaultColor: { r: 0, g: 0, b: 0 },
   toHsv: rgbToHsv,

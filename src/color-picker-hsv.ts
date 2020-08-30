@@ -2,6 +2,8 @@ import type { ColorModel, HSV } from './lib/types';
 import { ColorPicker } from './lib/components/color-picker.js';
 import { equalColorObjects } from './lib/utils/compare.js';
 
+export { HSV };
+
 const colorModel: ColorModel<HSV> = {
   defaultColor: { h: 0, s: 0, v: 0 },
   toHsv: (hsv) => hsv,
