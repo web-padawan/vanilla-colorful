@@ -6,10 +6,10 @@ module.exports = {
   coverage: true,
   coverageConfig: {
     threshold: {
-      statements: 90,
-      branches: 70,
-      functions: 90,
-      lines: 90
+      statements: 99,
+      branches: 77,
+      functions: 98,
+      lines: 99
     }
   },
 };

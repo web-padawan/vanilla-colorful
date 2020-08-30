@@ -32,7 +32,13 @@ export class HexInput extends HTMLElement {
 
   set color(hex: string) {
     this._color = hex;
-    this._input.value = escape(hex);
+    if (hex == null) {
+      this.removeAttribute('color');
+      this._input.value = '';
+    } else {
+      this.setAttribute('color', hex);
+      this._input.value = escape(hex);
+    }
   }
 
   constructor() {

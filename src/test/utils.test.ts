@@ -11,7 +11,7 @@ import {
   rgbToHsv,
   rgbStringToHsv
 } from '../lib/utils/convert.js';
-import { equalColorObjects, equalHex } from '../lib/utils/compare.js';
+import { equalColorObjects, equalColorString, equalHex } from '../lib/utils/compare.js';
 import { validHex } from '../lib/utils/validate.js';
 
 describe('Utils', () => {
@@ -193,6 +193,11 @@ describe('Utils', () => {
     expect(equalColorObjects({ h: 100, s: 50, v: 50 }, { h: 100, s: 50, v: 50 })).to.equal(true);
     expect(equalColorObjects({ h: 50, s: 0, v: 0 }, { h: 100, s: 0, v: 0 })).to.equal(false);
     expect(equalColorObjects({ h: 1, s: 2, v: 3 }, { h: 4, s: 5, v: 6 })).to.equal(false);
+  });
+
+  it('Compares two color strings', () => {
+    expect(equalColorString('rgb(0, 100, 100)', 'rgb(0,100,100)')).to.equal(true);
+    expect(equalColorString('hsl(0, 100%, 50%)', 'hsl(0,100%,50%)')).to.equal(true);
   });
 
   it('Validates HEX colors', () => {
