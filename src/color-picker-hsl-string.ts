@@ -8,9 +8,7 @@ const colorModel: ColorModel<string> = {
   toHsv: hslStringToHsv,
   fromHsv: hsvToHslString,
   equal: equalColorString,
-  toAttr: (color) => color,
-  fromAttr: (color) => color,
-  reflect: true
+  fromAttr: (color) => color
 };
 
 /**

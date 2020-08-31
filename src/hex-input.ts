@@ -32,13 +32,7 @@ export class HexInput extends HTMLElement {
 
   set color(hex: string) {
     this._color = hex;
-    if (hex == null) {
-      this.removeAttribute('color');
-      this._input.value = '';
-    } else {
-      this.setAttribute('color', hex);
-      this._input.value = escape(hex);
-    }
+    this._input.value = hex == null || hex == '' ? '' : escape(hex);
   }
 
   constructor() {
@@ -51,6 +45,19 @@ export class HexInput extends HTMLElement {
     input.addEventListener('input', this);
     input.addEventListener('blur', this);
     this._input = input;
+  }
+
+  connectedCallback(): void {
+    // A user may set a property on an _instance_ of an element,
+    // before its prototype has been connected to this class.
+    // If so, we need to run it through the proper class setter.
+    if (this.hasOwnProperty('color')) {
+      const value = this.color;
+      delete this['color' as keyof this];
+      this.color = value;
+    } else if (this.color == null) {
+      this.color = this.getAttribute('color') || '';
+    }
   }
 
   handleEvent(event: Event): void {

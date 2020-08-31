@@ -10,9 +10,7 @@ const colorModel: ColorModel<HSL> = {
   toHsv: hslToHsv,
   fromHsv: hsvToHsl,
   equal: equalColorObjects,
-  toAttr: (color) => JSON.stringify(color),
-  fromAttr: (color) => JSON.parse(color),
-  reflect: false
+  fromAttr: (color) => JSON.parse(color)
 };
 
 /**

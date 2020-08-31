@@ -23,7 +23,5 @@ export interface ColorModel<T extends AnyColor> {
   toHsv: (color: T) => HSV;
   fromHsv: (hsv: HSV) => T;
   equal: (first: T, second: T) => boolean;
-  toAttr: (color: T) => string;
   fromAttr: (attr: string) => T;
-  reflect: boolean;
 }

@@ -5,7 +5,6 @@ import { hexToHsv, hsvToRgbString } from '../lib/utils/convert';
 import type { ColorHue } from '../lib/components/hue';
 import type { ColorSaturation } from '../lib/components/saturation';
 import type { ColorPickerHex } from '../color-picker-hex';
-import '../color-picker-hex';
 
 class FakeMouseEvent extends MouseEvent {
   constructor(type: string, values: { pageX: number; pageY: number }) {
@@ -51,6 +50,17 @@ const getPointer = (node: ColorHue | ColorSaturation) => {
 describe('color-picker-hex', () => {
   let picker: ColorPickerHex;
 
+  describe('lazy upgrade', () => {
+    it('should work with color property set before upgrade', async () => {
+      picker = document.createElement('color-picker-hex');
+      document.body.appendChild(picker);
+      picker.color = '#123';
+      await import('../color-picker-hex');
+      expect(picker.color).to.equal('#123');
+      document.body.removeChild(picker);
+    });
+  });
+
   describe('default', () => {
     beforeEach(async () => {
       picker = await fixture(html`<color-picker-hex></color-picker-hex>`);
@@ -60,8 +70,8 @@ describe('color-picker-hex', () => {
       expect(picker.color).to.equal('#000');
     });
 
-    it('should reflect default color to attribute', () => {
-      expect(picker.getAttribute('color')).to.equal('#000');
+    it('should not reflect default color to attribute', () => {
+      expect(picker.getAttribute('color')).to.equal(null);
     });
   });
 
@@ -70,12 +80,12 @@ describe('color-picker-hex', () => {
       picker = await fixture(html`<color-picker-hex .color="${'#ccc'}"></color-picker-hex>`);
     });
 
-    it('should set default color property value', () => {
+    it('should accept color set as a property', () => {
       expect(picker.color).to.equal('#ccc');
     });
 
-    it('should reflect color property to attribute', () => {
-      expect(picker.getAttribute('color')).to.equal('#ccc');
+    it('should not reflect color property to attribute', () => {
+      expect(picker.getAttribute('color')).to.equal(null);
     });
   });
 
@@ -88,9 +98,9 @@ describe('color-picker-hex', () => {
       expect(picker.color).to.equal('#488');
     });
 
-    it('should update attribute when property changes', () => {
+    it('should not update attribute when property changes', () => {
       picker.color = '#ccc';
-      expect(picker.getAttribute('color')).to.equal('#ccc');
+      expect(picker.getAttribute('color')).to.equal('#488');
     });
 
     it('should update property when attribute changes', () => {

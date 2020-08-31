@@ -2,7 +2,6 @@ import { expect } from '@esm-bundle/chai';
 import sinon from 'sinon';
 import { fixture, html } from '@open-wc/testing-helpers';
 import type { HexInput } from '../hex-input';
-import '../hex-input';
 
 describe('color-picker-hex', () => {
   let input: HexInput;
@@ -19,23 +18,70 @@ describe('color-picker-hex', () => {
     }
   }
 
-  beforeEach(async () => {
-    input = await fixture(html`<hex-input color="#488"></hex-input>`);
-    target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+  describe('lazy upgrade', () => {
+    it('should work with color property set before upgrade', async () => {
+      const element = document.createElement('hex-input');
+      document.body.appendChild(element);
+      element.color = '#123';
+      await import('../hex-input');
+      expect(element.color).to.equal('#123');
+      target = element.shadowRoot!.querySelector('input') as HTMLInputElement;
+      expect(target.value).to.equal('123');
+      document.body.removeChild(element);
+    });
+  });
+
+  describe('default', () => {
+    beforeEach(async () => {
+      input = await fixture(html`<hex-input></hex-input>`);
+      target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+    });
+
+    it('should set color property to empty string', () => {
+      expect(input.color).to.equal('');
+    });
+
+    it('should set native input value to empty string', () => {
+      expect(target.value).to.equal('');
+    });
   });
 
   describe('color property', () => {
+    beforeEach(async () => {
+      input = await fixture(html`<hex-input .color="${'#ccc'}"></hex-input>`);
+      target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+    });
+
+    it('should accept color set as a property', () => {
+      expect(input.color).to.equal('#ccc');
+    });
+
+    it('should pass property value to native input', () => {
+      expect(target.value).to.equal('ccc');
+    });
+
+    it('should not reflect property to attribute', () => {
+      expect(input.getAttribute('color')).to.equal(null);
+    });
+  });
+
+  describe('color attribute', () => {
+    beforeEach(async () => {
+      input = await fixture(html`<hex-input color="#488"></hex-input>`);
+      target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+    });
+
     it('should set color based on the attribute value', () => {
       expect(input.color).to.equal('#488');
     });
 
-    it('should set value to the underlying input', () => {
+    it('should pass attribute value to native input', () => {
       expect(target.value).to.equal('488');
     });
 
-    it('should update attribute when property changes', () => {
+    it('should not update attribute when property changes', () => {
       input.color = '#ccc';
-      expect(input.getAttribute('color')).to.equal('#ccc');
+      expect(input.getAttribute('color')).to.equal('#488');
     });
 
     it('should update property when attribute changes', () => {
@@ -45,16 +91,14 @@ describe('color-picker-hex', () => {
   });
 
   describe('empty value', () => {
-    it('should remove attribute when color is set to null', () => {
-      // @ts-expect-error
-      input.color = null;
-      expect(input.hasAttribute('color')).to.be.false;
+    beforeEach(async () => {
+      input = await fixture(html`<hex-input color="#488"></hex-input>`);
+      target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
     });
 
-    it('should remove attribute when color is set to undefined', () => {
-      // @ts-expect-error
-      input.color = undefined;
-      expect(input.hasAttribute('color')).to.be.false;
+    it('should clean native input when color is set to empty string', () => {
+      input.color = '';
+      expect(target.value).to.equal('');
     });
 
     it('should clean native input when color is set to null', () => {
@@ -71,6 +115,11 @@ describe('color-picker-hex', () => {
   });
 
   describe('events', () => {
+    beforeEach(async () => {
+      input = await fixture(html`<hex-input color="#488"></hex-input>`);
+      target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+    });
+
     it('should dispatch color-changed event on valid hex input', () => {
       const spy = sinon.spy();
       input.addEventListener('color-changed', spy);

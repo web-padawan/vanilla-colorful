@@ -72,8 +72,17 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   }
 
   connectedCallback(): void {
-    const attr = this.getAttribute('color');
-    this.color = attr ? this.colorModel.fromAttr(attr) : this.colorModel.defaultColor;
+    // A user may set a property on an _instance_ of an element,
+    // before its prototype has been connected to this class.
+    // If so, we need to run it through the proper class setter.
+    if (this.hasOwnProperty('color')) {
+      const value = this.color;
+      delete this['color' as keyof this];
+      this.color = value;
+    } else if (!this.color) {
+      const attr = this.getAttribute('color');
+      this.color = attr ? this.colorModel.fromAttr(attr) : this.colorModel.defaultColor;
+    }
   }
 
   attributeChangedCallback(_attr: string, _oldVal: string, newVal: string): void {
@@ -94,10 +103,6 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   private _setProps(color: C, hsv: HSV): void {
     this.hsv = hsv;
     this[$color] = color;
-    const attr = this.colorModel.toAttr(color);
-    if (this.colorModel.reflect && this.getAttribute('color') !== attr) {
-      this.setAttribute('color', attr);
-    }
     this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: color } }));
   }
 }
