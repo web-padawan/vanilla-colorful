@@ -31,6 +31,7 @@
     "dev": "npm run watch & npm run serve",
     "lint": "eslint src --ext .ts",
     "serve": "es-dev-server --node-resolve",
+    "size": "npm run build && size-limit",
     "test": "wtr src/test/*.ts",
     "watch": "tsc-watch"
   },
@@ -45,10 +46,41 @@
       "prettier --write"
     ]
   },
+  "size-limit": [
+    {
+      "path": "color-picker-hex.js",
+      "limit": "2.2 KB"
+    },
+    {
+      "path": "color-picker-hsl.js",
+      "limit": "2 KB"
+    },
+    {
+      "path": "color-picker-hsl-string.js",
+      "limit": "2 KB"
+    },
+    {
+      "path": "color-picker-hsv.js",
+      "limit": "2 KB"
+    },
+    {
+      "path": "color-picker-rgb.js",
+      "limit": "2.1 KB"
+    },
+    {
+      "path": "color-picker-rgb-string.js",
+      "limit": "2.1 KB"
+    },
+    {
+      "path": "hex-input.js",
+      "limit": "1 KB"
+    }
+  ],
   "dependencies": {},
   "devDependencies": {
     "@esm-bundle/chai": "^4.1.5",
     "@open-wc/testing-helpers": "~1.7.2",
+    "@size-limit/preset-small-lib": "^4.5.6",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
     "@types/sinon": "^9.0.0",
@@ -63,6 +95,7 @@
     "lit-html": "^1.0.0",
     "prettier": "^2.1.1",
     "sinon": "^9.0.0",
+    "size-limit": "^4.5.7",
     "throttle-debounce": "^2.3.0",
     "tsc-watch": "^4.2.9",
     "typescript": "^4.0.2",
