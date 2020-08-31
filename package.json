@@ -15,6 +15,7 @@
   },
   "files": [
     "ACKNOWLEDGMENTS",
+    "LICENSE",
     "/lib",
     "/color-*.d.ts",
     "/color-*.d.ts.map",
