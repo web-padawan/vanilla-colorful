@@ -1,18 +1,20 @@
-import { colorPickerStyles } from '../styles.js';
-import './hue.js';
-import './saturation.js';
 import { equalColorObjects } from '../utils/compare.js';
+import { createTemplate, createRoot } from '../utils/dom.js';
 import type { ColorSaturation } from './saturation.js';
 import type { HSV, AnyColor, ColorModel } from '../types';
+import './hue.js';
+import './saturation.js';
 import { ColorHue } from './hue.js';
+import styles from '../styles/color-picker.js';
 
-const template = document.createElement('template');
+const tpl = createTemplate(`
+<style>${styles}</style>
+<color-saturation part="saturation" exportparts="pointer"></color-saturation>
+<color-hue part="hue" exportparts="pointer"></color-hue>
+`);
 
-template.innerHTML = `
-  <style>${colorPickerStyles}</style>
-  <color-saturation part="saturation" exportparts="pointer"></color-saturation>
-  <color-hue part="hue" exportparts="pointer"></color-hue>
-`;
+const $color = Symbol('color');
+const $hsv = Symbol('hsv');
 
 export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   static get observedAttributes(): string[] {
@@ -23,38 +25,42 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   private $!: { h: ColorHue; s: ColorSaturation };
 
-  private _hsv!: HSV;
+  private [$hsv]!: HSV;
 
-  private _color!: C;
+  private [$color]!: C;
 
-  private _readyPromise!: Promise<void[]>;
+  private _ready!: Promise<void[]>;
 
   private get hsv(): HSV {
-    return this._hsv;
+    return this[$hsv];
   }
 
   private set hsv(hsv: HSV) {
-    this._hsv = hsv;
-    this._update(hsv);
+    this[$hsv] = hsv;
+    // Wait for custom elements to upgrade before setting properties.
+    // Otherwise these would shadow the accessors and break.
+    this._ready.then(() => {
+      this.$.s.hsv = hsv;
+      this.$.h.hue = hsv.h;
+    });
   }
 
   get color(): C {
-    return this._color;
+    return this[$color];
   }
 
   set color(color: C) {
-    if (!this._color || !this.colorModel.equal(color, this._color)) {
+    if (!this[$color] || !this.colorModel.equal(color, this[$color])) {
       this._setProps(color, this.colorModel.toHsv(color));
     }
   }
 
   constructor() {
     super();
-    const root = this.attachShadow({ mode: 'open' });
-    root.appendChild(template.content.cloneNode(true));
-    root.addEventListener('change', this);
+    const root = createRoot(this, tpl);
+    root.addEventListener('move', this);
 
-    this._readyPromise = Promise.all([
+    this._ready = Promise.all([
       customElements.whenDefined('color-hue'),
       customElements.whenDefined('color-saturation')
     ]);
@@ -77,28 +83,21 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     }
   }
 
-  handleEvent({ detail }: CustomEvent): void {
+  handleEvent(event: CustomEvent): void {
     // Merge the current HSV color object with updated params.
-    const hsv = Object.assign({}, this.hsv, detail);
+    const hsv = Object.assign({}, this.hsv, event.detail);
     if (!equalColorObjects(hsv, this.hsv)) {
       this._setProps(this.colorModel.fromHsv(hsv), hsv);
     }
   }
 
-  private async _update(hsv: HSV) {
-    // Wait for custom elements to upgrade before setting properties.
-    // Otherwise these would shadow the accessors and break.
-    await this._readyPromise;
-    this.$.s.hsv = hsv;
-    this.$.h.hue = hsv.h;
-  }
-
   private _setProps(color: C, hsv: HSV): void {
     this.hsv = hsv;
-    this._color = color;
-    const { reflect, toAttr } = this.colorModel;
-    const attr = toAttr(color);
-    if (reflect && this.getAttribute('color') !== attr) this.setAttribute('color', attr);
+    this[$color] = color;
+    const attr = this.colorModel.toAttr(color);
+    if (this.colorModel.reflect && this.getAttribute('color') !== attr) {
+      this.setAttribute('color', attr);
+    }
     this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: color } }));
   }
 }

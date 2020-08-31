@@ -45,7 +45,7 @@ const getInteractive = (node: ColorHue | ColorSaturation) => {
 };
 
 const getPointer = (node: ColorHue | ColorSaturation) => {
-  return node.shadowRoot!.getElementById('pointer') as HTMLElement;
+  return node.shadowRoot!.querySelector('[part=pointer]') as HTMLElement;
 };
 
 describe('color-picker-hex', () => {

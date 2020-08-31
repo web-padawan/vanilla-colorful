@@ -1,26 +1,28 @@
 import { Interactive, Interaction } from './interactive.js';
-import { PointerMixin } from './pointer-mixin.js';
-import { saturationStyles } from '../styles.js';
 import { hsvToHslString } from '../utils/convert.js';
+import { createTemplate, createRoot } from '../utils/dom.js';
+import styles from '../styles/saturation.js';
 import type { HSV } from '../types';
 
-export class ColorSaturation extends PointerMixin(Interactive, saturationStyles) {
-  set hsv({ h, s, v }: HSV) {
-    this.style.backgroundColor = hsvToHslString({ h, s: 100, v: 100 });
-    this.setPointer({
-      top: `${100 - v}%`,
-      left: `${s}%`,
-      backgroundColor: hsvToHslString({ h, s, v })
+const template = createTemplate(`<style>${styles}</style>`);
+
+export class ColorSaturation extends Interactive {
+  constructor() {
+    super();
+    createRoot(this, template);
+  }
+
+  set hsv(hsv: HSV) {
+    this.style.backgroundColor = hsvToHslString({ h: hsv.h, s: 100, v: 100 });
+    this.setStyles({
+      top: `${100 - hsv.v}%`,
+      left: `${hsv.s}%`,
+      'background-color': hsvToHslString(hsv)
     });
   }
 
-  onMove({ left, top }: Interaction): void {
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        bubbles: true,
-        detail: { s: left * 100, v: Math.round(100 - top * 100) }
-      })
-    );
+  getMove(interaction: Interaction): Record<string, number> {
+    return { s: interaction.left * 100, v: Math.round(100 - interaction.top * 100) };
   }
 }
 

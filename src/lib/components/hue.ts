@@ -1,18 +1,25 @@
 import { Interactive, Interaction } from './interactive.js';
-import { PointerMixin } from './pointer-mixin.js';
-import { hueStyles } from '../styles.js';
 import { hsvToHslString } from '../utils/convert.js';
+import { createTemplate, createRoot } from '../utils/dom.js';
+import styles from '../styles/hue.js';
 
-export class ColorHue extends PointerMixin(Interactive, hueStyles) {
+const template = createTemplate(`<style>${styles}</style>`);
+
+export class ColorHue extends Interactive {
+  constructor() {
+    super();
+    createRoot(this, template);
+  }
+
   set hue(h: number) {
-    this.setPointer({
+    this.setStyles({
       left: `${(h / 360) * 100}%`,
-      backgroundColor: hsvToHslString({ h, s: 100, v: 100 })
+      'background-color': hsvToHslString({ h, s: 100, v: 100 })
     });
   }
 
-  onMove({ left }: Interaction): void {
-    this.dispatchEvent(new CustomEvent('change', { bubbles: true, detail: { h: 360 * left } }));
+  getMove(interaction: Interaction): Record<string, number> {
+    return { h: 360 * interaction.left };
   }
 }
 

@@ -5,6 +5,7 @@
 /test/**/*.d.ts.map
 /test/**/*.js
 /test/**/*.js.map
+/src/lib/styles/*.ts
 color-picker-*.js
 hex-input.js
 *.d.ts
