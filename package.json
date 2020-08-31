@@ -14,6 +14,7 @@
     "url": "https://github.com/web-padawan/vanilla-colorful/issues"
   },
   "files": [
+    "ACKNOWLEDGMENTS",
     "/lib",
     "/color-*.d.ts",
     "/color-*.d.ts.map",
