@@ -9,8 +9,8 @@ import styles from '../styles/color-picker.js';
 
 const tpl = createTemplate(`
 <style>${styles}</style>
-<color-saturation part="saturation" exportparts="pointer"></color-saturation>
-<color-hue part="hue" exportparts="pointer"></color-hue>
+<color-saturation part="saturation" exportparts="pointer: saturation-pointer"></color-saturation>
+<color-hue part="hue" exportparts="pointer: hue-pointer"></color-hue>
 `);
 
 const $color = Symbol('color');

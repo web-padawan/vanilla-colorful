@@ -24,7 +24,8 @@ const colorModel: ColorModel<HSL> = {
  *
  * @csspart hue - A hue selector container.
  * @csspart saturation - A saturation selector container
- * @csspart pointer - A draggable pointer element.
+ * @csspart hue-pointer - A hue pointer element.
+ * @csspart saturation-pointer - A saturation pointer element.
  */
 export class ColorPickerHsl extends ColorPicker<HSL> {
   protected get colorModel(): ColorModel<HSL> {
