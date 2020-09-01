@@ -17,11 +17,7 @@ const template = createTemplate(`
 <div id="interactive"><div part="pointer"></div></div>
 `);
 
-const getRelativePosition = (
-  container: HTMLElement,
-  event: MouseEvent | TouchEvent
-): Interaction => {
-  const rect = container.getBoundingClientRect();
+const getRelativePosition = (rect: DOMRect, event: MouseEvent | TouchEvent): Interaction => {
   const pointer = event instanceof MouseEvent ? event : (event as TouchEvent).touches[0];
 
   return {
@@ -79,7 +75,7 @@ export abstract class Interactive extends HTMLElement implements InteractiveInte
     this.dispatchEvent(
       new CustomEvent('move', {
         bubbles: true,
-        detail: this.getMove(getRelativePosition(this, event))
+        detail: this.getMove(getRelativePosition(this.getBoundingClientRect(), event))
       })
     );
   }

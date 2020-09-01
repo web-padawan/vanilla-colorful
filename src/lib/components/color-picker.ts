@@ -15,6 +15,8 @@ const tpl = createTemplate(`
 
 const $color = Symbol('color');
 const $hsv = Symbol('hsv');
+const $h = Symbol('h');
+const $s = Symbol('s');
 
 export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   static get observedAttributes(): string[] {
@@ -23,27 +25,15 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   protected abstract get colorModel(): ColorModel<C>;
 
-  private $!: { h: ColorHue; s: ColorSaturation };
+  private [$h]!: ColorHue;
+
+  private [$s]!: ColorSaturation;
 
   private [$hsv]!: HSV;
 
   private [$color]!: C;
 
   private _ready!: Promise<void[]>;
-
-  private get hsv(): HSV {
-    return this[$hsv];
-  }
-
-  private set hsv(hsv: HSV) {
-    this[$hsv] = hsv;
-    // Wait for custom elements to upgrade before setting properties.
-    // Otherwise these would shadow the accessors and break.
-    this._ready.then(() => {
-      this.$.s.hsv = hsv;
-      this.$.h.hue = hsv.h;
-    });
-  }
 
   get color(): C {
     return this[$color];
@@ -65,10 +55,8 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
       customElements.whenDefined('color-saturation')
     ]);
 
-    this.$ = {
-      h: root.children[2] as ColorHue,
-      s: root.children[1] as ColorSaturation
-    };
+    this[$s] = root.children[1] as ColorSaturation;
+    this[$h] = root.children[2] as ColorHue;
   }
 
   connectedCallback(): void {
@@ -94,15 +82,20 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   handleEvent(event: CustomEvent): void {
     // Merge the current HSV color object with updated params.
-    const hsv = Object.assign({}, this.hsv, event.detail);
-    if (!equalColorObjects(hsv, this.hsv)) {
+    const hsv = Object.assign({}, this[$hsv], event.detail);
+    if (!equalColorObjects(hsv, this[$hsv])) {
       this._setProps(this.colorModel.fromHsv(hsv), hsv);
     }
   }
 
-  private _setProps(color: C, hsv: HSV): void {
-    this.hsv = hsv;
+  private async _setProps(color: C, hsv: HSV): Promise<void> {
+    this[$hsv] = hsv;
     this[$color] = color;
     this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: color } }));
+    // Wait for custom elements to upgrade before setting properties.
+    // Otherwise these would shadow the accessors and break.
+    await this._ready;
+    this[$s].hsv = hsv;
+    this[$h].hue = hsv.h;
   }
 }
