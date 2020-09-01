@@ -33,9 +33,9 @@
     "dev": "npm run watch & npm run serve",
     "dist": "rimraf dist && rollup -c rollup.config.js",
     "lint": "eslint src --ext .ts",
-    "serve": "web-dev-server --node-resolve",
-    "serve:dist": "web-dev-server --app-index dist/index.html --open",
+    "serve": "web-dev-server --node-resolve --app-index demo/index.html --open",
     "size": "npm run build && size-limit",
+    "start": "web-dev-server --app-index dist/index.html --open",
     "styles": "node ./scripts/build-styles.js",
     "test": "wtr src/test/*.ts",
     "watch": "tsc-watch"
