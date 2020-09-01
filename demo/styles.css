@@ -4,7 +4,6 @@
   padding: 0;
   border: none;
   font: inherit;
-  outline: none;
 }
 
 body {
@@ -56,7 +55,6 @@ hex-input > input {
   padding-left: 0.7em;
   border: none;
   background: none;
-  outline: none;
   text-transform: uppercase;
   opacity: 0.5;
   font: inherit;
