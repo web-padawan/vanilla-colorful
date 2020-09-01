@@ -35,6 +35,7 @@
     "dev": "npm run watch & npm run serve",
     "dist": "npm run build && rimraf dist && rollup -c rollup.config.js",
     "lint": "eslint src --ext .ts",
+    "prepublishOnly": "npm run build && npm run analyze",
     "serve": "web-dev-server --node-resolve --app-index demo/index.html --open",
     "size": "npm run build && size-limit",
     "start": "web-dev-server --app-index dist/index.html --open",
