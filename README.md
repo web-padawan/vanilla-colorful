@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://web-padawan.github.io/vanilla-colorful">
+  <a href="https://web-padawan.github.io/vanilla-colorful/">
     <img src="https://raw.githubusercontent.com/web-padawan/vanilla-colorful/master/screenshot.png" width="210" height="210" alt="Screenshot of the color picker">
   </a>
 </div>
@@ -20,7 +20,7 @@
 
 ## Live demo
 
-- [Website](https://web-padawan.github.io/vanilla-colorful)
+- [Website](https://web-padawan.github.io/vanilla-colorful/)
 
 ## Install
 
