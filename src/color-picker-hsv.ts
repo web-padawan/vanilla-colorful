@@ -17,7 +17,7 @@ const colorModel: ColorModel<HSV> = {
  *
  * @element color-picker-hsv
  *
- * @prop {string} color - Selected color in HSV object format.
+ * @prop {HSV} color - Selected color in HSV object format.
  *
  * @fires color-changed - Event fired when color property changes.
  *

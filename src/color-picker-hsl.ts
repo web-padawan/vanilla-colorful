@@ -18,7 +18,7 @@ const colorModel: ColorModel<HSL> = {
  *
  * @element color-picker-hsl
  *
- * @prop {string} color - Selected color in HSL object format.
+ * @prop {HSL} color - Selected color in HSL object format.
  *
  * @fires color-changed - Event fired when color property changes.
  *

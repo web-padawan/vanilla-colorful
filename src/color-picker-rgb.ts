@@ -18,7 +18,7 @@ const colorModel: ColorModel<RGB> = {
  *
  * @element color-picker-rgb
  *
- * @prop {string} color - Selected color in RGB object format.
+ * @prop {RGB} color - Selected color in RGB object format.
  *
  * @fires color-changed - Event fired when color property changes.
  *

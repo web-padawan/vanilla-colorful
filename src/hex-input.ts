@@ -9,7 +9,6 @@ const escape = (hex: string) => hex.replace(/([^0-9A-F]+)/gi, '');
  * @element hex-input
  *
  * @prop {string} color - Color in HEX format.
- * @attr {string} color - Color in HEX format.
  *
  * @fires color-changed - Event fired when color is changed.
  *
