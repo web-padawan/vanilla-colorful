@@ -16,6 +16,7 @@
   "files": [
     "ACKNOWLEDGMENTS",
     "LICENSE",
+    "README.md",
     "/lib",
     "/color-*.d.ts",
     "/color-*.d.ts.map",
