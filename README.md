@@ -5,6 +5,18 @@
 </div>
 
 <div align="center">
+  <a href="https://npmjs.org/package/vanilla-colorful">
+    <img alt="npm" src="https://img.shields.io/npm/v/vanilla-colorful.svg" />
+  </a>
+ <a href="https://npmjs.org/package/vanilla-colorful">
+    <img alt="no dependencies" src="https://img.shields.io/david/web-padawan/vanilla-colorful.svg" />
+  </a>
+  <a href="https://bundlephobia.com/result?p=vanilla-colorful">
+    <img alt="gzip size" src="https://badgen.net/bundlephobia/minzip/vanilla-colorful" />
+  </a>
+</div>
+
+<div align="center">
   <strong>vanilla-colorful</strong> is a port of <a href="https://github.com/omgovich/react-colorful">react colorful</a> to vanilla Custom Elements.
 </div>
 
@@ -65,7 +77,7 @@ you need another color model, we provide 5 additional color picker bundles.
 ```html
 <color-picker-rgb></color-picker-rgb>
 <script type="module">
-  import 'vanilla-colorful/color-picker-rgb.js;
+  import 'vanilla-colorful/color-picker-rgb.js';
 
   const picker = document.querySelector('color-picker-rgb');
   picker.color = { r: 50, g: 100, b: 150 };
@@ -112,7 +124,7 @@ color-picker-hex::part(hue-pointer) {
 ```html
 <hex-input color="#1e88e5"></hex-input>
 <script type="module">
-  import 'vanilla-colorful/hex-input.js;
+  import 'vanilla-colorful/hex-input.js';
 
   const input = document.querySelector('hex-input');
   input.addEventListener('color-changed', event => {
