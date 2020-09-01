@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://web-padawan.github.io/vanilla-colorful">
-    <img src="https://raw.githubusercontent.com/web-padawan/vanilla-colorful/master/screenshot.png" width="220" height="230" alt="Screenshot of the color picker">
+    <img src="https://raw.githubusercontent.com/web-padawan/vanilla-colorful/master/screenshot.png" width="210" height="210" alt="Screenshot of the color picker">
   </a>
 </div>
 
