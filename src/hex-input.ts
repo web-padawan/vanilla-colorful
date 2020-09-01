@@ -11,8 +11,6 @@ const escape = (hex: string) => hex.replace(/([^0-9A-F]+)/gi, '');
  * @prop {string} color - Color in HEX format.
  *
  * @fires color-changed - Event fired when color is changed.
- *
- * @csspart input - An underlying input element.
  */
 export class HexInput extends HTMLElement {
   static get observedAttributes(): string[] {
@@ -36,11 +34,13 @@ export class HexInput extends HTMLElement {
 
   constructor() {
     super();
-    const input = document.createElement('input');
-    input.setAttribute('part', 'input');
-    input.setAttribute('spellcheck', 'false');
-    input.setAttribute('maxlength', '6');
-    this.attachShadow({ mode: 'open' }).appendChild(input);
+    let input = this.querySelector('input');
+    if (!input) {
+      input = document.createElement('input');
+      input.setAttribute('spellcheck', 'false');
+      input.setAttribute('maxlength', '6');
+      this.appendChild(input);
+    }
     input.addEventListener('input', this);
     input.addEventListener('blur', this);
     this._input = input;

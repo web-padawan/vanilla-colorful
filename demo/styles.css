@@ -49,7 +49,7 @@ hex-input {
   color: inherit;
 }
 
-hex-input::part(input) {
+hex-input > input {
   display: block;
   color: inherit;
   width: 100%;

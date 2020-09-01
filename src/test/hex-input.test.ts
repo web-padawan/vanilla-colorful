@@ -25,7 +25,7 @@ describe('color-picker-hex', () => {
       element.color = '#123';
       await import('../hex-input');
       expect(element.color).to.equal('#123');
-      target = element.shadowRoot!.querySelector('input') as HTMLInputElement;
+      target = element.querySelector('input') as HTMLInputElement;
       expect(target.value).to.equal('123');
       document.body.removeChild(element);
     });
@@ -34,7 +34,7 @@ describe('color-picker-hex', () => {
   describe('default', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input></hex-input>`);
-      target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+      target = input.querySelector('input') as HTMLInputElement;
     });
 
     it('should set color property to empty string', () => {
@@ -49,7 +49,7 @@ describe('color-picker-hex', () => {
   describe('color property', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input .color="${'#ccc'}"></hex-input>`);
-      target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+      target = input.querySelector('input') as HTMLInputElement;
     });
 
     it('should accept color set as a property', () => {
@@ -68,7 +68,7 @@ describe('color-picker-hex', () => {
   describe('color attribute', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input color="#488"></hex-input>`);
-      target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+      target = input.querySelector('input') as HTMLInputElement;
     });
 
     it('should set color based on the attribute value', () => {
@@ -93,7 +93,7 @@ describe('color-picker-hex', () => {
   describe('empty value', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input color="#488"></hex-input>`);
-      target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+      target = input.querySelector('input') as HTMLInputElement;
     });
 
     it('should clean native input when color is set to empty string', () => {
@@ -114,10 +114,26 @@ describe('color-picker-hex', () => {
     });
   });
 
+  describe('custom input', () => {
+    beforeEach(async () => {
+      input = await fixture(html`<hex-input color="#488"><input type="text" /></hex-input>`);
+      target = input.querySelector('input') as HTMLInputElement;
+    });
+
+    it('should pass attribute value to custom input', () => {
+      expect(target.value).to.equal('488');
+    });
+
+    it('should pass property value to custom input', () => {
+      input.color = '#ccc';
+      expect(target.value).to.equal('ccc');
+    });
+  });
+
   describe('events', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input color="#488"></hex-input>`);
-      target = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+      target = input.querySelector('input') as HTMLInputElement;
     });
 
     it('should dispatch color-changed event on valid hex input', () => {
