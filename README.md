@@ -40,6 +40,20 @@
 npm install vanilla-colorful --save
 ```
 
+Or use one of the following content delivery networks:
+
+[unpkg.com CDN](https://unpkg.com/vanilla-colorful?module):
+
+```html
+<script type="module" src="https://unpkg.com/vanilla-colorful?module"></script>
+```
+
+[Skypack CDN](https://cdn.skypack.dev/vanilla-colorful):
+
+```html
+<script type="module" src="https://cdn.skypack.dev/vanilla-colorful"></script>
+```
+
 ## Usage
 
 ```html
