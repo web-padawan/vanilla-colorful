@@ -33,6 +33,11 @@
 ## Live demo
 
 - [Website](https://web-padawan.github.io/vanilla-colorful/)
+- [Angular example](https://components.studio/edit/MGLIUt626MIwrLZ1c2E8)
+- [LitElement example](https://components.studio/edit/5F8uPtFM41MCEQBsDbIF)
+- [React example](https://components.studio/edit/dXQXpT6ggwihpoxPqioI)
+- [Svelte example](https://components.studio/edit/CpWY9ofL287dfvJaQJIA)
+- [Vue example](https://components.studio/edit/xACXVNs47cgdWFSafS70)
 
 ## Install
 
