@@ -1,16 +1,5 @@
-import type { ColorModel, HSV } from './lib/types';
-import { ColorPicker } from './lib/components/color-picker.js';
-import { equalColorObjects } from './lib/utils/compare.js';
-
-export { HSV };
-
-const colorModel: ColorModel<HSV> = {
-  defaultColor: { h: 0, s: 0, v: 0 },
-  toHsv: (hsv) => hsv,
-  fromHsv: (hsv) => hsv,
-  equal: equalColorObjects,
-  fromAttr: (color) => JSON.parse(color)
-};
+import { HsvBase } from './lib/entrypoints/hsv.js';
+export type { HSV } from './lib/types';
 
 /**
  * A color picker custom element that uses HSV object format.
@@ -26,11 +15,7 @@ const colorModel: ColorModel<HSV> = {
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerHsv extends ColorPicker<HSV> {
-  protected get colorModel(): ColorModel<HSV> {
-    return colorModel;
-  }
-}
+export class ColorPickerHsv extends HsvBase {}
 
 customElements.define('color-picker-hsv', ColorPickerHsv);
 

@@ -1,15 +1,4 @@
-import type { ColorModel } from './lib/types';
-import { ColorPicker } from './lib/components/color-picker.js';
-import { hsvToRgbString, rgbStringToHsv } from './lib/utils/convert.js';
-import { equalColorString } from './lib/utils/compare.js';
-
-const colorModel: ColorModel<string> = {
-  defaultColor: 'rgb(0, 0, 0)',
-  toHsv: rgbStringToHsv,
-  fromHsv: hsvToRgbString,
-  equal: equalColorString,
-  fromAttr: (color) => color
-};
+import { RgbStringBase } from './lib/entrypoints/rgb-string.js';
 
 /**
  * A color picker custom element that uses RGB string format.
@@ -25,11 +14,7 @@ const colorModel: ColorModel<string> = {
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerRgbString extends ColorPicker<string> {
-  protected get colorModel(): ColorModel<string> {
-    return colorModel;
-  }
-}
+export class ColorPickerRgbString extends RgbStringBase {}
 
 customElements.define('color-picker-rgb-string', ColorPickerRgbString);
 

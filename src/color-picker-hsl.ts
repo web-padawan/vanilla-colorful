@@ -1,17 +1,5 @@
-import type { ColorModel, HSL } from './lib/types';
-import { ColorPicker } from './lib/components/color-picker.js';
-import { hslToHsv, hsvToHsl } from './lib/utils/convert.js';
-import { equalColorObjects } from './lib/utils/compare.js';
-
-export { HSL };
-
-const colorModel: ColorModel<HSL> = {
-  defaultColor: { h: 0, s: 0, l: 0 },
-  toHsv: hslToHsv,
-  fromHsv: hsvToHsl,
-  equal: equalColorObjects,
-  fromAttr: (color) => JSON.parse(color)
-};
+import { HslBase } from './lib/entrypoints/hsl.js';
+export type { HSL } from './lib/types';
 
 /**
  * A color picker custom element that uses HSL object format.
@@ -27,11 +15,7 @@ const colorModel: ColorModel<HSL> = {
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerHsl extends ColorPicker<HSL> {
-  protected get colorModel(): ColorModel<HSL> {
-    return colorModel;
-  }
-}
+export class ColorPickerHsl extends HslBase {}
 
 customElements.define('color-picker-hsl', ColorPickerHsl);
 

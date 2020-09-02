@@ -1,17 +1,5 @@
-import type { ColorModel, RGB } from './lib/types';
-import { ColorPicker } from './lib/components/color-picker.js';
-import { hsvToRgb, rgbToHsv } from './lib/utils/convert.js';
-import { equalColorObjects } from './lib/utils/compare.js';
-
-export { RGB };
-
-const colorModel: ColorModel<RGB> = {
-  defaultColor: { r: 0, g: 0, b: 0 },
-  toHsv: rgbToHsv,
-  fromHsv: hsvToRgb,
-  equal: equalColorObjects,
-  fromAttr: (color) => JSON.parse(color)
-};
+import { RgbBase } from './lib/entrypoints/rgb.js';
+export type { RGB } from './lib/types';
 
 /**
  * A color picker custom element that uses RGB object format.
@@ -27,11 +15,7 @@ const colorModel: ColorModel<RGB> = {
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerRgb extends ColorPicker<RGB> {
-  protected get colorModel(): ColorModel<RGB> {
-    return colorModel;
-  }
-}
+export class ColorPickerRgb extends RgbBase {}
 
 customElements.define('color-picker-rgb', ColorPickerRgb);
 
