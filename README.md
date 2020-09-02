@@ -62,7 +62,7 @@ Or use one of the following content delivery networks:
   import 'vanilla-colorful';
 
   const picker = document.querySelector('color-picker-gex');
-  picker.addEventListener('color-changed', event => {
+  picker.addEventListener('color-changed', (event) => {
     const newColor = event.detail.value;
   });
 </script>
@@ -79,8 +79,8 @@ you need another color model, we provide 5 additional color picker bundles.
 #### Available pickers
 
 | File to import                 | HTML element                | Value example                |
-| -------------------------------|-----------------------------| ---------------------------- |
-| `"color-picker-rgb.js"`        | `<color-picker-rgb>`        | `{ r: 255, g: 255, b: 255 }` |
+| ------------------------------ | --------------------------- | ---------------------------- |
+| `"color-picker-rgb.js"`        | `<color-picker-rgb>`        | `{ r: 255, g: 255, b: 255 }` |
 | `"color-picker-rgb-string.js"` | `<color-picker-rgb-string>` | `"rgb(255, 255, 255)"`       |
 | `"color-picker-hsl.js"`        | `<color-picker-hsl>`        | `{ h: 0, s: 0, l: 100 }`     |
 | `"color-picker-hsl-string.js"` | `<color-picker-hsl-string>` | `"hsl(0, 0%, 100%)"`         |
@@ -141,7 +141,7 @@ color-picker-hex::part(hue-pointer) {
   import 'vanilla-colorful/hex-input.js';
 
   const input = document.querySelector('hex-input');
-  input.addEventListener('color-changed', event => {
+  input.addEventListener('color-changed', (event) => {
     const newColor = event.detail.value;
   });
 </script>
@@ -162,7 +162,7 @@ the element you're using, you can also import the type that is associated with t
 For example, if you're using our HSL color picker component, you can also import the `HSL` type.
 
 ```ts
-import type { HSL }  from 'vanilla-colorful/color-picker-hsl';
+import type { HSL } from 'vanilla-colorful/color-picker-hsl';
 
 const myHslValue: HSL = { h: 0, s: 0, l: 0 };
 ```
@@ -170,6 +170,7 @@ const myHslValue: HSL = { h: 0, s: 0, l: 0 };
 All the included custom elements are compatible with [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) and
 [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) extension for Visual
 Studio Code, so you can benefit from type checking in lit-html templates.
+
 </details>
 
 ## Browser support
