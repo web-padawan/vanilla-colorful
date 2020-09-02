@@ -2,9 +2,9 @@ import { expect } from '@esm-bundle/chai';
 import sinon from 'sinon';
 import { fixture, html } from '@open-wc/testing-helpers';
 import { hexToHsv, hsvToRgbString } from '../lib/utils/convert';
-import type { ColorHue } from '../lib/components/hue';
-import type { ColorSaturation } from '../lib/components/saturation';
 import type { ColorPickerHex } from '../color-picker-hex';
+import type { Hue } from '../lib/components/hue';
+import type { Saturation } from '../lib/components/saturation';
 
 class FakeMouseEvent extends MouseEvent {
   constructor(type: string, values: { pageX: number; pageY: number }) {
@@ -39,11 +39,11 @@ const middleOfNode = (node: Element) => {
   return { y: bcr.top + bcr.height / 2, x: bcr.left + bcr.width / 2 };
 };
 
-const getInteractive = (node: ColorHue | ColorSaturation) => {
+const getInteractive = (node: Hue | Saturation) => {
   return node.shadowRoot!.getElementById('interactive') as HTMLElement;
 };
 
-const getPointer = (node: ColorHue | ColorSaturation) => {
+const getPointer = (node: Hue | Saturation) => {
   return node.shadowRoot!.querySelector('[part=pointer]') as HTMLElement;
 };
 
@@ -110,13 +110,14 @@ describe('color-picker-hex', () => {
   });
 
   describe('hue and saturation', () => {
-    let hue: ColorHue;
-    let saturation: ColorSaturation;
+    let hue: Hue;
+    let saturation: Saturation;
 
     beforeEach(async () => {
       picker = await fixture(html`<color-picker-hex color="#488"></color-picker-hex>`);
-      hue = picker.shadowRoot!.querySelector('color-hue') as ColorHue;
-      saturation = picker.shadowRoot!.querySelector('color-saturation') as ColorSaturation;
+      const root = picker.shadowRoot as ShadowRoot;
+      hue = root.querySelector('[part="hue"]') as Hue;
+      saturation = root.querySelector('[part="saturation"]') as Saturation;
     });
 
     describe('pointers', () => {

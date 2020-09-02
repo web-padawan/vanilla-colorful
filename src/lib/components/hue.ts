@@ -5,7 +5,7 @@ import styles from '../styles/hue.js';
 
 const template = createTemplate(`<style>${styles}</style>`);
 
-export class ColorHue extends Interactive {
+export class Hue extends Interactive {
   constructor() {
     super();
     createRoot(this, template);
@@ -23,4 +23,4 @@ export class ColorHue extends Interactive {
   }
 }
 
-customElements.define('color-hue', ColorHue);
+customElements.define('vc-hue', Hue);

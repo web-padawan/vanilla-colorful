@@ -6,7 +6,7 @@ import type { HSV } from '../types';
 
 const template = createTemplate(`<style>${styles}</style>`);
 
-export class ColorSaturation extends Interactive {
+export class Saturation extends Interactive {
   constructor() {
     super();
     createRoot(this, template);
@@ -26,4 +26,4 @@ export class ColorSaturation extends Interactive {
   }
 }
 
-customElements.define('color-saturation', ColorSaturation);
+customElements.define('vc-saturation', Saturation);

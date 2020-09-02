@@ -1,16 +1,16 @@
 import { equalColorObjects } from '../utils/compare.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
-import type { ColorSaturation } from './saturation.js';
-import type { HSV, AnyColor, ColorModel } from '../types';
+import type { AnyColor, ColorModel, HSV } from '../types';
+import type { Hue } from './hue.js';
+import type { Saturation } from './saturation.js';
 import './hue.js';
 import './saturation.js';
-import { ColorHue } from './hue.js';
 import styles from '../styles/color-picker.js';
 
 const tpl = createTemplate(`
 <style>${styles}</style>
-<color-saturation part="saturation" exportparts="pointer: saturation-pointer"></color-saturation>
-<color-hue part="hue" exportparts="pointer: hue-pointer"></color-hue>
+<vc-saturation part="saturation" exportparts="pointer: saturation-pointer"></vc-saturation>
+<vc-hue part="hue" exportparts="pointer: hue-pointer"></vc-hue>
 `);
 
 const $color = Symbol('color');
@@ -25,9 +25,9 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   protected abstract get colorModel(): ColorModel<C>;
 
-  private [$h]!: ColorHue;
+  private [$h]!: Hue;
 
-  private [$s]!: ColorSaturation;
+  private [$s]!: Saturation;
 
   private [$hsv]!: HSV;
 
@@ -51,12 +51,12 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     root.addEventListener('move', this);
 
     this._ready = Promise.all([
-      customElements.whenDefined('color-hue'),
-      customElements.whenDefined('color-saturation')
+      customElements.whenDefined('vc-hue'),
+      customElements.whenDefined('vc-saturation')
     ]);
 
-    this[$s] = root.children[1] as ColorSaturation;
-    this[$h] = root.children[2] as ColorHue;
+    this[$s] = root.children[1] as Saturation;
+    this[$h] = root.children[2] as Hue;
   }
 
   connectedCallback(): void {
