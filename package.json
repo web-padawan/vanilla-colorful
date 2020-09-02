@@ -30,7 +30,7 @@
     "custom-elements.json"
   ],
   "scripts": {
-    "analyze": "wca analyze src/color-*.ts --format json --outFile custom-elements.json",
+    "analyze": "wca analyze src/*.ts --format json --outFile custom-elements.json",
     "build": "npm run styles && tsc",
     "deploy": "npm run dist && gh-pages -d dist",
     "dev": "npm run watch & npm run serve",
