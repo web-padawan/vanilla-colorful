@@ -20,11 +20,10 @@ export class HexInputBase extends HTMLElement {
 
   set color(hex: string) {
     this._color = hex;
-    this._input.value = hex == null || hex == '' ? '' : escape(hex);
+    this._setValue(hex);
   }
 
-  constructor() {
-    super();
+  connectedCallback(): void {
     let input = this.querySelector('input');
     if (!input) {
       input = document.createElement('input');
@@ -35,9 +34,7 @@ export class HexInputBase extends HTMLElement {
     input.addEventListener('input', this);
     input.addEventListener('blur', this);
     this._input = input;
-  }
 
-  connectedCallback(): void {
     // A user may set a property on an _instance_ of an element,
     // before its prototype has been connected to this class.
     // If so, we need to run it through the proper class setter.
@@ -47,6 +44,8 @@ export class HexInputBase extends HTMLElement {
       this.color = value;
     } else if (this.color == null) {
       this.color = this.getAttribute('color') || '';
+    } else if (this._color) {
+      this._setValue(this._color);
     }
   }
 
@@ -72,6 +71,12 @@ export class HexInputBase extends HTMLElement {
   attributeChangedCallback(_attr: string, _oldVal: string, newVal: string): void {
     if (this.color !== newVal) {
       this.color = newVal;
+    }
+  }
+
+  private _setValue(hex: string): void {
+    if (this._input) {
+      this._input.value = hex == null || hex == '' ? '' : escape(hex);
     }
   }
 }

@@ -46,6 +46,28 @@ describe('color-picker-hex', () => {
     });
   });
 
+  describe('initialization', () => {
+    beforeEach(async () => {
+      input = document.createElement('hex-input');
+    });
+
+    afterEach(() => {
+      document.body.removeChild(input);
+    });
+
+    it('should handle property set before adding to the DOM', () => {
+      input.color = '#123';
+      document.body.appendChild(input);
+      expect((input.querySelector('input') as HTMLInputElement).value).to.equal('123');
+    });
+
+    it('should handle attribute set before adding to the DOM', () => {
+      input.setAttribute('color', '#123');
+      document.body.appendChild(input);
+      expect((input.querySelector('input') as HTMLInputElement).value).to.equal('123');
+    });
+  });
+
   describe('color property', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input .color="${'#ccc'}"></hex-input>`);
