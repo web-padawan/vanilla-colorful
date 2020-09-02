@@ -1,0 +1,15 @@
+sudo: false
+dist: xenial
+language: node_js
+node_js: lts/*
+
+addons:
+  chrome: stable
+
+cache: npm
+
+script:
+
+- npm run build
+- npm run lint
+- npm test
