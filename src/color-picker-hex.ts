@@ -1,15 +1,4 @@
-import type { ColorModel } from './lib/types';
-import { ColorPicker } from './lib/components/color-picker.js';
-import { hexToHsv, hsvToHex } from './lib/utils/convert.js';
-import { equalHex } from './lib/utils/compare.js';
-
-const colorModel: ColorModel<string> = {
-  defaultColor: '#000',
-  toHsv: hexToHsv,
-  fromHsv: hsvToHex,
-  equal: equalHex,
-  fromAttr: (color) => color
-};
+import { HexBase } from './lib/entrypoints/hex.js';
 
 /**
  * A color picker custom element that uses HEX format.
@@ -25,11 +14,7 @@ const colorModel: ColorModel<string> = {
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerHex extends ColorPicker<string> {
-  protected get colorModel(): ColorModel<string> {
-    return colorModel;
-  }
-}
+export class ColorPickerHex extends HexBase {}
 
 customElements.define('color-picker-hex', ColorPickerHex);
 
