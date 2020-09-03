@@ -10,6 +10,6 @@ cache: npm
 
 script:
 
-- npm run build
+- npm run size
 - npm run lint
 - npm test
