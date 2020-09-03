@@ -1,3 +1,20 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.1](https://github.com/web-padawan/vanilla-colorful/compare/v0.1.0...v0.1.1) (2020-09-03)
+
+
+### Features
+
+* add base classes entrypoints ([#2](https://github.com/web-padawan/vanilla-colorful/issues/2)) ([31024ca](https://github.com/web-padawan/vanilla-colorful/commit/31024ca0be6adce4e4cdd9b4c5485cc4812559a6))
+
+
+### Bug Fixes
+
+* prevent exception in hex-input ([2c2b74c](https://github.com/web-padawan/vanilla-colorful/commit/2c2b74c501e12f42020c54236e42a11530ab0687))
+* run internal setters properly ([#3](https://github.com/web-padawan/vanilla-colorful/issues/3)) ([fe32815](https://github.com/web-padawan/vanilla-colorful/commit/fe3281580d1587428e926fc685ab82f4499051c6))
+
 ## 0.1.0 (2020-09-01)
 
 ### Features
