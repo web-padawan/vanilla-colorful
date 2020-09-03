@@ -155,6 +155,17 @@ color-picker-hex::part(hue-pointer) {
 `<hex-input>` does not use Shadow DOM and renders an `input` element without any custom styles. You
 can also provide a custom `input` element as a child if you want to configure it.
 
+## Base classes
+
+**vanilla-colorful** provides a set of base classes that can be imported without registering custom
+elements. This is useful if you want to create your own color picker with a different tag name.
+
+```js
+import { RgbBase } from 'vanilla-colorful/lib/entrypoints/rgb.js';
+
+customElements.define('custom-color-picker', class extends RgbBase {});
+```
+
 ## TypeScript support
 
 **vanilla-colorful** supports TypeScript and ships with types in the library itself; no need for any other install.
