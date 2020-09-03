@@ -11,6 +11,14 @@ export class Hue extends Interactive {
     createRoot(this, template);
   }
 
+  connectedCallback(): void {
+    if (this.hasOwnProperty('hue')) {
+      const value = this.hue;
+      delete this['hue' as keyof this];
+      this.hue = value;
+    }
+  }
+
   set hue(h: number) {
     this.setStyles({
       left: `${(h / 360) * 100}%`,

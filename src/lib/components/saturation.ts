@@ -12,6 +12,14 @@ export class Saturation extends Interactive {
     createRoot(this, template);
   }
 
+  connectedCallback(): void {
+    if (this.hasOwnProperty('hsv')) {
+      const value = this.hsv;
+      delete this['hsv' as keyof this];
+      this.hsv = value;
+    }
+  }
+
   set hsv(hsv: HSV) {
     this.style.backgroundColor = hsvToHslString({ h: hsv.h, s: 100, v: 100 });
     this.setStyles({
