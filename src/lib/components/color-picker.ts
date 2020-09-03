@@ -33,8 +33,6 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   private [$color]!: C;
 
-  private _ready!: Promise<void[]>;
-
   get color(): C {
     return this[$color];
   }
@@ -49,12 +47,6 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     super();
     const root = createRoot(this, tpl);
     root.addEventListener('move', this);
-
-    this._ready = Promise.all([
-      customElements.whenDefined('vc-hue'),
-      customElements.whenDefined('vc-saturation')
-    ]);
-
     this[$s] = root.children[1] as Saturation;
     this[$h] = root.children[2] as Hue;
   }
@@ -88,14 +80,11 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     }
   }
 
-  private async _setProps(color: C, hsv: HSV): Promise<void> {
+  private _setProps(color: C, hsv: HSV): void {
     this[$hsv] = hsv;
     this[$color] = color;
-    this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: color } }));
-    // Wait for custom elements to upgrade before setting properties.
-    // Otherwise these would shadow the accessors and break.
-    await this._ready;
     this[$s].hsv = hsv;
     this[$h].hue = hsv.h;
+    this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: color } }));
   }
 }

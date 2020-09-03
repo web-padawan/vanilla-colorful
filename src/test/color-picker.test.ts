@@ -1,6 +1,6 @@
 import { expect } from '@esm-bundle/chai';
 import sinon from 'sinon';
-import { fixture, html } from '@open-wc/testing-helpers';
+import { fixture, html, nextFrame } from '@open-wc/testing-helpers';
 import { hexToHsv, hsvToRgbString } from '../lib/utils/convert';
 import type { ColorPickerHex } from '../color-picker-hex';
 import type { Hue } from '../lib/components/hue';
@@ -114,10 +114,17 @@ describe('color-picker-hex', () => {
     let saturation: Saturation;
 
     beforeEach(async () => {
-      picker = await fixture(html`<color-picker-hex color="#488"></color-picker-hex>`);
+      picker = document.createElement('color-picker-hex');
+      picker.color = '#488';
+      await nextFrame();
+      document.body.appendChild(picker);
       const root = picker.shadowRoot as ShadowRoot;
       hue = root.querySelector('[part="hue"]') as Hue;
       saturation = root.querySelector('[part="saturation"]') as Saturation;
+    });
+
+    afterEach(() => {
+      document.body.removeChild(picker);
     });
 
     describe('pointers', () => {
