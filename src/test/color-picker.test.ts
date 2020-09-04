@@ -87,11 +87,32 @@ describe('color-picker-hex', () => {
     it('should not reflect color property to attribute', () => {
       expect(picker.getAttribute('color')).to.equal(null);
     });
+
+    it('should fire color-change event when property changes', () => {
+      const spy = sinon.spy();
+      picker.addEventListener('color-changed', spy);
+      picker.color = '#123';
+      expect(spy.callCount).to.equal(1);
+    });
+
+    it('should not fire color-change event for same HEX property', () => {
+      const spy = sinon.spy();
+      picker.addEventListener('color-changed', spy);
+      picker.color = '#cccccc';
+      expect(spy.callCount).to.equal(0);
+    });
   });
 
   describe('color attribute', () => {
     beforeEach(async () => {
-      picker = await fixture(html`<color-picker-hex color="#488"></color-picker-hex>`);
+      picker = document.createElement('color-picker-hex');
+      picker.setAttribute('color', '#488');
+      await nextFrame();
+      document.body.appendChild(picker);
+    });
+
+    afterEach(() => {
+      document.body.removeChild(picker);
     });
 
     it('should set color based on the attribute value', () => {
@@ -106,6 +127,20 @@ describe('color-picker-hex', () => {
     it('should update property when attribute changes', () => {
       picker.setAttribute('color', '#ccc');
       expect(picker.color).to.equal('#ccc');
+    });
+
+    it('should fire color-change event when attribute changes', () => {
+      const spy = sinon.spy();
+      picker.addEventListener('color-changed', spy);
+      picker.setAttribute('color', '#123');
+      expect(spy.callCount).to.equal(1);
+    });
+
+    it('should not fire color-change event for same HEX attribute', () => {
+      const spy = sinon.spy();
+      picker.addEventListener('color-changed', spy);
+      picker.setAttribute('color', '#448888');
+      expect(spy.callCount).to.equal(0);
     });
   });
 
@@ -199,6 +234,18 @@ describe('color-picker-hex', () => {
         elem.dispatchEvent(new FakeTouchEvent('touchmove', [{ pageX: x + 20, pageY: y }]));
         elem.dispatchEvent(new FakeTouchEvent('touchend', [{ pageX: x + 20, pageY: y }]));
         expect(spy.callCount).to.equal(2);
+      });
+
+      it('should not dispatch event when hue changes for black', () => {
+        picker.color = '#000';
+        const elem = getInteractive(hue);
+        const spy = sinon.spy();
+        picker.addEventListener('color-changed', spy);
+        const { x, y } = middleOfNode(elem);
+        elem.dispatchEvent(new FakeTouchEvent('touchstart', [{ pageX: x + 10, pageY: y }]));
+        elem.dispatchEvent(new FakeTouchEvent('touchmove', [{ pageX: x + 20, pageY: y }]));
+        elem.dispatchEvent(new FakeTouchEvent('touchend', [{ pageX: x + 20, pageY: y }]));
+        expect(spy.callCount).to.equal(0);
       });
     });
   });
