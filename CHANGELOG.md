@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## 0.1.0 (2020-09-01)
 
+
 ### Features
 
 * add exports for relevant types ([69fac69](https://github.com/web-padawan/vanilla-colorful/commit/69fac69298089ffcc74152577f7822432aebb9b4))
