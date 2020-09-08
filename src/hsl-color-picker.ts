@@ -1,12 +1,12 @@
 import { HslBase } from './lib/entrypoints/hsl.js';
-export type { HSL } from './lib/types';
+export type { HslColor } from './lib/types';
 
 /**
  * A color picker custom element that uses HSL object format.
  *
- * @element color-picker-hsl
+ * @element hsl-color-picker
  *
- * @prop {HSL} color - Selected color in HSL object format.
+ * @prop {HslColor} color - Selected color in HSL object format.
  *
  * @fires color-changed - Event fired when color property changes.
  *
@@ -15,12 +15,12 @@ export type { HSL } from './lib/types';
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerHsl extends HslBase {}
+export class HslColorPicker extends HslBase {}
 
-customElements.define('color-picker-hsl', ColorPickerHsl);
+customElements.define('hsl-color-picker', HslColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {
-    'color-picker-hsl': ColorPickerHsl;
+    'hsl-color-picker': HslColorPicker;
   }
 }

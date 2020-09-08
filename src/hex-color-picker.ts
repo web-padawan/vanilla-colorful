@@ -3,7 +3,7 @@ import { HexBase } from './lib/entrypoints/hex.js';
 /**
  * A color picker custom element that uses HEX format.
  *
- * @element color-picker-hex
+ * @element hex-color-picker
  *
  * @prop {string} color - Selected color in HEX format.
  *
@@ -14,12 +14,12 @@ import { HexBase } from './lib/entrypoints/hex.js';
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerHex extends HexBase {}
+export class HexColorPicker extends HexBase {}
 
-customElements.define('color-picker-hex', ColorPickerHex);
+customElements.define('hex-color-picker', HexColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {
-    'color-picker-hex': ColorPickerHex;
+    'hex-color-picker': HexColorPicker;
   }
 }

@@ -1,12 +1,12 @@
 import { RgbBase } from './lib/entrypoints/rgb.js';
-export type { RGB } from './lib/types';
+export type { RgbColor } from './lib/types';
 
 /**
  * A color picker custom element that uses RGB object format.
  *
- * @element color-picker-rgb
+ * @element rgb-color-picker
  *
- * @prop {RGB} color - Selected color in RGB object format.
+ * @prop {RgbColor} color - Selected color in RGB object format.
  *
  * @fires color-changed - Event fired when color property changes.
  *
@@ -15,12 +15,12 @@ export type { RGB } from './lib/types';
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerRgb extends RgbBase {}
+export class RgbColorPicker extends RgbBase {}
 
-customElements.define('color-picker-rgb', ColorPickerRgb);
+customElements.define('rgb-color-picker', RgbColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {
-    'color-picker-rgb': ColorPickerRgb;
+    'rgb-color-picker': RgbColorPicker;
   }
 }

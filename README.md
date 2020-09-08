@@ -62,11 +62,11 @@ Or use one of the following content delivery networks:
 ## Usage
 
 ```html
-<color-picker-hex color="#1e88e5"></color-picker-hex>
+<hex-color-picker color="#1e88e5"></hex-color-picker>
 <script type="module">
   import 'vanilla-colorful';
 
-  const picker = document.querySelector('color-picker-gex');
+  const picker = document.querySelector('hex-color-picker');
   picker.addEventListener('color-changed', (event) => {
     const newColor = event.detail.value;
   });
@@ -85,20 +85,21 @@ you need another color model, we provide 5 additional color picker bundles.
 
 | File to import                 | HTML element                | Value example                |
 | ------------------------------ | --------------------------- | ---------------------------- |
-| `"color-picker-rgb.js"`        | `<color-picker-rgb>`        | `{ r: 255, g: 255, b: 255 }` |
-| `"color-picker-rgb-string.js"` | `<color-picker-rgb-string>` | `"rgb(255, 255, 255)"`       |
-| `"color-picker-hsl.js"`        | `<color-picker-hsl>`        | `{ h: 0, s: 0, l: 100 }`     |
-| `"color-picker-hsl-string.js"` | `<color-picker-hsl-string>` | `"hsl(0, 0%, 100%)"`         |
-| `"color-picker-hsv.js"`        | `<color-picker-hsv>`        | `{ h: 0, s: 0, v: 100 }`     |
+| `"hex-color-picker.js"`        | `<hex-color-picker>`        | `"#ffffff"`                  |
+| `"hsl-color-picker.js"`        | `<hsl-color-picker>`        | `{ h: 0, s: 0, l: 100 }`     |
+| `"hsl-string-color-picker.js"` | `<hsl-string-color-picker>` | `"hsl(0, 0%, 100%)"`         |
+| `"hsv-color-picker.js"`        | `<hsv-color-picker>`        | `{ h: 0, s: 0, v: 100 }`     |
+| `"rgb-color-picker.js"`        | `<rgb-color-picker>`        | `{ r: 255, g: 255, b: 255 }` |
+| `"rgb-string-color-picker.js"` | `<rgb-string-color-picker>` | `"rgb(255, 255, 255)"`       |
 
 #### Code example
 
 ```html
-<color-picker-rgb></color-picker-rgb>
+<rgb-color-picker></rgb-color-picker>
 <script type="module">
-  import 'vanilla-colorful/color-picker-rgb.js';
+  import 'vanilla-colorful/rgb-color-picker.js';
 
-  const picker = document.querySelector('color-picker-rgb');
+  const picker = document.querySelector('rgb-color-picker');
   picker.color = { r: 50, g: 100, b: 150 };
 </script>
 ```
@@ -111,25 +112,25 @@ you need another color model, we provide 5 additional color picker bundles.
 allowing to override the default styles:
 
 ```css
-color-picker-hex {
+hex-color-picker {
   height: 250px;
 }
 
-color-picker-hex::part(saturation) {
+hex-color-picker::part(saturation) {
   bottom: 30px;
   border-radius: 3px 3px 0 0;
 }
 
-color-picker-hex::part(hue) {
+hex-color-picker::part(hue) {
   height: 30px;
   border-radius: 0 0 3px 3px;
 }
 
-color-picker-hex::part(saturation-pointer) {
+hex-color-picker::part(saturation-pointer) {
   border-radius: 5px;
 }
 
-color-picker-hex::part(hue-pointer) {
+hex-color-picker::part(hue-pointer) {
   border-radius: 2px;
   width: 15px;
   height: inherit;
@@ -178,9 +179,9 @@ the element you're using, you can also import the type that is associated with t
 For example, if you're using our HSL color picker component, you can also import the `HSL` type.
 
 ```ts
-import type { HSL } from 'vanilla-colorful/color-picker-hsl';
+import type { HslColor } from 'vanilla-colorful/hsl-color-picker';
 
-const myHslValue: HSL = { h: 0, s: 0, l: 0 };
+const myHslValue: HslColor = { h: 0, s: 0, l: 0 };
 ```
 
 All the included custom elements are compatible with [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) and

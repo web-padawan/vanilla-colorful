@@ -7,8 +7,10 @@
 /test/**/*.js
 /test/**/*.js.map
 /src/lib/styles/*.ts
-color-picker-*.js
-hex-input.js
+hex-*.js
+hsl-*.js
+hsv-*.js
+rgb-*.js
 *.d.ts
 *.map
 custom-elements.json

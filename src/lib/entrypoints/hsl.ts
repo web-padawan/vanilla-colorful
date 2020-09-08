@@ -1,9 +1,9 @@
-import type { ColorModel, HSL } from '../types';
+import type { ColorModel, HslColor } from '../types';
 import { ColorPicker } from '../components/color-picker.js';
 import { hslToHsv, hsvToHsl } from '../utils/convert.js';
 import { equalColorObjects } from '../utils/compare.js';
 
-const colorModel: ColorModel<HSL> = {
+const colorModel: ColorModel<HslColor> = {
   defaultColor: { h: 0, s: 0, l: 0 },
   toHsv: hslToHsv,
   fromHsv: hsvToHsl,
@@ -11,8 +11,8 @@ const colorModel: ColorModel<HSL> = {
   fromAttr: (color) => JSON.parse(color)
 };
 
-export class HslBase extends ColorPicker<HSL> {
-  protected get colorModel(): ColorModel<HSL> {
+export class HslBase extends ColorPicker<HslColor> {
+  protected get colorModel(): ColorModel<HslColor> {
     return colorModel;
   }
 }

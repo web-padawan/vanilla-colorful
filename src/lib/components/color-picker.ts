@@ -1,6 +1,6 @@
 import { equalColorObjects } from '../utils/compare.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
-import type { AnyColor, ColorModel, HSV } from '../types';
+import type { AnyColor, ColorModel, HsvColor } from '../types';
 import type { Hue } from './hue.js';
 import type { Saturation } from './saturation.js';
 import './hue.js';
@@ -24,7 +24,7 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   private _s!: Saturation;
 
-  private _hsv!: HSV;
+  private _hsv!: HsvColor;
 
   private _color!: C;
 
@@ -85,12 +85,12 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     return this.color && this.colorModel.equal(color, this.color);
   }
 
-  private _render(hsv: HSV): void {
+  private _render(hsv: HsvColor): void {
     this._s.hsv = hsv;
     this._h.hue = hsv.h;
   }
 
-  private _change(color: C, hsv: HSV): void {
+  private _change(color: C, hsv: HsvColor): void {
     this._color = color;
     this._hsv = hsv;
     this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: color } }));

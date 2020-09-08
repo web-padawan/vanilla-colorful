@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { fixture, html } from '@open-wc/testing-helpers';
 import type { HexInput } from '../hex-input';
 
-describe('color-picker-hex', () => {
+describe('hex-input', () => {
   let input: HexInput;
   let target: HTMLInputElement;
 
