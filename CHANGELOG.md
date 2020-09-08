@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.1.2...v0.2.0) (2020-09-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename components and types (#5)
+
+### Internal Changes
+
+* rename components and types ([#5](https://github.com/web-padawan/vanilla-colorful/issues/5)) ([52652e9](https://github.com/web-padawan/vanilla-colorful/commit/52652e94b4c7fa5bf1a0ec85b727c6487b716122))
+
 ### [0.1.2](https://github.com/web-padawan/vanilla-colorful/compare/v0.1.1...v0.1.2) (2020-09-05)
 
 
