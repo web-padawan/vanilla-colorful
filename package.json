@@ -4,8 +4,8 @@
   "description": "A tiny framework agnostic color picker element for modern web apps",
   "author": "Serhii Kulykov <iamkulykov@gmail.com>",
   "license": "MIT",
-  "main": "color-picker-hex.js",
-  "module": "color-picker-hex.js",
+  "main": "hex-color-picker.js",
+  "module": "hex-color-picker.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/web-padawan/vanilla-colorful.git"
@@ -19,14 +19,22 @@
     "LICENSE",
     "README.md",
     "/lib",
-    "/color-*.d.ts",
-    "/color-*.d.ts.map",
-    "/color-*.js",
-    "/color-*.js.map",
-    "/hex-input.d.ts",
-    "/hex-input.d.ts.map",
-    "/hex-input.js",
-    "/hex-input.js.map",
+    "/hex-*.d.ts",
+    "/hex-*.d.ts.map",
+    "/hex-*.js",
+    "/hex-*.js.map",
+    "/hsl-*.d.ts",
+    "/hsl-*.d.ts.map",
+    "/hsl-*.js",
+    "/hsl-*.js.map",
+    "/hsv-*.d.ts",
+    "/hsv-*.d.ts.map",
+    "/hsv-*.js",
+    "/hsv-*.js.map",
+    "/rgb-*.d.ts",
+    "/rgb-*.d.ts.map",
+    "/rgb-*.js",
+    "/rgb-*.js.map",
     "custom-elements.json"
   ],
   "scripts": {
@@ -58,27 +66,27 @@
   },
   "size-limit": [
     {
-      "path": "color-picker-hex.js",
+      "path": "hex-color-picker.js",
       "limit": "2.2 KB"
     },
     {
-      "path": "color-picker-hsl.js",
+      "path": "hsl-color-picker.js",
       "limit": "2 KB"
     },
     {
-      "path": "color-picker-hsl-string.js",
+      "path": "hsl-string-color-picker.js",
       "limit": "2 KB"
     },
     {
-      "path": "color-picker-hsv.js",
+      "path": "hsv-color-picker.js",
       "limit": "2 KB"
     },
     {
-      "path": "color-picker-rgb.js",
+      "path": "rgb-color-picker.js",
       "limit": "2.1 KB"
     },
     {
-      "path": "color-picker-rgb-string.js",
+      "path": "rgb-string-color-picker.js",
       "limit": "2.1 KB"
     },
     {

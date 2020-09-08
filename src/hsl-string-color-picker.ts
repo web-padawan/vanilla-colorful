@@ -3,7 +3,7 @@ import { HslStringBase } from './lib/entrypoints/hsl-string.js';
 /**
  * A color picker custom element that uses HSL string format.
  *
- * @element color-picker-hsl-string
+ * @element hsl-string-color-picker
  *
  * @prop {string} color - Selected color in HSL string format.
  *
@@ -14,12 +14,12 @@ import { HslStringBase } from './lib/entrypoints/hsl-string.js';
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerHslString extends HslStringBase {}
+export class HslStringColorPicker extends HslStringBase {}
 
-customElements.define('color-picker-hsl-string', ColorPickerHslString);
+customElements.define('hsl-string-color-picker', HslStringColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {
-    'color-picker-hsl-string': ColorPickerHslString;
+    'hsl-string-color-picker': HslStringColorPicker;
   }
 }

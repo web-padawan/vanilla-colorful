@@ -1,7 +1,10 @@
-import type { HSL, HSV, RGB } from '../types';
+import type { HslColor, HsvColor, RgbColor } from '../types';
 import { hexToRgb } from './convert.js';
 
-export const equalColorObjects = (first: HSL | HSV | RGB, second: HSL | HSV | RGB): boolean => {
+export const equalColorObjects = (
+  first: HslColor | HsvColor | RgbColor,
+  second: HslColor | HsvColor | RgbColor
+): boolean => {
   if (first === second) return true;
 
   for (const prop in first) {

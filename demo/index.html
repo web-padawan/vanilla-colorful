@@ -14,7 +14,7 @@
     <div class="wrapper" style="color: var(--contrast, #fff)">
       <header class="header">
         <div class="demo">
-          <color-picker-hex color="#1e88e5"></color-picker-hex>
+          <hex-color-picker color="#1e88e5"></hex-color-picker>
           <div class="field">
             <hex-input></hex-input>
           </div>
@@ -49,7 +49,7 @@
     </div>
 
     <script type="module">
-      import '../color-picker-hex.js';
+      import '../hex-color-picker.js';
       import '../hex-input.js';
       import { hexToRgb } from '../lib/utils/convert.js';
       import { setFaviconColor } from './favicon.js';
@@ -57,7 +57,7 @@
       // See http://www.w3.org/TR/AERT#color-contrast
       const getBrightness = ({ r, g, b }) => (r * 299 + g * 587 + b * 114) / 1000;
 
-      const picker = document.querySelector('color-picker-hex');
+      const picker = document.querySelector('hex-color-picker');
       const input = document.querySelector('hex-input');
 
       const defaultColor = picker.color;

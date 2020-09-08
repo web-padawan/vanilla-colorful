@@ -3,7 +3,7 @@ import { RgbStringBase } from './lib/entrypoints/rgb-string.js';
 /**
  * A color picker custom element that uses RGB string format.
  *
- * @element color-picker-rgb-string
+ * @element rgb-string-color-picker
  *
  * @prop {string} color - Selected color in RGB string format.
  *
@@ -14,12 +14,12 @@ import { RgbStringBase } from './lib/entrypoints/rgb-string.js';
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerRgbString extends RgbStringBase {}
+export class RgbStringColorPicker extends RgbStringBase {}
 
-customElements.define('color-picker-rgb-string', ColorPickerRgbString);
+customElements.define('rgb-string-color-picker', RgbStringColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {
-    'color-picker-rgb-string': ColorPickerRgbString;
+    'rgb-string-color-picker': RgbStringColorPicker;
   }
 }

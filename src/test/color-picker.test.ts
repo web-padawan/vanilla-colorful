@@ -2,7 +2,7 @@ import { expect } from '@esm-bundle/chai';
 import sinon from 'sinon';
 import { fixture, html, nextFrame } from '@open-wc/testing-helpers';
 import { hexToHsv, hsvToRgbString } from '../lib/utils/convert';
-import type { ColorPickerHex } from '../color-picker-hex';
+import type { HexColorPicker } from '../hex-color-picker';
 import type { Hue } from '../lib/components/hue';
 import type { Saturation } from '../lib/components/saturation';
 
@@ -47,15 +47,15 @@ const getPointer = (node: Hue | Saturation) => {
   return node.shadowRoot!.querySelector('[part=pointer]') as HTMLElement;
 };
 
-describe('color-picker-hex', () => {
-  let picker: ColorPickerHex;
+describe('hex-color-picker', () => {
+  let picker: HexColorPicker;
 
   describe('lazy upgrade', () => {
     it('should work with color property set before upgrade', async () => {
-      picker = document.createElement('color-picker-hex');
+      picker = document.createElement('hex-color-picker');
       document.body.appendChild(picker);
       picker.color = '#123';
-      await import('../color-picker-hex');
+      await import('../hex-color-picker');
       expect(picker.color).to.equal('#123');
       document.body.removeChild(picker);
     });
@@ -63,7 +63,7 @@ describe('color-picker-hex', () => {
 
   describe('default', () => {
     beforeEach(async () => {
-      picker = await fixture(html`<color-picker-hex></color-picker-hex>`);
+      picker = await fixture(html`<hex-color-picker></hex-color-picker>`);
     });
 
     it('should set default color property value', () => {
@@ -77,7 +77,7 @@ describe('color-picker-hex', () => {
 
   describe('color property', () => {
     beforeEach(async () => {
-      picker = await fixture(html`<color-picker-hex .color="${'#ccc'}"></color-picker-hex>`);
+      picker = await fixture(html`<hex-color-picker .color="${'#ccc'}"></hex-color-picker>`);
     });
 
     it('should accept color set as a property', () => {
@@ -105,7 +105,7 @@ describe('color-picker-hex', () => {
 
   describe('color attribute', () => {
     beforeEach(async () => {
-      picker = document.createElement('color-picker-hex');
+      picker = document.createElement('hex-color-picker');
       picker.setAttribute('color', '#488');
       await nextFrame();
       document.body.appendChild(picker);
@@ -149,7 +149,7 @@ describe('color-picker-hex', () => {
     let saturation: Saturation;
 
     beforeEach(async () => {
-      picker = document.createElement('color-picker-hex');
+      picker = document.createElement('hex-color-picker');
       picker.color = '#488';
       await nextFrame();
       document.body.appendChild(picker);

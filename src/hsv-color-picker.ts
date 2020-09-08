@@ -1,12 +1,12 @@
 import { HsvBase } from './lib/entrypoints/hsv.js';
-export type { HSV } from './lib/types';
+export type { HsvColor } from './lib/types';
 
 /**
  * A color picker custom element that uses HSV object format.
  *
- * @element color-picker-hsv
+ * @element hsv-color-picker
  *
- * @prop {HSV} color - Selected color in HSV object format.
+ * @prop {HsvColor} color - Selected color in HSV object format.
  *
  * @fires color-changed - Event fired when color property changes.
  *
@@ -15,12 +15,12 @@ export type { HSV } from './lib/types';
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  */
-export class ColorPickerHsv extends HsvBase {}
+export class HsvColorPicker extends HsvBase {}
 
-customElements.define('color-picker-hsv', ColorPickerHsv);
+customElements.define('hsv-color-picker', HsvColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {
-    'color-picker-hsv': ColorPickerHsv;
+    'hsv-color-picker': HsvColorPicker;
   }
 }
