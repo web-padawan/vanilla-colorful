@@ -17,7 +17,7 @@
 </div>
 
 <div align="center">
-  <strong>vanilla-colorful</strong> is a port of <a href="https://github.com/omgovich/react-colorful">react colorful</a> to vanilla Custom Elements.
+  <strong>vanilla-colorful</strong> is a port of <a href="https://github.com/omgovich/react-colorful">react-colorful</a> to vanilla Custom Elements.
 </div>
 
 ## Features
@@ -175,8 +175,8 @@ customElements.define('custom-color-picker', class extends RgbBase {});
   <summary>How you can get the most from our TypeScript support</summary><br />
 
 While not only typing its own class methods and variables, it can also help you type yours. Depending on
-the element you're using, you can also import the type that is associated with the element.
-For example, if you're using our HSL color picker component, you can also import the `HSL` type.
+the element you are using, you can also import the type that is associated with the element.
+For example, if you are using our `<hsl-color-picker>` element, you can also import the `HslColor` type.
 
 ```ts
 import type { HslColor } from 'vanilla-colorful/hsl-color-picker';
