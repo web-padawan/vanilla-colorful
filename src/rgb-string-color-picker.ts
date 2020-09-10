@@ -6,6 +6,7 @@ import { RgbStringBase } from './lib/entrypoints/rgb-string.js';
  * @element rgb-string-color-picker
  *
  * @prop {string} color - Selected color in RGB string format.
+ * @attr {string} color - Selected color in RGB string format.
  *
  * @fires color-changed - Event fired when color property changes.
  *

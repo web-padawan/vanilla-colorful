@@ -6,6 +6,7 @@ import { HslStringBase } from './lib/entrypoints/hsl-string.js';
  * @element hsl-string-color-picker
  *
  * @prop {string} color - Selected color in HSL string format.
+ * @attr {string} color - Selected color in HSL string format.
  *
  * @fires color-changed - Event fired when color property changes.
  *

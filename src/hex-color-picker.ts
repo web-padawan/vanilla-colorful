@@ -6,6 +6,7 @@ import { HexBase } from './lib/entrypoints/hex.js';
  * @element hex-color-picker
  *
  * @prop {string} color - Selected color in HEX format.
+ * @attr {string} color - Selected color in HEX format.
  *
  * @fires color-changed - Event fired when color property changes.
  *
