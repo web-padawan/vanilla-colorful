@@ -1,5 +1,7 @@
 {
   "types": [
+    { "type": "feat", "section": "Features", "hidden": false },
+    { "type": "fix", "section": "Bug Fixes", "hidden": false },
     { "type": "refactor", "section": "Internal Changes", "hidden": true }
   ]
 }
