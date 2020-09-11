@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/web-padawan/vanilla-colorful/compare/v0.2.0...v0.2.1) (2020-09-11)
+
+
+### Bug Fixes
+
+* add hidden attribute styles ([0c490dd](https://github.com/web-padawan/vanilla-colorful/commit/0c490dd774279dd239544d5723a9ba5c5413331c))
+
 ## [0.2.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.1.2...v0.2.0) (2020-09-08)
 
 
