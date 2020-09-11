@@ -7,3 +7,7 @@
   -webkit-user-select: none;
   cursor: default;
 }
+
+:host([hidden]) {
+  display: none !important;
+}

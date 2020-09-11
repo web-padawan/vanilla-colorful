@@ -73,6 +73,11 @@ describe('hex-color-picker', () => {
     it('should not reflect default color to attribute', () => {
       expect(picker.getAttribute('color')).to.equal(null);
     });
+
+    it('should change display to none when hidden is set', () => {
+      picker.setAttribute('hidden', '');
+      expect(getComputedStyle(picker).display).to.equal('none');
+    });
   });
 
   describe('color property', () => {
