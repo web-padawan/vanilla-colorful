@@ -6,6 +6,7 @@ module.exports = {
   plugins: [
     esbuildPlugin({ ts: true }),
     visualRegressionPlugin({
+      baseDir: 'src/test/visual/screenshots',
       update: process.env.UPDATE_REFS === 'true'
     })
   ],

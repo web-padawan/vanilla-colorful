@@ -1,20 +1,28 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
-import { fixture, html } from '@open-wc/testing-helpers';
+import { fixture } from '@open-wc/testing-helpers';
 import '../../hex-color-picker.js';
-describe('visual test', () => {
+import '../../hsl-color-picker.js';
+import '../../hsl-string-color-picker.js';
+import '../../hsv-color-picker.js';
+import '../../rgb-color-picker.js';
+import '../../rgb-string-color-picker.js';
+
+describe('visual tests', () => {
   let picker: HTMLElement;
 
-  beforeEach(async () => {
-    picker = await fixture(
-      html`
-        <div style="width: 220px; padding: 10px">
-          <hex-color-picker></hex-color-picker>
-        </div>
-      `
-    );
-  });
+  ['hex', 'hsl', 'hsl-string', 'hsv', 'rgb', 'rgb-string'].forEach((type) => {
+    describe(`${type}-color-picker`, () => {
+      beforeEach(async () => {
+        picker = await fixture(`
+          <div style="display: flex; justify-content: center; width: 216px; padding: 8px">
+            <${type}-color-picker></${type}-color-picker>
+          </div>
+        `);
+      });
 
-  it('cross renders properly by default', async () => {
-    await visualDiff(picker, 'hex');
+      it('should match screenshot', async () => {
+        await visualDiff(picker, type);
+      });
+    });
   });
 });
