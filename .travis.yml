@@ -13,3 +13,4 @@ script:
 - npm run size
 - npm run lint
 - npm test
+- npm run test:visual
