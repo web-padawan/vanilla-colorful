@@ -76,21 +76,26 @@ Or use one of the following content delivery networks:
 ## Supported color models
 
 The default **vanilla-colorful**'s input/output format is a HEX string (like `#ffffff`). In case if
-you need another color model, we provide 5 additional color picker bundles.
+you need another color model, we provide 10 additional color picker bundles.
 
 <details>
   <summary>How to use another color model</summary>
 
 #### Available pickers
 
-| File to import                 | HTML element                | Value example                |
-| ------------------------------ | --------------------------- | ---------------------------- |
-| `"hex-color-picker.js"`        | `<hex-color-picker>`        | `"#ffffff"`                  |
-| `"hsl-color-picker.js"`        | `<hsl-color-picker>`        | `{ h: 0, s: 0, l: 100 }`     |
-| `"hsl-string-color-picker.js"` | `<hsl-string-color-picker>` | `"hsl(0, 0%, 100%)"`         |
-| `"hsv-color-picker.js"`        | `<hsv-color-picker>`        | `{ h: 0, s: 0, v: 100 }`     |
-| `"rgb-color-picker.js"`        | `<rgb-color-picker>`        | `{ r: 255, g: 255, b: 255 }` |
-| `"rgb-string-color-picker.js"` | `<rgb-string-color-picker>` | `"rgb(255, 255, 255)"`       |
+| File to import                  | HTML element                 | Value example                      |
+| ------------------------------- | ---------------------------- | ---------------------------------- |
+| `"hex-color-picker.js"`         | `<hex-color-picker>`         | `"#ffffff"`                        |
+| `"hsl-color-picker.js"`         | `<hsl-color-picker>`         | `{ h: 0, s: 0, l: 100 }`           |
+| `"hsl-string-color-picker.js"`  | `<hsl-string-color-picker>`  | `"hsl(0, 0%, 100%)"`               |
+| `"hsla-color-picker.js"`        | `<hsla-color-picker>`        | `{ h: 0, s: 0, l: 100, a: 1 }`     |
+| `"hsla-string-color-picker.js"` | `<hsla-string-color-picker>` | `"hsla(0, 0%, 100%, 1)"`           |
+| `"hsv-color-picker.js"`         | `<hsv-color-picker>`         | `{ h: 0, s: 0, v: 100 }`           |
+| `"hsva-color-picker.js"`        | `<hsva-color-picker>`        | `{ h: 0, s: 0, v: 100, a: 1 }`     |
+| `"rgb-color-picker.js"`         | `<rgb-color-picker>`         | `{ r: 255, g: 255, b: 255 }`       |
+| `"rgba-color-picker.js"`        | `<rgba-color-picker>`        | `{ r: 255, g: 255, b: 255, a: 1 }` |
+| `"rgb-string-color-picker.js"`  | `<rgb-string-color-picker>`  | `"rgb(255, 255, 255)"`             |
+| `"rgba-string-color-picker.js"` | `<rgba-string-color-picker>` | `"rgba(255, 255, 255, 1)"`         |
 
 #### Code example
 
