@@ -69,7 +69,7 @@
   "size-limit": [
     {
       "path": "hex-color-picker.js",
-      "limit": "2.2 KB"
+      "limit": "2.3 KB"
     },
     {
       "path": "hsl-color-picker.js",
@@ -77,19 +77,39 @@
     },
     {
       "path": "hsl-string-color-picker.js",
-      "limit": "2 KB"
+      "limit": "2.1 KB"
+    },
+    {
+      "path": "hsla-color-picker.js",
+      "limit": "2.3 KB"
+    },
+    {
+      "path": "hsla-string-color-picker.js",
+      "limit": "2.4 KB"
     },
     {
       "path": "hsv-color-picker.js",
       "limit": "2 KB"
     },
     {
+      "path": "hsva-color-picker.js",
+      "limit": "2.3 KB"
+    },
+    {
       "path": "rgb-color-picker.js",
-      "limit": "2.1 KB"
+      "limit": "2.2 KB"
     },
     {
       "path": "rgb-string-color-picker.js",
-      "limit": "2.2 KB"
+      "limit": "2.3 KB"
+    },
+    {
+      "path": "rgba-color-picker.js",
+      "limit": "2.4 KB"
+    },
+    {
+      "path": "rgba-string-color-picker.js",
+      "limit": "2.6 KB"
     },
     {
       "path": "hex-input.js",
