@@ -1,5 +1,5 @@
 import { Interactive, Interaction } from './interactive.js';
-import { hsvToHslString } from '../utils/convert.js';
+import { hsvaToHslString } from '../utils/convert.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
 import styles from '../styles/hue.js';
 
@@ -22,7 +22,7 @@ export class Hue extends Interactive {
   set hue(h: number) {
     this.setStyles({
       left: `${(h / 360) * 100}%`,
-      'background-color': hsvToHslString({ h, s: 100, v: 100 })
+      color: hsvaToHslString({ h, s: 100, v: 100, a: 1 })
     });
   }
 
