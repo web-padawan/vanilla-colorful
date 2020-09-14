@@ -1,8 +1,8 @@
 import { Interactive, Interaction } from './interactive.js';
-import { hsvToHslString } from '../utils/convert.js';
+import { hsvaToHslString } from '../utils/convert.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
 import styles from '../styles/saturation.js';
-import type { HsvColor } from '../types';
+import type { HsvaColor } from '../types';
 
 const template = createTemplate(`<style>${styles}</style>`);
 
@@ -13,19 +13,19 @@ export class Saturation extends Interactive {
   }
 
   connectedCallback(): void {
-    if (this.hasOwnProperty('hsv')) {
-      const value = this.hsv;
-      delete this['hsv' as keyof this];
-      this.hsv = value;
+    if (this.hasOwnProperty('hsva')) {
+      const value = this.hsva;
+      delete this['hsva' as keyof this];
+      this.hsva = value;
     }
   }
 
-  set hsv(hsv: HsvColor) {
-    this.style.backgroundColor = hsvToHslString({ h: hsv.h, s: 100, v: 100 });
+  set hsva(hsva: HsvaColor) {
+    this.style.backgroundColor = hsvaToHslString({ h: hsva.h, s: 100, v: 100, a: 1 });
     this.setStyles({
-      top: `${100 - hsv.v}%`,
-      left: `${hsv.s}%`,
-      'background-color': hsvToHslString(hsv)
+      top: `${100 - hsva.v}%`,
+      left: `${hsva.s}%`,
+      color: hsvaToHslString(hsva)
     });
   }
 

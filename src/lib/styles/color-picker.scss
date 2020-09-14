@@ -1,5 +1,6 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 200px;
   height: 200px;
@@ -10,4 +11,9 @@
 
 :host([hidden]) {
   display: none !important;
+}
+
+/* Round bottom corners of the last element: `Hue` or `Alpha` */
+[part]:last-child {
+  border-radius: 0 0 8px 8px;
 }

@@ -1,6 +1,6 @@
 import { equalColorObjects } from '../utils/compare.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
-import type { AnyColor, ColorModel, HsvColor } from '../types';
+import type { AnyColor, ColorModel, HsvaColor } from '../types';
 import type { Hue } from './hue.js';
 import type { Saturation } from './saturation.js';
 import './hue.js';
@@ -24,7 +24,7 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   private _s!: Saturation;
 
-  private _hsv!: HsvColor;
+  private _hsva!: HsvaColor;
 
   private _color!: C;
 
@@ -34,9 +34,9 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   set color(newColor: C) {
     if (!this._isSame(newColor)) {
-      const newHsv = this.colorModel.toHsv(newColor);
-      this._render(newHsv);
-      this._change(newColor, newHsv);
+      const newHsva = this.colorModel.toHsva(newColor);
+      this._render(newHsva);
+      this._change(newColor, newHsva);
     }
   }
 
@@ -70,14 +70,14 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   handleEvent(event: CustomEvent): void {
     // Merge the current HSV color object with updated params.
-    const newHsv = Object.assign({}, this._hsv, event.detail);
-    this._render(newHsv);
+    const newHsva = Object.assign({}, this._hsva, event.detail);
+    this._render(newHsva);
     let newColor;
     if (
-      !equalColorObjects(newHsv, this._hsv) &&
-      !this._isSame((newColor = this.colorModel.fromHsv(newHsv)))
+      !equalColorObjects(newHsva, this._hsva) &&
+      !this._isSame((newColor = this.colorModel.fromHsva(newHsva)))
     ) {
-      this._change(newColor, newHsv);
+      this._change(newColor, newHsva);
     }
   }
 
@@ -85,14 +85,14 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     return this.color && this.colorModel.equal(color, this.color);
   }
 
-  private _render(hsv: HsvColor): void {
-    this._s.hsv = hsv;
-    this._h.hue = hsv.h;
+  protected _render(hsva: HsvaColor): void {
+    this._s.hsva = hsva;
+    this._h.hue = hsva.h;
   }
 
-  private _change(color: C, hsv: HsvColor): void {
+  private _change(color: C, hsva: HsvaColor): void {
     this._color = color;
-    this._hsv = hsv;
+    this._hsva = hsva;
     this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: color } }));
   }
 }

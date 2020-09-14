@@ -1,184 +1,132 @@
 import { expect } from '@esm-bundle/chai';
 import {
-  hexToHsv,
-  hsvToHex,
-  hsvToHsl,
-  hslToHsv,
-  hsvToHslString,
-  hslStringToHsv,
-  hsvToRgb,
-  hsvToRgbString,
-  rgbToHsv,
-  rgbStringToHsv
+  hexToHsva,
+  hslaToHsl,
+  hslaToHsva,
+  hsvaToHex,
+  hsvaToHsla,
+  hsvaToHslaString,
+  hsvaToHslString,
+  hslStringToHsva,
+  hsvaToHsv,
+  hsvaToRgba,
+  hsvaToRgbaString,
+  hsvaToRgbString,
+  rgbaToHsva,
+  rgbaToRgb,
+  rgbStringToHsva
 } from '../lib/utils/convert.js';
 import { equalColorObjects, equalColorString, equalHex } from '../lib/utils/compare.js';
 import { validHex } from '../lib/utils/validate.js';
+import type { HslaColor, HsvaColor, RgbaColor } from '../lib/types.js';
 
 describe('Utils', () => {
   it('Converts HEX to HSV', () => {
-    expect(hexToHsv('#ffffff')).to.deep.equal({ h: 0, s: 0, v: 100 });
-    expect(hexToHsv('#ffff00')).to.deep.equal({ h: 60, s: 100, v: 100 });
-    expect(hexToHsv('#ff0000')).to.deep.equal({ h: 0, s: 100, v: 100 });
-    expect(hexToHsv('#000000')).to.deep.equal({ h: 0, s: 0, v: 0 });
-    expect(hexToHsv('#c62182')).to.deep.equal({ h: 325, s: 83, v: 78 });
+    expect(hexToHsva('#ffffff')).to.deep.equal({ h: 0, s: 0, v: 100, a: 1 });
+    expect(hexToHsva('#ffff00')).to.deep.equal({ h: 60, s: 100, v: 100, a: 1 });
+    expect(hexToHsva('#ff0000')).to.deep.equal({ h: 0, s: 100, v: 100, a: 1 });
+    expect(hexToHsva('#000000')).to.deep.equal({ h: 0, s: 0, v: 0, a: 1 });
+    expect(hexToHsva('#c62182')).to.deep.equal({ h: 325, s: 83, v: 78, a: 1 });
   });
 
-  it('Converts shorthand HEX to HSV', () => {
-    expect(hexToHsv('#FFF')).to.deep.equal({ h: 0, s: 0, v: 100 });
-    expect(hexToHsv('#FF0')).to.deep.equal({ h: 60, s: 100, v: 100 });
-    expect(hexToHsv('#F00')).to.deep.equal({ h: 0, s: 100, v: 100 });
-    expect(hexToHsv('#ABC')).to.deep.equal({ h: 210, s: 17, v: 80 });
+  it('Converts shorthand HEX to HSVA', () => {
+    expect(hexToHsva('#FFF')).to.deep.equal({ h: 0, s: 0, v: 100, a: 1 });
+    expect(hexToHsva('#FF0')).to.deep.equal({ h: 60, s: 100, v: 100, a: 1 });
+    expect(hexToHsva('#F00')).to.deep.equal({ h: 0, s: 100, v: 100, a: 1 });
+    expect(hexToHsva('#ABC')).to.deep.equal({ h: 210, s: 17, v: 80, a: 1 });
   });
 
   it('Converts HSV to HEX', () => {
-    expect(hsvToHex({ h: 0, s: 0, v: 100 })).to.equal('#ffffff');
-    expect(hsvToHex({ h: 60, s: 100, v: 100 })).to.equal('#ffff00');
-    expect(hsvToHex({ h: 0, s: 100, v: 100 })).to.equal('#ff0000');
-    expect(hsvToHex({ h: 0, s: 0, v: 0 })).to.equal('#000000');
-    expect(hsvToHex({ h: 284, s: 93, v: 73 })).to.equal('#8c0dba');
+    expect(hsvaToHex({ h: 0, s: 0, v: 100, a: 1 })).to.equal('#ffffff');
+    expect(hsvaToHex({ h: 60, s: 100, v: 100, a: 1 })).to.equal('#ffff00');
+    expect(hsvaToHex({ h: 0, s: 100, v: 100, a: 1 })).to.equal('#ff0000');
+    expect(hsvaToHex({ h: 0, s: 0, v: 0, a: 1 })).to.equal('#000000');
+    expect(hsvaToHex({ h: 284, s: 93, v: 73, a: 1 })).to.equal('#8c0dba');
   });
 
-  it('Converts HSV to HSL', () => {
-    expect(hsvToHsl({ h: 0, s: 0, v: 100 })).to.deep.equal({
-      h: 0,
-      s: 0,
-      l: 100
-    });
-    expect(hsvToHsl({ h: 60, s: 100, v: 100 })).to.deep.equal({
-      h: 60,
-      s: 100,
-      l: 50
-    });
-    expect(hsvToHsl({ h: 0, s: 100, v: 100 })).to.deep.equal({
-      h: 0,
-      s: 100,
-      l: 50
-    });
-    expect(hsvToHsl({ h: 0, s: 0, v: 0 })).to.deep.equal({ h: 0, s: 0, l: 0 });
-    expect(hsvToHsl({ h: 200, s: 40, v: 40 })).to.deep.equal({
-      h: 200,
-      s: 25,
-      l: 32
-    });
+  it('Converts HSVA to HSLA', () => {
+    const test = (input: HsvaColor, output: HslaColor) =>
+      expect(hsvaToHsla(input)).to.deep.equal(output);
+
+    test({ h: 0, s: 0, v: 100, a: 1 }, { h: 0, s: 0, l: 100, a: 1 });
+    test({ h: 60, s: 100, v: 100, a: 1 }, { h: 60, s: 100, l: 50, a: 1 });
+    test({ h: 0, s: 100, v: 100, a: 1 }, { h: 0, s: 100, l: 50, a: 1 });
+    test({ h: 0, s: 0, v: 0, a: 1 }, { h: 0, s: 0, l: 0, a: 1 });
+    test({ h: 200, s: 40, v: 40, a: 1 }, { h: 200, s: 25, l: 32, a: 1 });
   });
 
-  it('Converts HSL to HSV', () => {
-    expect(hslToHsv({ h: 0, s: 0, l: 100 })).to.deep.equal({
-      h: 0,
-      s: 0,
-      v: 100
-    });
-    expect(hslToHsv({ h: 60, s: 100, l: 50 })).to.deep.equal({
-      h: 60,
-      s: 100,
-      v: 100
-    });
-    expect(hslToHsv({ h: 0, s: 100, l: 50 })).to.deep.equal({
-      h: 0,
-      s: 100,
-      v: 100
-    });
-    expect(hslToHsv({ h: 0, s: 0, l: 0 })).to.deep.equal({ h: 0, s: 0, v: 0 });
-    expect(hslToHsv({ h: 200, s: 25, l: 32 })).to.deep.equal({
-      h: 200,
-      s: 40,
-      v: 40
-    });
+  it('Converts HSLA to HSVA', () => {
+    const test = (input: HslaColor, output: HsvaColor) =>
+      expect(hslaToHsva(input)).to.deep.equal(output);
+
+    test({ h: 0, s: 0, l: 100, a: 1 }, { h: 0, s: 0, v: 100, a: 1 });
+    test({ h: 60, s: 100, l: 50, a: 1 }, { h: 60, s: 100, v: 100, a: 1 });
+    test({ h: 0, s: 100, l: 50, a: 1 }, { h: 0, s: 100, v: 100, a: 1 });
+    test({ h: 0, s: 0, l: 0, a: 1 }, { h: 0, s: 0, v: 0, a: 1 });
+    test({ h: 200, s: 25, l: 32, a: 1 }, { h: 200, s: 40, v: 40, a: 1 });
   });
 
-  it('Converts HSV to HSL string', () => {
-    expect(hsvToHslString({ h: 0, s: 0, v: 0 })).to.equal('hsl(0, 0%, 0%)');
+  it('Converts HSVA to HSL string', () => {
+    expect(hsvaToHslString({ h: 200, s: 40, v: 40, a: 1 })).to.equal('hsl(200, 25%, 32%)');
+    expect(hsvaToHslString({ h: 0, s: 0, v: 0, a: 1 })).to.equal('hsl(0, 0%, 0%)');
+  });
+
+  it('Converts HSVA to HSLA string', () => {
+    expect(hsvaToHslaString({ h: 200, s: 40, v: 40, a: 0.5 })).to.equal('hsla(200, 25%, 32%, 0.5)');
+    expect(hsvaToHslaString({ h: 0, s: 0, v: 0, a: 0 })).to.equal('hsla(0, 0%, 0%, 0)');
   });
 
   it('Converts HSL string to HSV', () => {
-    expect(hslStringToHsv('hsl(0, 0%, 100%)')).to.deep.equal({
-      h: 0,
-      s: 0,
-      v: 100
-    });
-    expect(hslStringToHsv('hsl(0,0,100)')).to.deep.equal({
-      h: 0,
-      s: 0,
-      v: 100
-    });
-    expect(hslStringToHsv('hsl(60, 100%, 50%)')).to.deep.equal({
-      h: 60,
-      s: 100,
-      v: 100
-    });
-    expect(hslStringToHsv('hsl(0, 100%, 50%)')).to.deep.equal({
-      h: 0,
-      s: 100,
-      v: 100
-    });
-    expect(hslStringToHsv('hsl(0, 0%, 0%)')).to.deep.equal({
-      h: 0,
-      s: 0,
-      v: 0
-    });
-    expect(hslStringToHsv('hsl(200, 25%, 32%)')).to.deep.equal({
-      h: 200,
-      s: 40,
-      v: 40
-    });
+    expect(hslStringToHsva('hsl(0, 0%, 100%)')).to.deep.equal({ h: 0, s: 0, v: 100, a: 1 });
+    expect(hslStringToHsva('hsl(0,0,100)')).to.deep.equal({ h: 0, s: 0, v: 100, a: 1 });
+    expect(hslStringToHsva('hsl(60, 100%, 50%)')).to.deep.equal({ h: 60, s: 100, v: 100, a: 1 });
+    expect(hslStringToHsva('hsl(0, 100%, 50%)')).to.deep.equal({ h: 0, s: 100, v: 100, a: 1 });
+    expect(hslStringToHsva('hsl(0, 0%, 0%)')).to.deep.equal({ h: 0, s: 0, v: 0, a: 1 });
+    expect(hslStringToHsva('hsl(200, 25%, 32%)')).to.deep.equal({ h: 200, s: 40, v: 40, a: 1 });
   });
 
-  it('Converts HSV to RGB', () => {
-    expect(hsvToRgb({ h: 0, s: 0, v: 100 })).to.deep.equal({
-      r: 255,
-      g: 255,
-      b: 255
-    });
-    expect(hsvToRgb({ h: 0, s: 100, v: 100 })).to.deep.equal({
-      r: 255,
-      g: 0,
-      b: 0
-    });
+  it('Converts HSVA to RGBA', () => {
+    const test = (input: HsvaColor, output: RgbaColor) =>
+      expect(hsvaToRgba(input)).to.deep.equal(output);
+
+    test({ h: 0, s: 0, v: 100, a: 1 }, { r: 255, g: 255, b: 255, a: 1 });
+    test({ h: 0, s: 100, v: 100, a: 0.5 }, { r: 255, g: 0, b: 0, a: 0.5 });
   });
 
-  it('Converts RGB to HSV', () => {
-    expect(rgbToHsv({ r: 255, g: 255, b: 255 })).to.deep.equal({
-      h: 0,
-      s: 0,
-      v: 100
-    });
-    expect(rgbToHsv({ r: 255, g: 0, b: 0 })).to.deep.equal({
-      h: 0,
-      s: 100,
-      v: 100
-    });
+  it('Converts RGBA to HSVA', () => {
+    const test = (input: RgbaColor, output: HsvaColor) =>
+      expect(rgbaToHsva(input)).to.deep.equal(output);
+
+    test({ r: 255, g: 255, b: 255, a: 1 }, { h: 0, s: 0, v: 100, a: 1 });
+    test({ r: 255, g: 0, b: 0, a: 1 }, { h: 0, s: 100, v: 100, a: 1 });
   });
 
-  it('Converts RGB string to HSV', () => {
-    expect(rgbStringToHsv('rgb(255, 255, 255)')).to.deep.equal({
-      h: 0,
-      s: 0,
-      v: 100
-    });
-    expect(rgbStringToHsv('rgb(0,0,0)')).to.deep.equal({ h: 0, s: 0, v: 0 });
-    expect(rgbStringToHsv('rgb(61, 88, 102)')).to.deep.equal({
-      h: 200,
-      s: 40,
-      v: 40
-    });
+  it('Converts RGB string to HSVA', () => {
+    expect(rgbStringToHsva('rgb(255, 255, 255)')).to.deep.equal({ h: 0, s: 0, v: 100, a: 1 });
+    expect(rgbStringToHsva('rgb(0,0,0)')).to.deep.equal({ h: 0, s: 0, v: 0, a: 1 });
+    expect(rgbStringToHsva('rgb(61, 88, 102)')).to.deep.equal({ h: 200, s: 40, v: 40, a: 1 });
   });
 
-  it('Converts HSV to RGB string', () => {
-    expect(hsvToRgbString({ h: 0, s: 0, v: 100 })).to.equal('rgb(255, 255, 255)');
-    expect(hsvToRgbString({ h: 200, s: 40, v: 40 })).to.equal('rgb(61, 88, 102)');
+  it('Converts HSVA to RGB string', () => {
+    expect(hsvaToRgbString({ h: 0, s: 0, v: 100, a: 1 })).to.equal('rgb(255, 255, 255)');
+    expect(hsvaToRgbString({ h: 200, s: 40, v: 40, a: 1 })).to.equal('rgb(61, 88, 102)');
   });
 
-  it('Converts RGB string to HSV', () => {
-    expect(rgbStringToHsv('rgb(255, 255, 255)')).to.deep.equal({
-      h: 0,
-      s: 0,
-      v: 100
-    });
-    expect(rgbStringToHsv('rgb(61, 88, 102)')).to.deep.equal({
-      h: 200,
-      s: 40,
-      v: 40
-    });
+  it('Converts HSVA to RGBA string', () => {
+    expect(hsvaToRgbaString({ h: 0, s: 0, v: 100, a: 0.5 })).to.equal('rgba(255, 255, 255, 0.5)');
+    expect(hsvaToRgbaString({ h: 200, s: 40, v: 40, a: 0.5 })).to.equal('rgba(61, 88, 102, 0.5)');
+  });
+
+  it('Converts HSVA to HSV', () => {
+    expect(hsvaToHsv({ h: 200, s: 40, v: 40, a: 1 })).to.deep.equal({ h: 200, s: 40, v: 40 });
+  });
+
+  it('Converts HSLA to HSL', () => {
+    expect(hslaToHsl({ h: 0, s: 0, l: 100, a: 1 })).to.deep.equal({ h: 0, s: 0, l: 100 });
+  });
+
+  it('Converts RGBA to RGB', () => {
+    expect(rgbaToRgb({ r: 255, g: 255, b: 255, a: 1 })).to.deep.equal({ r: 255, g: 255, b: 255 });
   });
 
   it('Compares two HEX colors', () => {

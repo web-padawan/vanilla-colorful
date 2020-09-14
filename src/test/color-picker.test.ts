@@ -1,7 +1,7 @@
 import { expect } from '@esm-bundle/chai';
 import sinon from 'sinon';
 import { fixture, html, nextFrame } from '@open-wc/testing-helpers';
-import { hexToHsv, hsvToRgbString } from '../lib/utils/convert';
+import { hexToHsva, hsvaToRgbString } from '../lib/utils/convert';
 import type { HexColorPicker } from '../hex-color-picker';
 import type { Hue } from '../lib/components/hue';
 import type { Saturation } from '../lib/components/saturation';
@@ -169,31 +169,31 @@ describe('hex-color-picker', () => {
 
     describe('pointers', () => {
       it('should set saturation background color', () => {
-        const hsv = hexToHsv(picker.color);
-        const bgColor = hsvToRgbString({ h: hsv.h, s: 100, v: 100 });
+        const hsva = hexToHsva(picker.color);
+        const bgColor = hsvaToRgbString({ h: hsva.h, s: 100, v: 100, a: 1 });
         expect(getComputedStyle(saturation).backgroundColor).to.equal(bgColor);
       });
 
-      it('should set saturation pointer background', () => {
-        const bgColor = hsvToRgbString(hexToHsv(picker.color));
-        expect(getComputedStyle(getPointer(saturation)).backgroundColor).to.equal(bgColor);
+      it('should set saturation pointer color', () => {
+        const bgColor = hsvaToRgbString(hexToHsva(picker.color));
+        expect(getComputedStyle(getPointer(saturation)).color).to.equal(bgColor);
       });
 
       it('should set saturation pointer coordinates', () => {
-        const hsv = hexToHsv(picker.color);
+        const hsva = hexToHsva(picker.color);
         const pointer = getPointer(saturation);
-        expect(pointer.style.top).to.equal(`${100 - hsv.v}%`);
-        expect(pointer.style.left).to.equal(`${hsv.s}%`);
+        expect(pointer.style.top).to.equal(`${100 - hsva.v}%`);
+        expect(pointer.style.left).to.equal(`${hsva.s}%`);
       });
 
-      it('should set hue pointer background', () => {
-        const hsv = hexToHsv(picker.color);
-        const bgColor = hsvToRgbString({ h: hsv.h, s: 100, v: 100 });
-        expect(getComputedStyle(getPointer(hue)).backgroundColor).to.equal(bgColor);
+      it('should set hue pointer color', () => {
+        const hsva = hexToHsva(picker.color);
+        const bgColor = hsvaToRgbString({ h: hsva.h, s: 100, v: 100, a: 1 });
+        expect(getComputedStyle(getPointer(hue)).color).to.equal(bgColor);
       });
 
       it('should set hue pointer coordinate', () => {
-        const hsv = hexToHsv(picker.color);
+        const hsv = hexToHsva(picker.color);
         expect(getPointer(hue).style.left).to.equal(`${(hsv.h / 360) * 100}%`);
       });
     });

@@ -1,10 +1,7 @@
-import type { HslColor, HsvColor, RgbColor } from '../types';
-import { hexToRgb } from './convert.js';
+import { hexToRgba } from './convert';
+import type { ObjectColor } from '../types';
 
-export const equalColorObjects = (
-  first: HslColor | HsvColor | RgbColor,
-  second: HslColor | HsvColor | RgbColor
-): boolean => {
+export const equalColorObjects = (first: ObjectColor, second: ObjectColor): boolean => {
   if (first === second) return true;
 
   for (const prop in first) {
@@ -30,5 +27,6 @@ export const equalColorString = (first: string, second: string): boolean => {
 export const equalHex = (first: string, second: string): boolean => {
   if (first.toLowerCase() === second.toLowerCase()) return true;
 
-  return equalColorObjects(hexToRgb(first), hexToRgb(second));
+  // To compare colors like `#FFF` and `ffffff` we convert them into RGB objects
+  return equalColorObjects(hexToRgba(first), hexToRgba(second));
 };

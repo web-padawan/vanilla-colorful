@@ -13,10 +13,23 @@
   position: absolute;
   z-index: 1;
   box-sizing: border-box;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   transform: translate(-50%, -50%);
+  background-color: #fff;
   border: 2px solid #fff;
   border-radius: 50%;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[part=pointer]::after {
+  display: block;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background-color: currentColor;
 }

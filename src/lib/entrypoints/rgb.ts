@@ -1,12 +1,12 @@
 import type { ColorModel, RgbColor } from '../types';
 import { ColorPicker } from '../components/color-picker.js';
-import { hsvToRgb, rgbToHsv } from '../utils/convert.js';
+import { rgbaToHsva, hsvaToRgba, rgbaToRgb } from '../utils/convert.js';
 import { equalColorObjects } from '../utils/compare.js';
 
 const colorModel: ColorModel<RgbColor> = {
   defaultColor: { r: 0, g: 0, b: 0 },
-  toHsv: rgbToHsv,
-  fromHsv: hsvToRgb,
+  toHsva: ({ r, g, b }) => rgbaToHsva({ r, g, b, a: 1 }),
+  fromHsva: (hsva) => rgbaToRgb(hsvaToRgba(hsva)),
   equal: equalColorObjects,
   fromAttr: (color) => JSON.parse(color)
 };
