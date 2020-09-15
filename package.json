@@ -27,7 +27,7 @@
     "custom-elements.json"
   ],
   "scripts": {
-    "analyze": "wca analyze hex-*.js hsl-*.js hsv-*.js rgb-*.js --format json --outFile custom-elements.json",
+    "analyze": "wca analyze hex-input.js *-color-picker.js --format json --outFile custom-elements.json",
     "build": "npm run styles && tsc",
     "deploy": "npm run dist && gh-pages -d dist",
     "dev": "npm run watch & npm run serve",
