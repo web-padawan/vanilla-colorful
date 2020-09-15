@@ -51,7 +51,7 @@
     <script type="module">
       import '../hex-color-picker.js';
       import '../hex-input.js';
-      import { hexToRgb } from '../lib/utils/convert.js';
+      import { hexToRgba } from '../lib/utils/convert.js';
       import { setFaviconColor } from './favicon.js';
 
       // See http://www.w3.org/TR/AERT#color-contrast
@@ -66,7 +66,7 @@
 
       const updateColor = (color) => {
         document.body.style.backgroundColor = color;
-        const contrast = getBrightness(hexToRgb(color)) < 128 ? '#fff' : '#000';
+        const contrast = getBrightness(hexToRgba(color)) < 128 ? '#fff' : '#000';
         document.body.style.setProperty('--contrast', contrast);
         setFaviconColor(color)();
       };
