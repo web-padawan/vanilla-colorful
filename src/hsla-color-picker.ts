@@ -2,11 +2,11 @@ import { HslaBase } from './lib/entrypoints/hsla.js';
 export type { HslaColor } from './lib/types';
 
 /**
- * A color picker custom element that uses RGBA object format.
+ * A color picker custom element that uses HSLA object format.
  *
  * @element hsla-color-picker
  *
- * @prop {HslaColor} color - Selected color in RGBA object format.
+ * @prop {HslaColor} color - Selected color in HSLA object format.
  *
  * @fires color-changed - Event fired when color property changes.
  *

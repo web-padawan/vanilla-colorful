@@ -1,12 +1,12 @@
 import { HslaStringBase } from './lib/entrypoints/hsla-string.js';
 
 /**
- * A color picker custom element that uses RGBA string format.
+ * A color picker custom element that uses HSLA string format.
  *
  * @element hsla-string-color-picker
  *
- * @prop {string} color - Selected color in RGBA string format.
- * @attr {string} color - Selected color in RGBA string format.
+ * @prop {string} color - Selected color in HSLA string format.
+ * @attr {string} color - Selected color in HSLA string format.
  *
  * @fires color-changed - Event fired when color property changes.
  *
