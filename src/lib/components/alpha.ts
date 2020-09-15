@@ -20,7 +20,7 @@ export class Alpha extends Interactive {
   connectedCallback(): void {
     if (this.hasOwnProperty('hsva')) {
       const value = this.hsva;
-      delete this['hsv' as keyof this];
+      delete this['hsva' as keyof this];
       this.hsva = value;
     }
   }
