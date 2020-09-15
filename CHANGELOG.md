@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.2.1...v0.3.0) (2020-09-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* update `ColorModel` to use `fromHsva` and `toHsva` instead of `fromHsv` and `toHsv`
+
+### Features
+
+* add alpha color picker components ([248b216](https://github.com/web-padawan/vanilla-colorful/commit/248b216358607a3faab97d08f37224712da4e66b))
+* hsv-string and hva-string pickers ([d067683](https://github.com/web-padawan/vanilla-colorful/commit/d0676839e9c8e0f2e98b9d1187b53400317e10e1))
+
 ### [0.2.1](https://github.com/web-padawan/vanilla-colorful/compare/v0.2.0...v0.2.1) (2020-09-11)
 
 

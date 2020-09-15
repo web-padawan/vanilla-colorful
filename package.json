@@ -1,6 +1,6 @@
 {
   "name": "vanilla-colorful",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A tiny framework agnostic color picker element for modern web apps",
   "author": "Serhii Kulykov <iamkulykov@gmail.com>",
   "license": "MIT",
