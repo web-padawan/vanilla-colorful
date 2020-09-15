@@ -22,7 +22,7 @@
 
 ## Features
 
-- **Small**: Just 2,2 KB (minified and gzipped). [Size Limit](https://github.com/ai/size-limit) controls the size.
+- **Small**: Just 2,3 KB (minified and gzipped). [Size Limit](https://github.com/ai/size-limit) controls the size.
 - **Fast**: Built with standards based Custom Elements.
 - **Bulletproof**: Written in strict TypeScript and covered by 20+ tests.
 - **Simple**: The interface is straight forward and easy to use.
