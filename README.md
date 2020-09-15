@@ -100,12 +100,12 @@ you need another color model, we provide 10 additional color picker bundles.
 #### Code example
 
 ```html
-<rgb-color-picker></rgb-color-picker>
+<rgba-color-picker></rgba-color-picker>
 <script type="module">
-  import 'vanilla-colorful/rgb-color-picker.js';
+  import 'vanilla-colorful/rgba-color-picker.js';
 
-  const picker = document.querySelector('rgb-color-picker');
-  picker.color = { r: 50, g: 100, b: 150 };
+  const picker = document.querySelector('rgba-color-picker');
+  picker.color = { r: 50, g: 100, b: 150, a: 1 };
 </script>
 ```
 
