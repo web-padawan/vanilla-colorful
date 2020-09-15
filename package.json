@@ -81,8 +81,16 @@
       "limit": "2 KB"
     },
     {
+      "path": "hsv-string-color-picker.js",
+      "limit": "2.1 KB"
+    },
+    {
       "path": "hsva-color-picker.js",
       "limit": "2.3 KB"
+    },
+    {
+      "path": "hsva-string-color-picker.js",
+      "limit": "2.4 KB"
     },
     {
       "path": "rgb-color-picker.js",
