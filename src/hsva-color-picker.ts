@@ -2,11 +2,11 @@ import { HsvaBase } from './lib/entrypoints/hsva.js';
 export type { HsvaColor } from './lib/types';
 
 /**
- * A color picker custom element that uses HSV object format.
+ * A color picker custom element that uses HSVA object format.
  *
  * @element hsva-color-picker
  *
- * @prop {HsvaColor} color - Selected color in HSV object format.
+ * @prop {HsvaColor} color - Selected color in HSVA object format.
  *
  * @fires color-changed - Event fired when color property changes.
  *
