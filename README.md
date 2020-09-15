@@ -76,7 +76,7 @@ Or use one of the following content delivery networks:
 ## Supported color models
 
 The default **vanilla-colorful**'s input/output format is a HEX string (like `#ffffff`). In case if
-you need another color model, we provide 10 additional color picker bundles.
+you need another color model, we provide 12 additional color picker bundles.
 
 <details>
   <summary>How to use another color model</summary>
@@ -91,7 +91,9 @@ you need another color model, we provide 10 additional color picker bundles.
 | `"hsla-color-picker.js"`        | `<hsla-color-picker>`        | `{ h: 0, s: 0, l: 100, a: 1 }`     |
 | `"hsla-string-color-picker.js"` | `<hsla-string-color-picker>` | `"hsla(0, 0%, 100%, 1)"`           |
 | `"hsv-color-picker.js"`         | `<hsv-color-picker>`         | `{ h: 0, s: 0, v: 100 }`           |
+| `"hsv-string-color-picker.js"`  | `<hsv-string-color-picker>`  | `"hsv(0, 0%, 100%)"`               |
 | `"hsva-color-picker.js"`        | `<hsva-color-picker>`        | `{ h: 0, s: 0, v: 100, a: 1 }`     |
+| `"hsva-string-color-picker.js"` | `<hsva-string-color-picker>` | `"hsva(0, 0%, 100%, 1)"`           |
 | `"rgb-color-picker.js"`         | `<rgb-color-picker>`         | `{ r: 255, g: 255, b: 255 }`       |
 | `"rgba-color-picker.js"`        | `<rgba-color-picker>`        | `{ r: 255, g: 255, b: 255, a: 1 }` |
 | `"rgb-string-color-picker.js"`  | `<rgb-string-color-picker>`  | `"rgb(255, 255, 255)"`             |
