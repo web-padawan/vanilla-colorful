@@ -3,15 +3,19 @@ import {
   hexToHsva,
   hslaToHsl,
   hslaToHsva,
+  hslStringToHsva,
+  hsvaStringToHsva,
   hsvaToHex,
   hsvaToHsla,
   hsvaToHslaString,
   hsvaToHslString,
-  hslStringToHsva,
+  hsvaToHsvaString,
   hsvaToHsv,
+  hsvaToHsvString,
   hsvaToRgba,
   hsvaToRgbaString,
   hsvaToRgbString,
+  hsvStringToHsva,
   rgbaToHsva,
   rgbaToRgb,
   rgbStringToHsva
@@ -115,6 +119,24 @@ describe('Utils', () => {
   it('Converts HSVA to RGBA string', () => {
     expect(hsvaToRgbaString({ h: 0, s: 0, v: 100, a: 0.5 })).to.equal('rgba(255, 255, 255, 0.5)');
     expect(hsvaToRgbaString({ h: 200, s: 40, v: 40, a: 0.5 })).to.equal('rgba(61, 88, 102, 0.5)');
+  });
+
+  it('Converts HSVA to HSVA string', () => {
+    expect(hsvaToHsvaString({ h: 0, s: 0, v: 100, a: 1 })).to.equal('hsva(0, 0%, 100%, 1)');
+    expect(hsvaToHsvaString({ h: 200, s: 40, v: 40, a: 0 })).to.equal('hsva(200, 40%, 40%, 0)');
+  });
+
+  it('Converts HSVA to HSV string', () => {
+    expect(hsvaToHsvString({ h: 0, s: 0, v: 100, a: 1 })).to.equal('hsv(0, 0%, 100%)');
+    expect(hsvaToHsvString({ h: 200, s: 40, v: 40, a: 1 })).to.equal('hsv(200, 40%, 40%)');
+  });
+
+  it('Converts HSV string to HSVA', () => {
+    expect(hsvStringToHsva('hsv(0, 10.5%, 0%)')).to.deep.equal({ h: 0, s: 10.5, v: 0, a: 1 });
+  });
+
+  it('Converts HSVA string to HSVA', () => {
+    expect(hsvaStringToHsva('hsva(0, 10%, 0, 0.5)')).to.deep.equal({ h: 0, s: 10, v: 0, a: 0.5 });
   });
 
   it('Converts HSVA to HSV', () => {
