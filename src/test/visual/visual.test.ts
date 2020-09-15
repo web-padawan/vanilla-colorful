@@ -6,7 +6,9 @@ import '../../hsl-string-color-picker.js';
 import '../../hsla-color-picker.js';
 import '../../hsla-string-color-picker.js';
 import '../../hsv-color-picker.js';
+import '../../hsv-string-color-picker.js';
 import '../../hsva-color-picker.js';
+import '../../hsva-string-color-picker.js';
 import '../../rgb-color-picker.js';
 import '../../rgb-string-color-picker.js';
 import '../../rgba-color-picker.js';
@@ -22,7 +24,9 @@ describe('visual tests', () => {
     'hsla',
     'hsla-string',
     'hsv',
+    'hsv-string',
     'hsva',
+    'hsva-string',
     'rgb',
     'rgb-string',
     'rgba',
