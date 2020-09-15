@@ -4,10 +4,7 @@ import { createTemplate, createRoot } from '../utils/dom.js';
 import styles from '../styles/alpha.js';
 import type { HsvaColor } from '../types';
 
-const template = createTemplate(`
-<style>${styles}</style>
-<div id="gradient"></div>
-`);
+const template = createTemplate(`<style>${styles}</style><div id="gradient"></div>`);
 
 export class Alpha extends Interactive {
   private gradient!: HTMLElement;
