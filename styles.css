@@ -22,48 +22,9 @@ body {
   flex-shrink: 0;
 }
 
-color-picker-hex {
+rgba-color-picker {
   border-radius: 9px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-}
-
-.field {
-  position: absolute;
-  top: calc(100% + 16px);
-  left: calc(50% - 45px);
-  width: 90px;
-  font-family: "PT Mono", monospace;
-}
-
-.field::before {
-  content: "#";
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  opacity: 0.33;
-}
-
-hex-input {
-  color: inherit;
-}
-
-hex-input > input {
-  display: block;
-  color: inherit;
-  width: 100%;
-  padding-left: 0.7em;
-  border: none;
-  background: none;
-  text-transform: uppercase;
-  opacity: 0.5;
-  font: inherit;
-  transition: opacity 0.2s;
-}
-
-hex-input::part(input):focus,
-hex-input::part(input):hover {
-  opacity: 1;
 }
 
 .header {
@@ -130,9 +91,5 @@ a:hover {
   .header-description {
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .field {
-    display: none;
   }
 }
