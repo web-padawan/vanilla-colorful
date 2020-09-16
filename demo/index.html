@@ -14,10 +14,7 @@
     <div class="wrapper" style="color: var(--contrast, #fff)">
       <header class="header">
         <div class="demo">
-          <hex-color-picker color="#1e88e5"></hex-color-picker>
-          <div class="field">
-            <hex-input></hex-input>
-          </div>
+          <rgba-color-picker></rgba-color-picker>
         </div>
         <div class="header-content">
           <h1 class="header-title">Vanilla Colorful 🎨</h1>
@@ -49,39 +46,24 @@
     </div>
 
     <script type="module">
-      import '../hex-color-picker.js';
-      import '../hex-input.js';
-      import { hexToRgba } from '../lib/utils/convert.js';
+      import '../rgba-color-picker.js';
       import { setFaviconColor } from './favicon.js';
 
       // See http://www.w3.org/TR/AERT#color-contrast
       const getBrightness = ({ r, g, b }) => (r * 299 + g * 587 + b * 114) / 1000;
 
-      const picker = document.querySelector('hex-color-picker');
-      const input = document.querySelector('hex-input');
-
-      const defaultColor = picker.color;
-      input.color = defaultColor;
-      setFaviconColor(defaultColor)();
-
-      const updateColor = (color) => {
-        document.body.style.backgroundColor = color;
-        const contrast = getBrightness(hexToRgba(color)) < 128 ? '#fff' : '#000';
-        document.body.style.setProperty('--contrast', contrast);
-        setFaviconColor(color)();
-      };
+      const picker = document.querySelector('rgba-color-picker');
 
       picker.addEventListener('color-changed', (event) => {
-        const color = event.detail.value;
-        input.color = color;
-        updateColor(color);
+        const rgba = event.detail.value;
+        const color = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
+        document.body.style.backgroundColor = color;
+        const contrast = getBrightness(rgba) > 128 || rgba.a < 0.5 ? '#000' : '#fff';
+        document.body.style.setProperty('--contrast', contrast);
+        setFaviconColor(color)();
       });
 
-      input.addEventListener('color-changed', (event) => {
-        const hex = event.detail.value;
-        picker.color = hex;
-        updateColor(hex);
-      });
+      picker.color = { r: 30, g: 136, b: 229, a: 1 };
     </script>
   </body>
 </html>
