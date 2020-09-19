@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/web-padawan/vanilla-colorful/compare/v0.3.0...v0.3.1) (2020-09-19)
+
+
+### Bug Fixes
+
+* ignore mouse on touch devices ([0ea812f](https://github.com/web-padawan/vanilla-colorful/commit/0ea812fa3295932a46de9fea68755fe0e14825b7))
+
 ## [0.3.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.2.1...v0.3.0) (2020-09-15)
 
 
