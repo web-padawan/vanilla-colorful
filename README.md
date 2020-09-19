@@ -8,8 +8,8 @@
   <a href="https://npmjs.org/package/vanilla-colorful">
     <img alt="npm" src="https://img.shields.io/npm/v/vanilla-colorful.svg" />
   </a>
- <a href="https://npmjs.org/package/vanilla-colorful">
-    <img alt="no dependencies" src="https://img.shields.io/david/web-padawan/vanilla-colorful.svg" />
+  <a href="https://travis-ci.org/web-padawan/vanilla-colorful">
+    <img alt="build" src="https://travis-ci.org/web-padawan/vanilla-colorful.svg?branch=master" />
   </a>
   <a href="https://bundlephobia.com/result?p=vanilla-colorful">
     <img alt="gzip size" src="https://badgen.net/bundlephobia/minzip/vanilla-colorful" />
@@ -24,7 +24,7 @@
 
 - **Small**: Just 2,3 KB (minified and gzipped). [Size Limit](https://github.com/ai/size-limit) controls the size.
 - **Fast**: Built with standards based Custom Elements.
-- **Bulletproof**: Written in strict TypeScript and covered by 20+ tests.
+- **Bulletproof**: Written in strict TypeScript and covered by 60+ tests.
 - **Simple**: The interface is straight forward and easy to use.
 - **Mobile-friendly**: Works well on mobile devices and touch screens.
 - **Framework-agnostic**: Can be used [with any framework](https://custom-elements-everywhere.com/).
