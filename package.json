@@ -62,19 +62,19 @@
     },
     {
       "path": "hsl-color-picker.js",
-      "limit": "2 KB"
-    },
-    {
-      "path": "hsl-string-color-picker.js",
       "limit": "2.1 KB"
     },
     {
+      "path": "hsl-string-color-picker.js",
+      "limit": "2.2 KB"
+    },
+    {
       "path": "hsla-color-picker.js",
-      "limit": "2.3 KB"
+      "limit": "2.4 KB"
     },
     {
       "path": "hsla-string-color-picker.js",
-      "limit": "2.4 KB"
+      "limit": "2.5 KB"
     },
     {
       "path": "hsv-color-picker.js",
@@ -90,7 +90,7 @@
     },
     {
       "path": "hsva-string-color-picker.js",
-      "limit": "2.4 KB"
+      "limit": "2.5 KB"
     },
     {
       "path": "rgb-color-picker.js",
@@ -102,7 +102,7 @@
     },
     {
       "path": "rgba-color-picker.js",
-      "limit": "2.4 KB"
+      "limit": "2.5 KB"
     },
     {
       "path": "rgba-string-color-picker.js",
