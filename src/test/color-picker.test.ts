@@ -252,6 +252,21 @@ describe('hex-color-picker', () => {
         elem.dispatchEvent(new FakeTouchEvent('touchend', [{ pageX: x + 20, pageY: y }]));
         expect(spy.callCount).to.equal(0);
       });
+
+      it('should not react on mouse events after a touch interaction', () => {
+        const elem = getInteractive(hue);
+        picker.color = '#00f';
+        const spy = sinon.spy();
+        picker.addEventListener('color-changed', spy);
+        const { left, top, height } = elem.getBoundingClientRect();
+        const y = top + height / 2;
+        elem.dispatchEvent(new FakeTouchEvent('touchstart', [{ pageX: left, pageY: y }])); // 1 (#ff0000)
+        elem.dispatchEvent(new FakeTouchEvent('touchmove', [{ pageX: left + 50, pageY: y }])); // 2 (#00ffff)
+        // Should be skipped
+        elem.dispatchEvent(new FakeMouseEvent('mousedown', { pageX: left + 65, pageY: y })); // 3
+        elem.dispatchEvent(new FakeMouseEvent('mousemove', { pageX: left + 125, pageY: y })); // 4
+        expect(spy.callCount).to.equal(2);
+      });
     });
   });
 });
