@@ -126,7 +126,7 @@
     "@web/dev-server": "^0.0.10",
     "@web/dev-server-esbuild": "^0.2.4",
     "@web/rollup-plugin-copy": "^0.1.1",
-    "@web/test-runner": "^0.7.24",
+    "@web/test-runner": "^0.7.27",
     "@web/test-runner-visual-regression": "^0.1.6",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
