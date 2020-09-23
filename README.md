@@ -68,8 +68,12 @@ Or use one of the following content delivery networks:
 
   const picker = document.querySelector('hex-color-picker');
   picker.addEventListener('color-changed', (event) => {
+    // get updated color value
     const newColor = event.detail.value;
   });
+
+  // get current color value
+  console.log(picker.color);
 </script>
 ```
 
