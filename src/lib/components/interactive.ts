@@ -19,18 +19,18 @@ const template = createTemplate(`
 let hasTouched = false;
 
 // Check if an event was triggered by touch
-const isTouch = (e: MouseEvent | TouchEvent) => window.TouchEvent && e instanceof TouchEvent;
+const isTouch = (e: Event): e is TouchEvent => 'touches' in e;
 
 // Prevent mobile browsers from handling mouse events (conflicting with touch ones).
 // If we detected a touch interaction before, we prefer reacting to touch events only.
-const isValid = (event: MouseEvent | TouchEvent): boolean => {
+const isValid = (event: Event): boolean => {
   if (hasTouched && !isTouch(event)) return false;
   if (!hasTouched) hasTouched = isTouch(event);
   return true;
 };
 
-const getRelativePosition = (rect: DOMRect, event: MouseEvent | TouchEvent): Interaction => {
-  const pointer = event instanceof MouseEvent ? event : (event as TouchEvent).touches[0];
+const getRelativePosition = (rect: DOMRect, event: Event): Interaction => {
+  const pointer = isTouch(event) ? event.touches[0] : (event as MouseEvent);
 
   return {
     left: clamp((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
@@ -56,7 +56,7 @@ export abstract class Interactive extends HTMLElement implements InteractiveInte
     toggleEvent(hasTouched ? 'touchend' : 'mouseup', this);
   }
 
-  handleEvent(event: MouseEvent | TouchEvent): void {
+  handleEvent(event: Event): void {
     switch (event.type) {
       case 'mousedown':
       case 'touchstart':
@@ -80,7 +80,7 @@ export abstract class Interactive extends HTMLElement implements InteractiveInte
 
   abstract getMove(interaction: Interaction): Record<string, number>;
 
-  onMove(event: MouseEvent | TouchEvent): void {
+  onMove(event: Event): void {
     this.dispatchEvent(
       new CustomEvent('move', {
         bubbles: true,
