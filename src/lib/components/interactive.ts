@@ -1,4 +1,5 @@
 import { createTemplate, createRoot } from '../utils/dom.js';
+import { clamp } from '../utils/clamp.js';
 import styles from '../styles/interactive.js';
 
 export interface Interaction {
@@ -9,8 +10,6 @@ export interface Interaction {
 export interface InteractiveInterface {
   setStyles(properties: Record<string, string>): void;
 }
-
-const limit = (number: number) => (number > 1 ? 1 : number < 0 ? 0 : number);
 
 const template = createTemplate(`
 <style>${styles}</style>
@@ -34,8 +33,8 @@ const getRelativePosition = (rect: DOMRect, event: MouseEvent | TouchEvent): Int
   const pointer = event instanceof MouseEvent ? event : (event as TouchEvent).touches[0];
 
   return {
-    left: limit((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
-    top: limit((pointer.pageY - (rect.top + window.pageYOffset)) / rect.height)
+    left: clamp((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
+    top: clamp((pointer.pageY - (rect.top + window.pageYOffset)) / rect.height)
   };
 };
 

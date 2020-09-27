@@ -1,4 +1,5 @@
 import { expect } from '@esm-bundle/chai';
+import { clamp } from '../lib/utils/clamp.js';
 import {
   hexToHsva,
   hslaToHsl,
@@ -187,5 +188,14 @@ describe('Utils', () => {
     expect(validHex(null)).to.equal(false);
     // @ts-expect-error
     expect(validHex()).to.equal(false);
+  });
+
+  it('Clamps a number between bounds', () => {
+    expect(clamp(0.5)).to.equal(0.5);
+    expect(clamp(1.5)).to.equal(1);
+    expect(clamp(-1)).to.equal(0);
+    expect(clamp(50, -50, 100)).to.equal(50);
+    expect(clamp(-500, -50, 100)).to.equal(-50);
+    expect(clamp(500, -50, 100)).to.equal(100);
   });
 });
