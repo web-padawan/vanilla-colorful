@@ -4,26 +4,8 @@
   flex-grow: 1;
   border-bottom: 12px solid #000;
   border-radius: 8px 8px 0 0;
-}
-
-:host::after,
-:host::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-:host::before {
-  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
-}
-
-:host::after {
-  background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
+  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0)),
+    linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
   /* Improve rendering on light backgrounds */
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
