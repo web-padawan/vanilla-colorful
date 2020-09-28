@@ -1,4 +1,4 @@
-import { ColorPicker } from './color-picker.js';
+import { ColorPicker, $render } from './color-picker.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
 import type { AnyColor, HsvaColor } from '../types';
 import type { Alpha } from './alpha.js';
@@ -8,16 +8,18 @@ const tpl = createTemplate(
   '<vc-alpha part="alpha" exportparts="pointer: alpha-pointer"></vc-alpha>'
 );
 
+const $a = Symbol('a');
+
 export abstract class AlphaColorPicker<C extends AnyColor> extends ColorPicker<C> {
-  private _a!: Alpha;
+  private [$a]!: Alpha;
 
   constructor() {
     super();
-    this._a = createRoot(this, tpl).lastElementChild as Alpha;
+    this[$a] = createRoot(this, tpl).lastElementChild as Alpha;
   }
 
-  protected _render(hsva: HsvaColor): void {
-    super._render(hsva);
-    this._a.hsva = hsva;
+  protected [$render](hsva: HsvaColor): void {
+    super[$render](hsva);
+    this[$a].hsva = hsva;
   }
 }

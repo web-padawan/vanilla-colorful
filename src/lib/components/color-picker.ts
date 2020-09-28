@@ -13,6 +13,15 @@ const tpl = createTemplate(`
 <vc-hue part="hue" exportparts="pointer: hue-pointer"></vc-hue>
 `);
 
+const $h = Symbol('h');
+const $s = Symbol('s');
+const $isSame = Symbol('same');
+const $color = Symbol('color');
+const $hsva = Symbol('hsva');
+const $change = Symbol('change');
+
+export const $render = Symbol('render');
+
 export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   static get observedAttributes(): string[] {
     return ['color'];
@@ -20,23 +29,23 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   protected abstract get colorModel(): ColorModel<C>;
 
-  private _h!: Hue;
+  private [$h]!: Hue;
 
-  private _s!: Saturation;
+  private [$s]!: Saturation;
 
-  private _hsva!: HsvaColor;
+  private [$hsva]!: HsvaColor;
 
-  private _color!: C;
+  private [$color]!: C;
 
   get color(): C {
-    return this._color;
+    return this[$color];
   }
 
   set color(newColor: C) {
-    if (!this._isSame(newColor)) {
+    if (!this[$isSame](newColor)) {
       const newHsva = this.colorModel.toHsva(newColor);
-      this._render(newHsva);
-      this._change(newColor, newHsva);
+      this[$render](newHsva);
+      this[$change](newColor, newHsva);
     }
   }
 
@@ -44,8 +53,8 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     super();
     const root = createRoot(this, tpl);
     root.addEventListener('move', this);
-    this._s = root.children[1] as Saturation;
-    this._h = root.children[2] as Hue;
+    this[$s] = root.children[1] as Saturation;
+    this[$h] = root.children[2] as Hue;
   }
 
   connectedCallback(): void {
@@ -63,36 +72,36 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   attributeChangedCallback(_attr: string, _oldVal: string, newVal: string): void {
     const color = this.colorModel.fromAttr(newVal);
-    if (!this._isSame(color)) {
+    if (!this[$isSame](color)) {
       this.color = color;
     }
   }
 
   handleEvent(event: CustomEvent): void {
     // Merge the current HSV color object with updated params.
-    const newHsva = Object.assign({}, this._hsva, event.detail);
-    this._render(newHsva);
+    const newHsva = Object.assign({}, this[$hsva], event.detail);
+    this[$render](newHsva);
     let newColor;
     if (
-      !equalColorObjects(newHsva, this._hsva) &&
-      !this._isSame((newColor = this.colorModel.fromHsva(newHsva)))
+      !equalColorObjects(newHsva, this[$hsva]) &&
+      !this[$isSame]((newColor = this.colorModel.fromHsva(newHsva)))
     ) {
-      this._change(newColor, newHsva);
+      this[$change](newColor, newHsva);
     }
   }
 
-  private _isSame(color: C): boolean {
+  private [$isSame](color: C): boolean {
     return this.color && this.colorModel.equal(color, this.color);
   }
 
-  protected _render(hsva: HsvaColor): void {
-    this._s.hsva = hsva;
-    this._h.hue = hsva.h;
+  protected [$render](hsva: HsvaColor): void {
+    this[$s].hsva = hsva;
+    this[$h].hue = hsva.h;
   }
 
-  private _change(color: C, hsva: HsvaColor): void {
-    this._color = color;
-    this._hsva = hsva;
+  private [$change](color: C, hsva: HsvaColor): void {
+    this[$color] = color;
+    this[$hsva] = hsva;
     this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: color } }));
   }
 }

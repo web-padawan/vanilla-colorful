@@ -62,11 +62,11 @@
     },
     {
       "path": "hsl-color-picker.js",
-      "limit": "2.3 KB"
+      "limit": "2.4 KB"
     },
     {
       "path": "hsl-string-color-picker.js",
-      "limit": "2.4 KB"
+      "limit": "2.5 KB"
     },
     {
       "path": "hsla-color-picker.js",
@@ -86,7 +86,7 @@
     },
     {
       "path": "hsva-color-picker.js",
-      "limit": "2.6 KB"
+      "limit": "2.7 KB"
     },
     {
       "path": "hsva-string-color-picker.js",
@@ -106,7 +106,7 @@
     },
     {
       "path": "rgba-string-color-picker.js",
-      "limit": "2.9 KB"
+      "limit": "3 KB"
     },
     {
       "path": "hex-input.js",
