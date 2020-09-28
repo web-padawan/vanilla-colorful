@@ -24,7 +24,7 @@ export class Saturation extends Interactive {
 
   private _hsva!: HsvaColor;
 
-  get arrowsOnly(): boolean {
+  get xy(): boolean {
     return true;
   }
 
