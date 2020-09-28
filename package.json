@@ -14,6 +14,23 @@
     "url": "https://github.com/web-padawan/vanilla-colorful/issues"
   },
   "homepage": "https://web-padawan.github.io/vanilla-colorful/",
+  "keywords": [
+    "webcomponents",
+    "web-components",
+    "webcomponent",
+    "web-component",
+    "custom-element",
+    "customelement",
+    "colorpicker",
+    "hex",
+    "color",
+    "color-picker",
+    "accessible",
+    "accessibility",
+    "aria",
+    "a11y",
+    "wai-aria"
+  ],
   "files": [
     "ACKNOWLEDGMENTS",
     "LICENSE",
