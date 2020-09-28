@@ -29,13 +29,59 @@ const isValid = (event: Event): boolean => {
   return true;
 };
 
-const getRelativePosition = (rect: DOMRect, event: Event): Interaction => {
-  const pointer = isTouch(event) ? event.touches[0] : (event as MouseEvent);
+const fireMove = (target: Interactive, interaction: Interaction, key?: boolean): void => {
+  target.dispatchEvent(
+    new CustomEvent('move', {
+      bubbles: true,
+      detail: target.getMove(interaction, key)
+    })
+  );
+};
 
-  return {
+const pointerMove = (target: Interactive, event: Event): void => {
+  const pointer = isTouch(event) ? event.touches[0] : (event as MouseEvent);
+  const rect = target.getBoundingClientRect();
+
+  fireMove(target, {
     left: clamp((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
     top: clamp((pointer.pageY - (rect.top + window.pageYOffset)) / rect.height)
-  };
+  });
+};
+
+const keyMove = (target: Interactive, event: KeyboardEvent): void => {
+  // We use `keyCode` instead of `key` to reduce the size of the library.
+  const keyCode = event.keyCode;
+  // Ignore all keys except arrow ones, Page Up, Page Down, Home and End.
+  if (keyCode > 40 || (target.arrowsOnly && keyCode < 37) || keyCode < 33) return;
+  // Do not scroll page by keys when color picker element has focus.
+  event.preventDefault();
+  // Send relative offset to the parent component.
+  fireMove(
+    target,
+    {
+      left:
+        keyCode === 39 // Arrow Right
+          ? 0.01
+          : keyCode === 37 // Arrow Left
+          ? -0.01
+          : keyCode === 34 // Page Down
+          ? 0.05
+          : keyCode === 33 // Page Up
+          ? -0.05
+          : keyCode === 35 // End
+          ? 1
+          : keyCode === 36 // Home
+          ? -1
+          : 0,
+      top:
+        keyCode === 40 // Arrow down
+          ? 0.01
+          : keyCode === 38 // Arrow Up
+          ? -0.01
+          : 0
+    },
+    true
+  );
 };
 
 export abstract class Interactive extends HTMLElement implements InteractiveInterface {
@@ -48,6 +94,9 @@ export abstract class Interactive extends HTMLElement implements InteractiveInte
     ) as HTMLElement).style;
     this.addEventListener('mousedown', this);
     this.addEventListener('touchstart', this);
+    this.addEventListener('keydown', this);
+    this.setAttribute('role', 'slider');
+    this.setAttribute('tabindex', '0');
   }
 
   set dragging(state: boolean) {
@@ -63,31 +112,27 @@ export abstract class Interactive extends HTMLElement implements InteractiveInte
         event.preventDefault();
         // event.button is 0 in mousedown for left button activation
         if (!isValid(event) || (!hasTouched && (event as MouseEvent).button != 0)) return;
-        this.onMove(event);
+        pointerMove(this, event);
         this.dragging = true;
         break;
       case 'mousemove':
       case 'touchmove':
         event.preventDefault();
-        this.onMove(event);
+        pointerMove(this, event);
         break;
       case 'mouseup':
       case 'touchend':
         this.dragging = false;
         break;
+      case 'keydown':
+        keyMove(this, event as KeyboardEvent);
+        break;
     }
   }
 
-  abstract getMove(interaction: Interaction): Record<string, number>;
+  abstract getMove(interaction: Interaction, key?: boolean): Record<string, number>;
 
-  onMove(event: Event): void {
-    this.dispatchEvent(
-      new CustomEvent('move', {
-        bubbles: true,
-        detail: this.getMove(getRelativePosition(this.getBoundingClientRect(), event))
-      })
-    );
-  }
+  abstract get arrowsOnly(): boolean;
 
   setStyles(properties: Record<string, string>): void {
     for (const p in properties) {

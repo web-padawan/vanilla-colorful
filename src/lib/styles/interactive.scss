@@ -1,3 +1,11 @@
+:host {
+  outline: none;
+}
+
+:host(:focus) [part=pointer] {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
 #interactive {
   position: absolute;
   left: 0;

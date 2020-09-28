@@ -1,6 +1,7 @@
 import { Interactive, Interaction } from './interactive.js';
 import { hsvaToHslaString } from '../utils/convert.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
+import { clamp } from '../utils/clamp.js';
 import styles from '../styles/alpha.js';
 import type { HsvaColor } from '../types';
 
@@ -12,6 +13,9 @@ export class Alpha extends Interactive {
   constructor() {
     super();
     this.gradient = createRoot(this, template).querySelector('#gradient') as HTMLElement;
+    this.setAttribute('aria-label', 'Alpha');
+    this.setAttribute('aria-valuemin', '0');
+    this.setAttribute('aria-valuemax', '1');
   }
 
   connectedCallback(): void {
@@ -22,7 +26,18 @@ export class Alpha extends Interactive {
     }
   }
 
+  private _hsva!: HsvaColor;
+
+  get arrowsOnly(): boolean {
+    return false;
+  }
+
+  get hsva(): HsvaColor {
+    return this._hsva;
+  }
+
   set hsva(hsva: HsvaColor) {
+    this._hsva = hsva;
     const colorFrom = hsvaToHslaString({ ...hsva, a: 0 });
     const colorTo = hsvaToHslaString({ ...hsva, a: 1 });
 
@@ -32,11 +47,14 @@ export class Alpha extends Interactive {
       left: `${hsva.a * 100}%`,
       color: hsvaToHslaString(hsva)
     });
+    const round = Math.round(hsva.a * 100);
+    this.setAttribute('aria-valuenow', `${round}`);
+    this.setAttribute('aria-valuetext', `${round}%`);
   }
 
-  getMove(interaction: Interaction): Record<string, number> {
+  getMove(interaction: Interaction, key?: boolean): Record<string, number> {
     // Alpha always fit into [0, 1] range
-    return { a: interaction.left };
+    return { a: key ? clamp(this.hsva.a + interaction.left) : interaction.left };
   }
 }
 
