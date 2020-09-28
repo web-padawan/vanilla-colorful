@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.3.1...v0.4.0) (2020-09-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename protected methods
+
+### Features
+
+* implement accessibility support ([23805f5](https://github.com/web-padawan/vanilla-colorful/commit/23805f5789468dc4682d042ec53c4c37144ca831))
+
+
+### Internal Changes
+
+* hide internals with symbols ([0f1d7e8](https://github.com/web-padawan/vanilla-colorful/commit/0f1d7e8849802ff3a41d79d12b02a229bfa8c574))
+
 ### [0.3.1](https://github.com/web-padawan/vanilla-colorful/compare/v0.3.0...v0.3.1) (2020-09-19)
 
 
