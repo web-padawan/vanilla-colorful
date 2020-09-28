@@ -11,10 +11,9 @@ export interface InteractiveInterface {
   setStyles(properties: Record<string, string>): void;
 }
 
-const template = createTemplate(`
-<style>${styles}</style>
-<div id="interactive"><div part="pointer"></div></div>
-`);
+const template = createTemplate(
+  `<style>${styles}</style><div id="interactive"><div part="pointer"></div></div>`
+);
 
 let hasTouched = false;
 
@@ -52,7 +51,7 @@ const keyMove = (target: Interactive, event: KeyboardEvent): void => {
   // We use `keyCode` instead of `key` to reduce the size of the library.
   const keyCode = event.keyCode;
   // Ignore all keys except arrow ones, Page Up, Page Down, Home and End.
-  if (keyCode > 40 || (target.arrowsOnly && keyCode < 37) || keyCode < 33) return;
+  if (keyCode > 40 || (target.xy && keyCode < 37) || keyCode < 33) return;
   // Do not scroll page by keys when color picker element has focus.
   event.preventDefault();
   // Send relative offset to the parent component.
@@ -132,7 +131,7 @@ export abstract class Interactive extends HTMLElement implements InteractiveInte
 
   abstract getMove(interaction: Interaction, key?: boolean): Record<string, number>;
 
-  abstract get arrowsOnly(): boolean;
+  abstract get xy(): boolean;
 
   setStyles(properties: Record<string, string>): void {
     for (const p in properties) {

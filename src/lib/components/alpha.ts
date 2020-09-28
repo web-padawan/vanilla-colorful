@@ -28,7 +28,7 @@ export class Alpha extends Interactive {
 
   private _hsva!: HsvaColor;
 
-  get arrowsOnly(): boolean {
+  get xy(): boolean {
     return false;
   }
 
@@ -40,14 +40,15 @@ export class Alpha extends Interactive {
     this._hsva = hsva;
     const colorFrom = hsvaToHslaString({ ...hsva, a: 0 });
     const colorTo = hsvaToHslaString({ ...hsva, a: 1 });
+    const value = hsva.a * 100;
 
     this.gradient.style.backgroundImage = `linear-gradient(to right, ${colorFrom}, ${colorTo}`;
     this.setStyles({
       top: '50%',
-      left: `${hsva.a * 100}%`,
+      left: `${value}%`,
       color: hsvaToHslaString(hsva)
     });
-    const round = Math.round(hsva.a * 100);
+    const round = Math.round(value);
     this.setAttribute('aria-valuenow', `${round}`);
     this.setAttribute('aria-valuetext', `${round}%`);
   }

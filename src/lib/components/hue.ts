@@ -25,7 +25,7 @@ export class Hue extends Interactive {
 
   private _h!: number;
 
-  get arrowsOnly(): boolean {
+  get xy(): boolean {
     return false;
   }
 
