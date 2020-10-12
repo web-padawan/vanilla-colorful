@@ -179,8 +179,8 @@ hex-color-picker::part(hue-pointer) {
 </script>
 ```
 
-`<hex-input>` does not use Shadow DOM and renders an `input` element without any custom styles. You
-can also provide a custom `input` element as a child if you want to configure it.
+`<hex-input>` renders an unstyled `<input>` element inside a slot and exposes it for styling using
+`part`. You can also pass your own `<input>` element as a child if you want to fully configure it.
 
 ## Base classes
 

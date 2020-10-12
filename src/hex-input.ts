@@ -9,6 +9,8 @@ import { HexInputBase } from './lib/entrypoints/hex-input.js';
  * @attr {string} color - Selected color in HEX format.
  *
  * @fires color-changed - Event fired when color is changed.
+ *
+ * @csspart input - A native input element.
  */
 export class HexInput extends HexInputBase {}
 

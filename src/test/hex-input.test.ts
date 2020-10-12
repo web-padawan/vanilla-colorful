@@ -7,6 +7,11 @@ describe('hex-input', () => {
   let input: HexInput;
   let target: HTMLInputElement;
 
+  function getTarget(input: HexInput) {
+    const root = input.shadowRoot as ShadowRoot;
+    return root.querySelector('input') as HTMLInputElement;
+  }
+
   function inputChar(char: string) {
     target.value += char;
     target.dispatchEvent(new CustomEvent('input', { bubbles: true, composed: true }));
@@ -25,7 +30,7 @@ describe('hex-input', () => {
       element.color = '#123';
       await import('../hex-input');
       expect(element.color).to.equal('#123');
-      target = element.querySelector('input') as HTMLInputElement;
+      target = getTarget(element);
       expect(target.value).to.equal('123');
       document.body.removeChild(element);
     });
@@ -34,7 +39,7 @@ describe('hex-input', () => {
   describe('default', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input></hex-input>`);
-      target = input.querySelector('input') as HTMLInputElement;
+      target = getTarget(input);
     });
 
     it('should set color property to empty string', () => {
@@ -43,6 +48,14 @@ describe('hex-input', () => {
 
     it('should set native input value to empty string', () => {
       expect(target.value).to.equal('');
+    });
+
+    it('should set part attribute on the native input', () => {
+      expect(target.getAttribute('part')).to.equal('input');
+    });
+
+    it('should set spellcheck to false on the native input', () => {
+      expect(target.getAttribute('spellcheck')).to.equal('false');
     });
   });
 
@@ -58,20 +71,20 @@ describe('hex-input', () => {
     it('should handle property set before adding to the DOM', () => {
       input.color = '#123';
       document.body.appendChild(input);
-      expect((input.querySelector('input') as HTMLInputElement).value).to.equal('123');
+      expect(getTarget(input).value).to.equal('123');
     });
 
     it('should handle attribute set before adding to the DOM', () => {
       input.setAttribute('color', '#123');
       document.body.appendChild(input);
-      expect((input.querySelector('input') as HTMLInputElement).value).to.equal('123');
+      expect(getTarget(input).value).to.equal('123');
     });
   });
 
   describe('color property', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input .color="${'#ccc'}"></hex-input>`);
-      target = input.querySelector('input') as HTMLInputElement;
+      target = getTarget(input);
     });
 
     it('should accept color set as a property', () => {
@@ -90,7 +103,7 @@ describe('hex-input', () => {
   describe('color attribute', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input color="#488"></hex-input>`);
-      target = input.querySelector('input') as HTMLInputElement;
+      target = getTarget(input);
     });
 
     it('should set color based on the attribute value', () => {
@@ -115,7 +128,7 @@ describe('hex-input', () => {
   describe('empty value', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input color="#488"></hex-input>`);
-      target = input.querySelector('input') as HTMLInputElement;
+      target = getTarget(input);
     });
 
     it('should clean native input when color is set to empty string', () => {
@@ -152,10 +165,20 @@ describe('hex-input', () => {
     });
   });
 
+  describe('invalid content', () => {
+    beforeEach(async () => {
+      input = await fixture(html`<hex-input color="#488"><span></span></hex-input>`);
+    });
+
+    it('should remove invalid slotted content', () => {
+      expect(input.querySelector('span')).to.be.not.ok;
+    });
+  });
+
   describe('events', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input color="#488"></hex-input>`);
-      target = input.querySelector('input') as HTMLInputElement;
+      target = getTarget(input);
     });
 
     it('should dispatch color-changed event on valid hex input', () => {
