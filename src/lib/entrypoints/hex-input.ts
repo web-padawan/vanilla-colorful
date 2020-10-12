@@ -1,7 +1,7 @@
 import { validHex } from '../utils/validate.js';
 
 // Escapes all non-hexadecimal characters including "#"
-const escape = (hex: string) => hex.replace(/([^0-9A-F]+)/gi, '');
+const escape = (hex: string) => hex.replace(/([^0-9A-F]+)/gi, '').substr(0, 6);
 
 export class HexInputBase extends HTMLElement {
   static get observedAttributes(): string[] {
@@ -28,7 +28,6 @@ export class HexInputBase extends HTMLElement {
     if (!input) {
       input = document.createElement('input');
       input.setAttribute('spellcheck', 'false');
-      input.setAttribute('maxlength', '6');
       this.appendChild(input);
     }
     input.addEventListener('input', this);
