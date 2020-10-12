@@ -180,7 +180,7 @@ hex-color-picker::part(hue-pointer) {
 ```
 
 `<hex-input>` renders an unstyled `<input>` element inside a slot and exposes it for styling using
-`part`. You can also pass your own `<input>` element as a child, if you want to fully configure it.
+`part`. You can also pass your own `<input>` element as a child if you want to fully configure it.
 
 ## Base classes
 
