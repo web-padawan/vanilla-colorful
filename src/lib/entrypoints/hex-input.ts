@@ -1,4 +1,7 @@
 import { validHex } from '../utils/validate.js';
+import { createTemplate, createRoot } from '../utils/dom.js';
+
+const template = createTemplate('<slot><input part="input" spellcheck="false"></slot>');
 
 // Escapes all non-hexadecimal characters including "#"
 const escape = (hex: string) => hex.replace(/([^0-9A-F]+)/gi, '').substr(0, 6);
@@ -24,15 +27,23 @@ export class HexInputBase extends HTMLElement {
   }
 
   connectedCallback(): void {
-    let input = this.querySelector('input');
-    if (!input) {
-      input = document.createElement('input');
-      input.setAttribute('spellcheck', 'false');
-      this.appendChild(input);
-    }
-    input.addEventListener('input', this);
-    input.addEventListener('blur', this);
-    this._input = input;
+    const slot = createRoot(this, template).firstElementChild as HTMLSlotElement;
+    const setInput = () => {
+      let input = this.querySelector('input');
+      if (!input) {
+        // remove all child node if no input found
+        let c;
+        while ((c = this.firstChild)) {
+          this.removeChild(c);
+        }
+        input = slot.firstChild as HTMLInputElement;
+      }
+      input.addEventListener('input', this);
+      input.addEventListener('blur', this);
+      this._input = input;
+    };
+    slot.addEventListener('slotchange', setInput);
+    setInput();
 
     // A user may set a property on an _instance_ of an element,
     // before its prototype has been connected to this class.
