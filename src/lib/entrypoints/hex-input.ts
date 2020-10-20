@@ -6,24 +6,29 @@ const template = createTemplate('<slot><input part="input" spellcheck="false"></
 // Escapes all non-hexadecimal characters including "#"
 const escape = (hex: string) => hex.replace(/([^0-9A-F]+)/gi, '').substr(0, 6);
 
+const $color = Symbol('color');
+const $saved = Symbol('saved');
+const $input = Symbol('saved');
+const $update = Symbol('update');
+
 export class HexInputBase extends HTMLElement {
   static get observedAttributes(): string[] {
     return ['color'];
   }
 
-  private _color!: string;
+  private [$color]!: string;
 
-  private _oldColor!: string;
+  private [$saved]!: string;
 
-  private _input!: HTMLInputElement;
+  private [$input]!: HTMLInputElement;
 
   get color(): string {
-    return this._color;
+    return this[$color];
   }
 
   set color(hex: string) {
-    this._color = hex;
-    this._setValue(hex);
+    this[$color] = hex;
+    this[$update](hex);
   }
 
   connectedCallback(): void {
@@ -40,7 +45,7 @@ export class HexInputBase extends HTMLElement {
       }
       input.addEventListener('input', this);
       input.addEventListener('blur', this);
-      this._input = input;
+      this[$input] = input;
     };
     slot.addEventListener('slotchange', setInput);
     setInput();
@@ -54,8 +59,8 @@ export class HexInputBase extends HTMLElement {
       this.color = value;
     } else if (this.color == null) {
       this.color = this.getAttribute('color') || '';
-    } else if (this._color) {
-      this._setValue(this._color);
+    } else if (this[$color]) {
+      this[$update](this[$color]);
     }
   }
 
@@ -65,7 +70,7 @@ export class HexInputBase extends HTMLElement {
     switch (event.type) {
       case 'input':
         const hex = escape(value);
-        this._oldColor = this.color;
+        this[$saved] = this.color;
         if (validHex(hex)) {
           this.color = hex;
           this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: '#' + hex } }));
@@ -73,7 +78,7 @@ export class HexInputBase extends HTMLElement {
         break;
       case 'blur':
         if (!validHex(value)) {
-          this.color = this._oldColor;
+          this.color = this[$saved];
         }
     }
   }
@@ -84,9 +89,9 @@ export class HexInputBase extends HTMLElement {
     }
   }
 
-  private _setValue(hex: string): void {
-    if (this._input) {
-      this._input.value = hex == null || hex == '' ? '' : escape(hex);
+  private [$update](hex: string): void {
+    if (this[$input]) {
+      this[$input].value = hex == null || hex == '' ? '' : escape(hex);
     }
   }
 }
