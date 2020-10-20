@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.4.0...v0.5.0) (2020-10-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* use Shadow DOM in hex-input (#16)
+
+### Internal Changes
+
+* use Shadow DOM in hex-input ([#16](https://github.com/web-padawan/vanilla-colorful/issues/16)) ([2fefcef](https://github.com/web-padawan/vanilla-colorful/commit/2fefcefbf14f142525ca516c68f7c23a17169986))
+
 ## [0.4.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.3.1...v0.4.0) (2020-09-28)
 
 
