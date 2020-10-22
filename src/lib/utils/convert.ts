@@ -1,4 +1,5 @@
 import { RgbaColor, RgbColor, HslaColor, HslColor, HsvaColor, HsvColor } from '../types';
+import { round } from './math.js';
 
 export const hexToHsva = (hex: string): HsvaColor => rgbaToHsva(hexToRgba(hex));
 
@@ -55,20 +56,20 @@ export const hsvaToHsla = ({ h, s, v, a }: HsvaColor): HslaColor => {
   const hh = ((200 - s) * v) / 100;
 
   return {
-    h: h,
-    s: hh > 0 && hh < 200 ? ((s * v) / 100 / (hh <= 100 ? hh : 200 - hh)) * 100 : 0,
-    l: hh / 2,
-    a
+    h: round(h),
+    s: round(hh > 0 && hh < 200 ? ((s * v) / 100 / (hh <= 100 ? hh : 200 - hh)) * 100 : 0),
+    l: round(hh / 2),
+    a: round(a, 2)
   };
 };
 
-export const hsvaToHsvString = (hsv: HsvaColor): string => {
-  const { h, s, v } = hsv;
+export const hsvaToHsvString = (hsva: HsvaColor): string => {
+  const { h, s, v } = roundHsva(hsva);
   return `hsv(${h}, ${s}%, ${v}%)`;
 };
 
 export const hsvaToHsvaString = (hsva: HsvaColor): string => {
-  const { h, s, v, a } = hsva;
+  const { h, s, v, a } = roundHsva(hsva);
   return `hsva(${h}, ${s}%, ${v}%, ${a})`;
 };
 
@@ -94,10 +95,10 @@ export const hsvaToRgba = ({ h, s, v, a }: HsvaColor): RgbaColor => {
     module = hh % 6;
 
   return {
-    r: Math.round([v, c, b, b, d, v][module] * 255),
-    g: Math.round([d, v, v, c, b, b][module] * 255),
-    b: Math.round([b, b, d, v, v, c][module] * 255),
-    a
+    r: round([v, c, b, b, d, v][module] * 255),
+    g: round([d, v, v, c, b, b][module] * 255),
+    b: round([b, b, d, v, v, c][module] * 255),
+    a: round(a, 2)
   };
 };
 
@@ -117,12 +118,12 @@ export const hsvaStringToHsva = (hsvString: string): HsvaColor => {
 
   if (!match) return { h: 0, s: 0, v: 0, a: 1 };
 
-  return {
+  return roundHsva({
     h: Number(match[1]),
     s: Number(match[2]),
     v: Number(match[3]),
     a: match[4] !== undefined ? Number(match[4]) : 1
-  };
+  });
 };
 
 export const hsvStringToHsva = hsvaStringToHsva;
@@ -166,15 +167,25 @@ export const rgbaToHsva = ({ r, g, b, a }: RgbaColor): HsvaColor => {
     : 0;
 
   return {
-    h: Math.round(60 * (hh < 0 ? hh + 6 : hh)),
-    s: Math.round(max ? (delta / max) * 100 : 0),
-    v: Math.round((max / 255) * 100),
+    h: round(60 * (hh < 0 ? hh + 6 : hh)),
+    s: round(max ? (delta / max) * 100 : 0),
+    v: round((max / 255) * 100),
     a
   };
 };
+
+export const roundHsva = (hsva: HsvaColor): HsvaColor => ({
+  h: round(hsva.h),
+  s: round(hsva.s),
+  v: round(hsva.v),
+  a: round(hsva.a, 2)
+});
 
 export const rgbaToRgb = ({ r, g, b }: RgbaColor): RgbColor => ({ r, g, b });
 
 export const hslaToHsl = ({ h, s, l }: HslaColor): HslColor => ({ h, s, l });
 
-export const hsvaToHsv = ({ h, s, v }: HsvaColor): HsvColor => ({ h, s, v });
+export const hsvaToHsv = (hsva: HsvaColor): HsvColor => {
+  const { h, s, v } = roundHsva(hsva);
+  return { h, s, v };
+};

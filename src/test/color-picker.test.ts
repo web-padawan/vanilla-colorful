@@ -182,8 +182,7 @@ describe('hex-color-picker', () => {
       });
 
       it('should set saturation pointer color', () => {
-        const bgColor = hsvaToRgbString(rgbaToHsva(picker.color));
-        expect(getComputedStyle(getPointer(saturation)).color).to.equal(bgColor);
+        expect(getComputedStyle(getPointer(saturation)).color).to.equal('rgb(68, 136, 136)');
       });
 
       it('should set saturation pointer coordinates', () => {

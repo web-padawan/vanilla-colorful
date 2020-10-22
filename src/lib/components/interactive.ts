@@ -1,5 +1,5 @@
 import { createTemplate, createRoot } from '../utils/dom.js';
-import { clamp } from '../utils/clamp.js';
+import { clamp } from '../utils/math.js';
 import styles from '../styles/interactive.js';
 
 export interface Interaction {
