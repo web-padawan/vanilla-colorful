@@ -33,7 +33,7 @@ jobs:
       - name: Size limit
         run: npm run size
 
-  tests-unit:
+  unit-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -45,14 +45,11 @@ jobs:
 
       - name: npm install
         run: npm ci
-
-      - name: Build
-        run: npm run build
 
       - name: Unit tests
         run: npm run test
 
-  tests-visual:
+  visual-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -64,9 +61,6 @@ jobs:
 
       - name: npm install
         run: npm ci
-
-      - name: Build
-        run: npm run build
 
       - name: Visual tests
         run: npm run test:visual
