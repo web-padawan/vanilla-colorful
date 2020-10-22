@@ -1,7 +1,7 @@
 import { Interactive, Interaction } from './interactive.js';
 import { hsvaToHslString } from '../utils/convert.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
-import { clamp } from '../utils/clamp.js';
+import { clamp, round } from '../utils/math.js';
 import styles from '../styles/hue.js';
 
 const template = createTemplate(`<style>${styles}</style>`);
@@ -39,7 +39,7 @@ export class Hue extends Interactive {
       left: `${(h / 360) * 100}%`,
       color: hsvaToHslString({ h, s: 100, v: 100, a: 1 })
     });
-    this.setAttribute('aria-valuenow', `${Math.round(h)}`);
+    this.setAttribute('aria-valuenow', `${round(h)}`);
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {

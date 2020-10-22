@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import { clamp } from '../lib/utils/clamp.js';
+import { clamp, round } from '../lib/utils/math.js';
 import {
   hexToHsva,
   hslaToHsl,
@@ -19,7 +19,8 @@ import {
   hsvStringToHsva,
   rgbaToHsva,
   rgbaToRgb,
-  rgbStringToHsva
+  rgbStringToHsva,
+  roundHsva
 } from '../lib/utils/convert.js';
 import { equalColorObjects, equalColorString, equalHex } from '../lib/utils/compare.js';
 import { validHex } from '../lib/utils/validate.js';
@@ -96,6 +97,7 @@ describe('Utils', () => {
 
     test({ h: 0, s: 0, v: 100, a: 1 }, { r: 255, g: 255, b: 255, a: 1 });
     test({ h: 0, s: 100, v: 100, a: 0.5 }, { r: 255, g: 0, b: 0, a: 0.5 });
+    test({ h: 0, s: 100, v: 100, a: 0.567 }, { r: 255, g: 0, b: 0, a: 0.57 });
   });
 
   it('Converts RGBA to HSVA', () => {
@@ -133,11 +135,11 @@ describe('Utils', () => {
   });
 
   it('Converts HSV string to HSVA', () => {
-    expect(hsvStringToHsva('hsv(0, 10.5%, 0%)')).to.deep.equal({ h: 0, s: 10.5, v: 0, a: 1 });
+    expect(hsvStringToHsva('hsv(0, 10.5%, 0%)')).to.deep.equal({ h: 0, s: 11, v: 0, a: 1 });
   });
 
   it('Converts HSVA string to HSVA', () => {
-    expect(hsvaStringToHsva('hsva(0, 10%, 0, 0.5)')).to.deep.equal({ h: 0, s: 10, v: 0, a: 0.5 });
+    expect(hsvaStringToHsva('hsva(0, 10.5%, 0, 0.5)')).to.deep.equal({ h: 0, s: 11, v: 0, a: 0.5 });
   });
 
   it('Converts HSVA to HSV', () => {
@@ -150,6 +152,14 @@ describe('Utils', () => {
 
   it('Converts RGBA to RGB', () => {
     expect(rgbaToRgb({ r: 255, g: 255, b: 255, a: 1 })).to.deep.equal({ r: 255, g: 255, b: 255 });
+  });
+
+  it('Rounds HSVA', () => {
+    const test = (input: HsvaColor, output: HsvaColor) =>
+      expect(roundHsva(input)).to.deep.equal(output);
+
+    test({ h: 1, s: 1, v: 1, a: 1 }, { h: 1, s: 1, v: 1, a: 1 });
+    test({ h: 3.3333, s: 4.4444, v: 5.5555, a: 0.6789 }, { h: 3, s: 4, v: 6, a: 0.68 });
   });
 
   it('Compares two HEX colors', () => {
@@ -197,5 +207,16 @@ describe('Utils', () => {
     expect(clamp(50, -50, 100)).to.equal(50);
     expect(clamp(-500, -50, 100)).to.equal(-50);
     expect(clamp(500, -50, 100)).to.equal(100);
+  });
+
+  it('Rounds a number', () => {
+    expect(round(0)).to.equal(0);
+    expect(round(1)).to.equal(1);
+    expect(round(0.1)).to.equal(0);
+    expect(round(0.9)).to.equal(1);
+    expect(round(0.123, 2)).to.equal(0.12);
+    expect(round(0.789, 2)).to.equal(0.79);
+    expect(round(1, 10)).to.equal(1);
+    expect(round(0.123, 10)).to.equal(0.123);
   });
 });

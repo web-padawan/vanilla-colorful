@@ -1,7 +1,7 @@
 import { Interactive, Interaction } from './interactive.js';
 import { hsvaToHslaString } from '../utils/convert.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
-import { clamp } from '../utils/clamp.js';
+import { clamp, round } from '../utils/math.js';
 import styles from '../styles/alpha.js';
 import type { HsvaColor } from '../types';
 
@@ -48,9 +48,9 @@ export class Alpha extends Interactive {
       left: `${value}%`,
       color: hsvaToHslaString(hsva)
     });
-    const round = Math.round(value);
-    this.setAttribute('aria-valuenow', `${round}`);
-    this.setAttribute('aria-valuetext', `${round}%`);
+    const v = round(value);
+    this.setAttribute('aria-valuenow', `${v}`);
+    this.setAttribute('aria-valuetext', `${v}%`);
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {

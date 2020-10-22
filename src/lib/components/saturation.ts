@@ -1,7 +1,7 @@
 import { Interactive, Interaction } from './interactive.js';
 import { hsvaToHslString } from '../utils/convert.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
-import { clamp } from '../utils/clamp.js';
+import { clamp, round } from '../utils/math.js';
 import styles from '../styles/saturation.js';
 import type { HsvaColor } from '../types';
 
@@ -42,7 +42,7 @@ export class Saturation extends Interactive {
     });
     this.setAttribute(
       'aria-valuetext',
-      `Saturation ${Math.round(hsva.s)}%, Brightness ${Math.round(hsva.v)}%`
+      `Saturation ${round(hsva.s)}%, Brightness ${round(hsva.v)}%`
     );
   }
 
