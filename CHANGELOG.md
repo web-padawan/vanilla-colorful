@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.1](https://github.com/web-padawan/vanilla-colorful/compare/v0.5.0...v0.5.1) (2020-10-22)
+
+
+### Bug Fixes
+
+* round color output values ([a68c80a](https://github.com/web-padawan/vanilla-colorful/commit/a68c80ab923496e9268151db30bca136985b00f0))
+
 ## [0.5.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.4.0...v0.5.0) (2020-10-20)
 
 
