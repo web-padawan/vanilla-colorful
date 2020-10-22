@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "hex-color-picker.js",
   "module": "hex-color-picker.js",
+  "types": "hex-color-picker.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/web-padawan/vanilla-colorful.git"
@@ -43,6 +44,24 @@
     "*-color-picker.js",
     "custom-elements.json"
   ],
+  "exports": {
+    ".": "./hex-color-picker.js",
+    "./hex-input.js": "./hex-input.js",
+    "./hsl-color-picker.js": "./hsl-color-picker.js",
+    "./hsl-string-color-picker.js": "./hsl-string-color-picker.js",
+    "./hsla-color-picker.js": "./hsla-color-picker.js",
+    "./hsla-string-color-picker.js": "./hsla-string-color-picker.js",
+    "./hsv-color-picker.js": "./hsv-color-picker.js",
+    "./hsv-string-color-picker.js": "./hsv-string-color-picker.js",
+    "./hsva-color-picker.js": "./hsva-color-picker.js",
+    "./hsva-string-color-picker.js": "./hsva-string-color-picker.js",
+    "./rgb-color-picker.js": "./rgb-color-picker.js",
+    "./rgb-string-color-picker.js": "./rgb-string-color-picker.js",
+    "./rgba-color-picker.js": "./rgba-color-picker.js",
+    "./rgba-string-color-picker.js": "./rgba-string-color-picker.js",
+    "./lib/entrypoints/*": "./lib/entrypoints/*.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "analyze": "wca analyze hex-input.js *-color-picker.js --format json --outFile custom-elements.json",
     "build": "npm run styles && tsc",
