@@ -34,8 +34,6 @@
   ],
   "files": [
     "ACKNOWLEDGMENTS",
-    "LICENSE",
-    "README.md",
     "/lib",
     "*.d.ts",
     "*.d.ts.map",
