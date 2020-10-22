@@ -8,8 +8,8 @@
   <a href="https://npmjs.org/package/vanilla-colorful">
     <img alt="npm" src="https://img.shields.io/npm/v/vanilla-colorful.svg" />
   </a>
-  <a href="https://travis-ci.org/web-padawan/vanilla-colorful">
-    <img alt="build" src="https://travis-ci.org/web-padawan/vanilla-colorful.svg?branch=master" />
+  <a href="https://github.com/web-padawan/vanilla-colorful/actions">
+    <img alt="build" src="https://github.com/web-padawan/vanilla-colorful/workflows/tests/badge.svg" />
   </a>
   <a href="https://bundlephobia.com/result?p=vanilla-colorful">
     <img alt="gzip size" src="https://badgen.net/bundlephobia/minzip/vanilla-colorful" />
