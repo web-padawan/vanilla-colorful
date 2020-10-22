@@ -46,6 +46,9 @@ jobs:
       - name: npm install
         run: npm ci
 
+      - name: Build
+        run: npm run build
+
       - name: Unit tests
         run: npm run test
 
@@ -61,6 +64,9 @@ jobs:
 
       - name: npm install
         run: npm ci
+
+      - name: Build
+        run: npm run build
 
       - name: Visual tests
         run: npm run test:visual
