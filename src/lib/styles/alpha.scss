@@ -4,13 +4,6 @@
   background-color: #fff;
 }
 
-:host::after {
-  content: '';
-  /* Improve rendering on light backgrounds */
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
-}
-
-:host::after,
 #gradient {
   position: absolute;
   left: 0;
@@ -19,6 +12,8 @@
   bottom: 0;
   pointer-events: none;
   border-radius: inherit;
+  /* Improve rendering on light backgrounds */
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 :host,
