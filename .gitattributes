@@ -1,0 +1,2 @@
+# do not show lock file while doing git diff
+package-lock.json -diff
