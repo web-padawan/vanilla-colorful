@@ -14,6 +14,9 @@
   <a href="https://bundlephobia.com/result?p=vanilla-colorful">
     <img alt="gzip size" src="https://badgen.net/bundlephobia/minzip/vanilla-colorful" />
   </a>
+  <a href="https://npmjs.org/package/vanilla-colorful">
+    <img alt="no dependencies" src="https://badgen.net/bundlephobia/dependency-count/vanilla-colorful" />
+  </a>
 </div>
 
 <div align="center">
