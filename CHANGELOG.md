@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.2](https://github.com/web-padawan/vanilla-colorful/compare/v0.5.1...v0.5.2) (2020-11-24)
+
+
+### Bug Fixes
+
+* add hex-color-picker export ([#20](https://github.com/web-padawan/vanilla-colorful/issues/20)) ([968cf2e](https://github.com/web-padawan/vanilla-colorful/commit/968cf2e1ed4b78c16423fb0c47922c23a713eff4))
+
 ### [0.5.1](https://github.com/web-padawan/vanilla-colorful/compare/v0.5.0...v0.5.1) (2020-10-22)
 
 
