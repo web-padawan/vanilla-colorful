@@ -125,6 +125,24 @@ describe('hex-color-picker', () => {
     });
   });
 
+  describe('event propagation', () => {
+    let div: HTMLDivElement;
+
+    afterEach(() => {
+      document.body.removeChild(div);
+    });
+
+    it('should fire when component is attached', () => {
+      div = document.createElement('div');
+      const spy = sinon.spy();
+      picker = document.createElement('hex-color-picker');
+      div.addEventListener('color-changed', spy);
+      document.body.appendChild(div);
+      div.appendChild(picker);
+      expect(spy.callCount).to.equal(1);
+    });
+  });
+
   describe('color attribute', () => {
     beforeEach(async () => {
       picker = document.createElement('hex-color-picker');

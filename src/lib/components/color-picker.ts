@@ -102,6 +102,8 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   private [$change](color: C, hsva: HsvaColor): void {
     this[$color] = color;
     this[$hsva] = hsva;
-    this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: color } }));
+    this.dispatchEvent(
+      new CustomEvent('color-changed', { bubbles: true, detail: { value: color } })
+    );
   }
 }
