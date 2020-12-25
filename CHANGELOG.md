@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.3](https://github.com/web-padawan/vanilla-colorful/compare/v0.5.2...v0.5.3) (2020-12-25)
+
+
+### Bug Fixes
+
+* make color-changed event bubble ([#22](https://github.com/web-padawan/vanilla-colorful/issues/22)) ([574e032](https://github.com/web-padawan/vanilla-colorful/commit/574e032e68eeb6635c6eb2f402cd105568ed87f6))
+
 ### [0.5.2](https://github.com/web-padawan/vanilla-colorful/compare/v0.5.1...v0.5.2) (2020-11-24)
 
 
