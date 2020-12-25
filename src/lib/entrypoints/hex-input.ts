@@ -73,7 +73,9 @@ export class HexInputBase extends HTMLElement {
         this[$saved] = this.color;
         if (validHex(hex)) {
           this.color = hex;
-          this.dispatchEvent(new CustomEvent('color-changed', { detail: { value: '#' + hex } }));
+          this.dispatchEvent(
+            new CustomEvent('color-changed', { bubbles: true, detail: { value: '#' + hex } })
+          );
         }
         break;
       case 'blur':
