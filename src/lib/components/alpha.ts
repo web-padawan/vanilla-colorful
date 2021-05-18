@@ -36,7 +36,6 @@ export class Alpha extends Slider {
 
     this.gradient.style.backgroundImage = `linear-gradient(to right, ${colorFrom}, ${colorTo}`;
     this.setStyles({
-      top: '50%',
       left: `${value}%`,
       color: hsvaToHslaString(hsva)
     });
