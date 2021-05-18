@@ -81,8 +81,6 @@ const keyMove = (target: Slider, event: KeyboardEvent): void => {
 export abstract class Slider implements SliderInterface {
   pointer!: CSSStyleDeclaration;
 
-  host!: HTMLElement;
-
   node!: HTMLElement;
 
   constructor(host: HTMLElement) {
