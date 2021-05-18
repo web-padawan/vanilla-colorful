@@ -33,12 +33,8 @@ export class Hue extends Slider {
     return template;
   }
 
-  getNode(root: ShadowRoot): HTMLElement {
-    return root.querySelector('[part=hue]') as HTMLElement;
-  }
-
-  getPointer(root: ShadowRoot): HTMLElement {
-    return root.querySelector('[part=hue-pointer]') as HTMLElement;
+  getPart(): string {
+    return 'hue';
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {

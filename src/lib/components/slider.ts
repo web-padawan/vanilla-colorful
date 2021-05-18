@@ -86,11 +86,12 @@ export abstract class Slider implements SliderInterface {
   node!: HTMLElement;
 
   constructor(host: HTMLElement) {
+    const part = this.getPart();
     const root = createRoot(host, this.getTemplate());
 
-    this.pointer = this.getPointer(root).style;
+    this.pointer = (root.querySelector(`[part=${part}-pointer]`) as HTMLElement).style;
 
-    const node = this.getNode(root);
+    const node = root.querySelector(`[part=${part}]`) as HTMLElement;
     node.addEventListener('mousedown', this);
     node.addEventListener('touchstart', this);
     node.addEventListener('keydown', this);
@@ -131,9 +132,7 @@ export abstract class Slider implements SliderInterface {
 
   abstract getMove(interaction: Interaction, key?: boolean): Record<string, number>;
 
-  abstract getNode(root: ShadowRoot): HTMLElement;
-
-  abstract getPointer(root: ShadowRoot): HTMLElement;
+  abstract getPart(): string;
 
   abstract getTemplate(): HTMLTemplateElement;
 

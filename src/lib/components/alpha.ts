@@ -48,12 +48,8 @@ export class Alpha extends Slider {
     return template;
   }
 
-  getNode(root: ShadowRoot): HTMLElement {
-    return root.querySelector('[part=alpha]') as HTMLElement;
-  }
-
-  getPointer(root: ShadowRoot): HTMLElement {
-    return root.querySelector('[part=alpha-pointer]') as HTMLElement;
+  getPart(): string {
+    return 'alpha';
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {

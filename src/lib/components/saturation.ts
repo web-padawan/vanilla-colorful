@@ -39,12 +39,8 @@ export class Saturation extends Slider {
     return template;
   }
 
-  getNode(root: ShadowRoot): HTMLElement {
-    return root.querySelector('[part=saturation]') as HTMLElement;
-  }
-
-  getPointer(root: ShadowRoot): HTMLElement {
-    return root.querySelector('[part=saturation-pointer]') as HTMLElement;
+  getPart(): string {
+    return 'saturation';
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
