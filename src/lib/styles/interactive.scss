@@ -1,12 +1,4 @@
-:host {
-  outline: none;
-}
-
-:host(:focus) [part=pointer] {
-  transform: translate(-50%, -50%) scale(1.1);
-}
-
-#interactive {
+[interactive] {
   position: absolute;
   left: 0;
   top: 0;
@@ -15,9 +7,10 @@
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
+  outline: none;
 }
 
-[part=pointer] {
+[part$=pointer] {
   position: absolute;
   z-index: 1;
   box-sizing: border-box;
@@ -30,7 +23,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-[part=pointer]::after {
+[part$=pointer]::after {
   display: block;
   content: "";
   position: absolute;
@@ -40,4 +33,8 @@
   bottom: 0;
   border-radius: inherit;
   background-color: currentColor;
+}
+
+[interactive]:focus [part$=pointer] {
+  transform: translate(-50%, -50%) scale(1.1);
 }

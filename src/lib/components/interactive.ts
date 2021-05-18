@@ -1,6 +1,5 @@
-import { createTemplate, createRoot } from '../utils/dom.js';
+import { createRoot } from '../utils/dom.js';
 import { clamp } from '../utils/math.js';
-import styles from '../styles/interactive.js';
 
 export interface Interaction {
   left: number;
@@ -8,12 +7,10 @@ export interface Interaction {
 }
 
 export interface InteractiveInterface {
+  host: HTMLElement;
+
   setStyles(properties: Record<string, string>): void;
 }
-
-const template = createTemplate(
-  `<style>${styles}</style><div id="interactive"><div part="pointer"></div></div>`
-);
 
 let hasTouched = false;
 
@@ -29,7 +26,7 @@ const isValid = (event: Event): boolean => {
 };
 
 const fireMove = (target: Interactive, interaction: Interaction, key?: boolean): void => {
-  target.dispatchEvent(
+  target.node.dispatchEvent(
     new CustomEvent('move', {
       bubbles: true,
       detail: target.getMove(interaction, key)
@@ -39,7 +36,7 @@ const fireMove = (target: Interactive, interaction: Interaction, key?: boolean):
 
 const pointerMove = (target: Interactive, event: Event): void => {
   const pointer = isTouch(event) ? event.touches[0] : (event as MouseEvent);
-  const rect = target.getBoundingClientRect();
+  const rect = target.node.getBoundingClientRect();
 
   fireMove(target, {
     left: clamp((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
@@ -83,19 +80,28 @@ const keyMove = (target: Interactive, event: KeyboardEvent): void => {
   );
 };
 
-export abstract class Interactive extends HTMLElement implements InteractiveInterface {
-  pointer!: CSSStyleDeclaration;
+export abstract class Interactive implements InteractiveInterface {
+  pointer!: HTMLElement;
 
-  constructor() {
-    super();
-    this.pointer = (createRoot(this, template).querySelector(
-      '[part=pointer]'
-    ) as HTMLElement).style;
-    this.addEventListener('mousedown', this);
-    this.addEventListener('touchstart', this);
-    this.addEventListener('keydown', this);
-    this.setAttribute('role', 'slider');
-    this.setAttribute('tabindex', '0');
+  host!: HTMLElement;
+
+  node!: HTMLElement;
+
+  constructor(host: HTMLElement) {
+    this.host = host;
+
+    const root = createRoot(host, this.getTemplate());
+
+    const pointer = this.getPointer(root);
+    this.pointer = pointer;
+
+    const node = this.getNode(root);
+    node.addEventListener('mousedown', this);
+    node.addEventListener('touchstart', this);
+    node.addEventListener('keydown', this);
+    node.setAttribute('role', 'slider');
+    node.setAttribute('tabindex', '0');
+    this.node = node;
   }
 
   set dragging(state: boolean) {
@@ -131,11 +137,17 @@ export abstract class Interactive extends HTMLElement implements InteractiveInte
 
   abstract getMove(interaction: Interaction, key?: boolean): Record<string, number>;
 
+  abstract getNode(root: ShadowRoot): HTMLElement;
+
+  abstract getPointer(root: ShadowRoot): HTMLElement;
+
+  abstract getTemplate(): HTMLTemplateElement;
+
   abstract get xy(): boolean;
 
   setStyles(properties: Record<string, string>): void {
     for (const p in properties) {
-      this.pointer.setProperty(p, properties[p]);
+      this.pointer.style.setProperty(p, properties[p]);
     }
   }
 }

@@ -3,9 +3,6 @@ import sinon from 'sinon';
 import { fixture, html, nextFrame } from '@open-wc/testing-helpers';
 import { hsvaToRgbString, rgbaToHsva } from '../lib/utils/convert';
 import type { HexColorPicker } from '../hex-color-picker';
-import type { Hue } from '../lib/components/hue';
-import type { Alpha } from '../lib/components/alpha';
-import type { Saturation } from '../lib/components/saturation';
 import type { RgbaColorPicker } from '../rgba-color-picker';
 import '../rgba-color-picker.js';
 
@@ -42,12 +39,8 @@ const middleOfNode = (node: Element) => {
   return { y: bcr.top + bcr.height / 2, x: bcr.left + bcr.width / 2 };
 };
 
-const getInteractive = (node: Hue | Saturation | Alpha) => {
-  return node.shadowRoot!.getElementById('interactive') as HTMLElement;
-};
-
-const getPointer = (node: Hue | Saturation | Alpha) => {
-  return node.shadowRoot!.querySelector('[part=pointer]') as HTMLElement;
+const getPointer = (node: HTMLElement) => {
+  return node.querySelector('[part$=pointer]') as HTMLElement;
 };
 
 describe('hex-color-picker', () => {
@@ -187,9 +180,9 @@ describe('hex-color-picker', () => {
   describe('hue, saturation, alpha', () => {
     let picker: RgbaColorPicker;
 
-    let hue: Hue;
-    let saturation: Saturation;
-    let alpha: Alpha;
+    let hue: HTMLElement;
+    let saturation: HTMLElement;
+    let alpha: HTMLElement;
 
     beforeEach(async () => {
       picker = document.createElement('rgba-color-picker');
@@ -197,9 +190,9 @@ describe('hex-color-picker', () => {
       await nextFrame();
       document.body.appendChild(picker);
       const root = picker.shadowRoot as ShadowRoot;
-      hue = root.querySelector('[part="hue"]') as Hue;
-      saturation = root.querySelector('[part="saturation"]') as Saturation;
-      alpha = root.querySelector('[part="alpha"]') as Alpha;
+      hue = root.querySelector('[part="hue"]') as HTMLElement;
+      saturation = root.querySelector('[part="saturation"]') as HTMLElement;
+      alpha = root.querySelector('[part="alpha"]') as HTMLElement;
     });
 
     afterEach(() => {
@@ -242,7 +235,7 @@ describe('hex-color-picker', () => {
 
     describe('interaction', () => {
       it('should dispatch color-changed event on mousedown', () => {
-        const elem = getInteractive(hue);
+        const elem = hue;
         const spy = sinon.spy();
         picker.addEventListener('color-changed', spy);
         const { x, y } = middleOfNode(elem);
@@ -252,7 +245,7 @@ describe('hex-color-picker', () => {
       });
 
       it('should dispatch color-changed event on mousemove', () => {
-        const elem = getInteractive(hue);
+        const elem = hue;
         const spy = sinon.spy();
         picker.addEventListener('color-changed', spy);
         const { x, y } = middleOfNode(elem);
@@ -263,7 +256,7 @@ describe('hex-color-picker', () => {
       });
 
       it('should dispatch color-changed event on touchstart', () => {
-        const elem = getInteractive(saturation);
+        const elem = saturation;
         const spy = sinon.spy();
         picker.addEventListener('color-changed', spy);
         const { x, y } = middleOfNode(elem);
@@ -273,7 +266,7 @@ describe('hex-color-picker', () => {
       });
 
       it('should dispatch color-changed event on touchmove', () => {
-        const elem = getInteractive(saturation);
+        const elem = saturation;
         const spy = sinon.spy();
         picker.addEventListener('color-changed', spy);
         const { x, y } = middleOfNode(elem);
@@ -284,7 +277,7 @@ describe('hex-color-picker', () => {
       });
 
       it('should dispatch color-changed event on alpha interaction', () => {
-        const elem = getInteractive(alpha);
+        const elem = alpha;
         const spy = sinon.spy();
         picker.addEventListener('color-changed', spy);
         const { x, y } = middleOfNode(elem);
@@ -295,7 +288,7 @@ describe('hex-color-picker', () => {
 
       it('should not dispatch event when hue changes for black', () => {
         picker.color = { r: 0, g: 0, b: 0, a: 1 };
-        const elem = getInteractive(hue);
+        const elem = hue;
         const spy = sinon.spy();
         picker.addEventListener('color-changed', spy);
         const { x, y } = middleOfNode(elem);
@@ -306,7 +299,7 @@ describe('hex-color-picker', () => {
       });
 
       it('should not react on mouse events after a touch interaction', () => {
-        const elem = getInteractive(hue);
+        const elem = hue;
         picker.color = { r: 0, g: 0, b: 255, a: 1 };
         const spy = sinon.spy();
         picker.addEventListener('color-changed', spy);

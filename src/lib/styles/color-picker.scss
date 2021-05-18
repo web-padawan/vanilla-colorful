@@ -14,6 +14,6 @@
 }
 
 /* Round bottom corners of the last element: `Hue` or `Alpha` */
-[part]:last-child {
+[interactive]:last-child {
   border-radius: 0 0 8px 8px;
 }

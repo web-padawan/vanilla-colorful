@@ -1,9 +1,9 @@
-:host {
+[part=hue] {
   position: relative;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 24px;
+  flex: 0 0 24px;
   background: linear-gradient(
     to right,
     #f00 0%,
@@ -16,7 +16,7 @@
   );
 }
 
-[part=pointer] {
+[part=hue-pointer] {
   top: 50%;
   /* Display the hue pointer over the alpha one */
   z-index: 2;

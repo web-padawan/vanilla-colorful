@@ -1,25 +1,18 @@
 import { Interactive, Interaction } from './interactive.js';
 import { hsvaToHslString } from '../utils/convert.js';
-import { createTemplate, createRoot } from '../utils/dom.js';
+import { createTemplate } from '../utils/dom.js';
 import { clamp, round } from '../utils/math.js';
 import styles from '../styles/saturation.js';
 import type { HsvaColor } from '../types';
 
-const template = createTemplate(`<style>${styles}</style>`);
+const template = createTemplate(
+  `<style>${styles}</style><div interactive part="saturation"><div part="saturation-pointer"></div></div>`
+);
 
-export class Saturation extends Interactive {
-  constructor() {
-    super();
-    createRoot(this, template);
-    this.setAttribute('aria-label', 'Color');
-  }
-
-  connectedCallback(): void {
-    if (this.hasOwnProperty('hsva')) {
-      const value = this.hsva;
-      delete this['hsva' as keyof this];
-      this.hsva = value;
-    }
+export class SaturationController extends Interactive {
+  constructor(host: HTMLElement) {
+    super(host);
+    this.node.setAttribute('aria-label', 'Color');
   }
 
   private _hsva!: HsvaColor;
@@ -34,16 +27,28 @@ export class Saturation extends Interactive {
 
   set hsva(hsva: HsvaColor) {
     this._hsva = hsva;
-    this.style.backgroundColor = hsvaToHslString({ h: hsva.h, s: 100, v: 100, a: 1 });
+    this.node.style.backgroundColor = hsvaToHslString({ h: hsva.h, s: 100, v: 100, a: 1 });
     this.setStyles({
       top: `${100 - hsva.v}%`,
       left: `${hsva.s}%`,
       color: hsvaToHslString(hsva)
     });
-    this.setAttribute(
+    this.node.setAttribute(
       'aria-valuetext',
       `Saturation ${round(hsva.s)}%, Brightness ${round(hsva.v)}%`
     );
+  }
+
+  getTemplate(): HTMLTemplateElement {
+    return template;
+  }
+
+  getNode(root: ShadowRoot): HTMLElement {
+    return root.querySelector('[part=saturation]') as HTMLElement;
+  }
+
+  getPointer(root: ShadowRoot): HTMLElement {
+    return root.querySelector('[part=saturation-pointer]') as HTMLElement;
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
@@ -56,5 +61,3 @@ export class Saturation extends Interactive {
     };
   }
 }
-
-customElements.define('vc-saturation', Saturation);
