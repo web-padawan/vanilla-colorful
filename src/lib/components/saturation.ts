@@ -1,4 +1,4 @@
-import { Interactive, Interaction } from './interactive.js';
+import { Slider, Interaction } from './slider.js';
 import { hsvaToHslString } from '../utils/convert.js';
 import { createTemplate } from '../utils/dom.js';
 import { clamp, round } from '../utils/math.js';
@@ -10,7 +10,7 @@ const template = createTemplate(`
 <div role="slider" part="saturation" aria-label="Color"><div part="saturation-pointer"></div></div>
 `);
 
-export class Saturation extends Interactive {
+export class Saturation extends Slider {
   private _hsva!: HsvaColor;
 
   get xy(): boolean {

@@ -6,9 +6,7 @@ export interface Interaction {
   top: number;
 }
 
-export interface InteractiveInterface {
-  host: HTMLElement;
-
+export interface SliderInterface {
   setStyles(properties: Record<string, string>): void;
 }
 
@@ -25,7 +23,7 @@ const isValid = (event: Event): boolean => {
   return true;
 };
 
-const fireMove = (target: Interactive, interaction: Interaction, key?: boolean): void => {
+const fireMove = (target: Slider, interaction: Interaction, key?: boolean): void => {
   target.node.dispatchEvent(
     new CustomEvent('move', {
       bubbles: true,
@@ -34,7 +32,7 @@ const fireMove = (target: Interactive, interaction: Interaction, key?: boolean):
   );
 };
 
-const pointerMove = (target: Interactive, event: Event): void => {
+const pointerMove = (target: Slider, event: Event): void => {
   const pointer = isTouch(event) ? event.touches[0] : (event as MouseEvent);
   const rect = target.node.getBoundingClientRect();
 
@@ -44,7 +42,7 @@ const pointerMove = (target: Interactive, event: Event): void => {
   });
 };
 
-const keyMove = (target: Interactive, event: KeyboardEvent): void => {
+const keyMove = (target: Slider, event: KeyboardEvent): void => {
   // We use `keyCode` instead of `key` to reduce the size of the library.
   const keyCode = event.keyCode;
   // Ignore all keys except arrow ones, Page Up, Page Down, Home and End.
@@ -80,7 +78,7 @@ const keyMove = (target: Interactive, event: KeyboardEvent): void => {
   );
 };
 
-export abstract class Interactive implements InteractiveInterface {
+export abstract class Slider implements SliderInterface {
   pointer!: HTMLElement;
 
   host!: HTMLElement;

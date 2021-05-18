@@ -1,4 +1,4 @@
-import { Interactive, Interaction } from './interactive.js';
+import { Slider, Interaction } from './slider.js';
 import { hsvaToHslaString } from '../utils/convert.js';
 import { createTemplate } from '../utils/dom.js';
 import { clamp, round } from '../utils/math.js';
@@ -10,7 +10,7 @@ const template = createTemplate(`
 <div role="slider" part="alpha" aria-label="Alpha" aria-valuemin="0" aria-valuemax="1"><div id="gradient"><div part="alpha-pointer"></div></div></div>
 `);
 
-export class Alpha extends Interactive {
+export class Alpha extends Slider {
   private gradient!: HTMLElement;
 
   private _hsva!: HsvaColor;
