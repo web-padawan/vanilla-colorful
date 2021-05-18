@@ -6,9 +6,8 @@ import { Saturation } from './saturation.js';
 import './hue.js';
 import './saturation.js';
 import styles from '../styles/color-picker.js';
-import interactiveStyles from '../styles/interactive.js';
 
-const template = createTemplate(`<style>${styles}${interactiveStyles}</style>`);
+const template = createTemplate(`<style>${styles}</style>`);
 
 const $h = Symbol('h');
 const $s = Symbol('s');
