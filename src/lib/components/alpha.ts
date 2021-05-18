@@ -7,7 +7,7 @@ import type { HsvaColor } from '../types';
 
 const template = createTemplate(`
 <style>${styles}</style>
-<div role="slider" part="alpha" aria-label="Alpha" aria-valuemin="0" aria-valuemax="1"><div id="gradient"><div part="alpha-pointer"></div></div></div>
+<div role="slider" part="alpha" aria-label="Alpha" aria-valuemin="0" aria-valuemax="1"><div part="alpha-pointer"></div></div><span part="gradient"></span>
 `);
 
 export class Alpha extends Slider {
@@ -17,7 +17,7 @@ export class Alpha extends Slider {
 
   constructor(host: HTMLElement) {
     super(host);
-    this.gradient = this.node.querySelector('#gradient') as HTMLElement;
+    this.gradient = this.node.nextElementSibling as HTMLElement;
   }
 
   get xy(): boolean {
