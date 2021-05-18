@@ -79,7 +79,7 @@ const keyMove = (target: Slider, event: KeyboardEvent): void => {
 };
 
 export abstract class Slider implements SliderInterface {
-  pointer!: HTMLElement;
+  pointer!: CSSStyleDeclaration;
 
   host!: HTMLElement;
 
@@ -88,8 +88,7 @@ export abstract class Slider implements SliderInterface {
   constructor(host: HTMLElement) {
     const root = createRoot(host, this.getTemplate());
 
-    const pointer = this.getPointer(root);
-    this.pointer = pointer;
+    this.pointer = this.getPointer(root).style;
 
     const node = this.getNode(root);
     node.addEventListener('mousedown', this);
@@ -142,7 +141,7 @@ export abstract class Slider implements SliderInterface {
 
   setStyles(properties: Record<string, string>): void {
     for (const p in properties) {
-      this.pointer.style.setProperty(p, properties[p]);
+      this.pointer.setProperty(p, properties[p]);
     }
   }
 }
