@@ -1,28 +1,15 @@
-import { Interactive, Interaction } from './interactive.js';
+import { Slider, Interaction } from './slider.js';
 import { hsvaToHslString } from '../utils/convert.js';
-import { createTemplate, createRoot } from '../utils/dom.js';
+import { createTemplate } from '../utils/dom.js';
 import { clamp, round } from '../utils/math.js';
 import styles from '../styles/hue.js';
 
-const template = createTemplate(`<style>${styles}</style>`);
+const template = createTemplate(`
+<style>${styles}</style>
+<div role="slider" part="hue" aria-label="Hue" aria-valuemin="0" aria-valuemax="360"><div part="hue-pointer"></div></div>
+`);
 
-export class Hue extends Interactive {
-  constructor() {
-    super();
-    createRoot(this, template);
-    this.setAttribute('aria-label', 'Hue');
-    this.setAttribute('aria-valuemin', '0');
-    this.setAttribute('aria-valuemax', '360');
-  }
-
-  connectedCallback(): void {
-    if (this.hasOwnProperty('hue')) {
-      const value = this.hue;
-      delete this['hue' as keyof this];
-      this.hue = value;
-    }
-  }
-
+export class Hue extends Slider {
   private _h!: number;
 
   get xy(): boolean {
@@ -39,7 +26,15 @@ export class Hue extends Interactive {
       left: `${(h / 360) * 100}%`,
       color: hsvaToHslString({ h, s: 100, v: 100, a: 1 })
     });
-    this.setAttribute('aria-valuenow', `${round(h)}`);
+    this.node.setAttribute('aria-valuenow', `${round(h)}`);
+  }
+
+  getTemplate(): HTMLTemplateElement {
+    return template;
+  }
+
+  getPart(): string {
+    return 'hue';
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
@@ -47,5 +42,3 @@ export class Hue extends Interactive {
     return { h: key ? clamp(this.hue + interaction.left * 360, 0, 360) : 360 * interaction.left };
   }
 }
-
-customElements.define('vc-hue', Hue);

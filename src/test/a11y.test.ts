@@ -1,20 +1,7 @@
 import { expect } from '@esm-bundle/chai';
 import { fixture, html } from '@open-wc/testing-helpers';
 import type { RgbaColorPicker } from '../rgba-color-picker';
-import type { Alpha } from '../lib/components/alpha';
-import type { Hue } from '../lib/components/hue';
-import type { Saturation } from '../lib/components/saturation';
 import '../rgba-color-picker.js';
-
-/*
-const getInteractive = (node: Hue | Saturation | Alpha) => {
-  return node.shadowRoot!.getElementById('interactive') as HTMLElement;
-};
-
-const getPointer = (node: Hue | Saturation | Alpha) => {
-  return node.shadowRoot!.querySelector('[part=pointer]') as HTMLElement;
-};
-*/
 
 const KEYS = {
   left: 37,
@@ -43,11 +30,11 @@ describe('accessibility', () => {
   });
 
   describe('saturation', () => {
-    let element: Saturation;
+    let element: HTMLElement;
 
     beforeEach(async () => {
       const root = picker.shadowRoot as ShadowRoot;
-      element = root.querySelector('[part="saturation"]') as Saturation;
+      element = root.querySelector('[part="saturation"]') as HTMLElement;
     });
 
     describe('WAI-ARIA', () => {
@@ -123,11 +110,11 @@ describe('accessibility', () => {
   });
 
   describe('hue', () => {
-    let element: Hue;
+    let element: HTMLElement;
 
     beforeEach(async () => {
       const root = picker.shadowRoot as ShadowRoot;
-      element = root.querySelector('[part="hue"]') as Hue;
+      element = root.querySelector('[part="hue"]') as HTMLElement;
     });
 
     describe('WAI-ARIA', () => {
@@ -211,11 +198,11 @@ describe('accessibility', () => {
   });
 
   describe('alpha', () => {
-    let element: Alpha;
+    let element: HTMLElement;
 
     beforeEach(async () => {
       const root = picker.shadowRoot as ShadowRoot;
-      element = root.querySelector('[part="alpha"]') as Alpha;
+      element = root.querySelector('[part="alpha"]') as HTMLElement;
     });
 
     describe('WAI-ARIA', () => {

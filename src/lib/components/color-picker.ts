@@ -1,17 +1,13 @@
 import { equalColorObjects } from '../utils/compare.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
 import type { AnyColor, ColorModel, HsvaColor } from '../types';
-import type { Hue } from './hue.js';
-import type { Saturation } from './saturation.js';
+import { Hue } from './hue.js';
+import { Saturation } from './saturation.js';
 import './hue.js';
 import './saturation.js';
 import styles from '../styles/color-picker.js';
 
-const tpl = createTemplate(`
-<style>${styles}</style>
-<vc-saturation part="saturation" exportparts="pointer: saturation-pointer"></vc-saturation>
-<vc-hue part="hue" exportparts="pointer: hue-pointer"></vc-hue>
-`);
+const template = createTemplate(`<style>${styles}</style>`);
 
 const $h = Symbol('h');
 const $s = Symbol('s');
@@ -51,10 +47,10 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   constructor() {
     super();
-    const root = createRoot(this, tpl);
+    const root = createRoot(this, template);
     root.addEventListener('move', this);
-    this[$s] = root.children[1] as Saturation;
-    this[$h] = root.children[2] as Hue;
+    this[$s] = new Saturation(this);
+    this[$h] = new Hue(this);
   }
 
   connectedCallback(): void {

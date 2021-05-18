@@ -1,19 +1,14 @@
-import { createTemplate, createRoot } from '../utils/dom.js';
+import { createRoot } from '../utils/dom.js';
 import { clamp } from '../utils/math.js';
-import styles from '../styles/interactive.js';
 
 export interface Interaction {
   left: number;
   top: number;
 }
 
-export interface InteractiveInterface {
+export interface SliderInterface {
   setStyles(properties: Record<string, string>): void;
 }
-
-const template = createTemplate(
-  `<style>${styles}</style><div id="interactive"><div part="pointer"></div></div>`
-);
 
 let hasTouched = false;
 
@@ -28,8 +23,8 @@ const isValid = (event: Event): boolean => {
   return true;
 };
 
-const fireMove = (target: Interactive, interaction: Interaction, key?: boolean): void => {
-  target.dispatchEvent(
+const fireMove = (target: Slider, interaction: Interaction, key?: boolean): void => {
+  target.node.dispatchEvent(
     new CustomEvent('move', {
       bubbles: true,
       detail: target.getMove(interaction, key)
@@ -37,9 +32,9 @@ const fireMove = (target: Interactive, interaction: Interaction, key?: boolean):
   );
 };
 
-const pointerMove = (target: Interactive, event: Event): void => {
+const pointerMove = (target: Slider, event: Event): void => {
   const pointer = isTouch(event) ? event.touches[0] : (event as MouseEvent);
-  const rect = target.getBoundingClientRect();
+  const rect = target.node.getBoundingClientRect();
 
   fireMove(target, {
     left: clamp((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
@@ -47,7 +42,7 @@ const pointerMove = (target: Interactive, event: Event): void => {
   });
 };
 
-const keyMove = (target: Interactive, event: KeyboardEvent): void => {
+const keyMove = (target: Slider, event: KeyboardEvent): void => {
   // We use `keyCode` instead of `key` to reduce the size of the library.
   const keyCode = event.keyCode;
   // Ignore all keys except arrow ones, Page Up, Page Down, Home and End.
@@ -83,19 +78,23 @@ const keyMove = (target: Interactive, event: KeyboardEvent): void => {
   );
 };
 
-export abstract class Interactive extends HTMLElement implements InteractiveInterface {
+export abstract class Slider implements SliderInterface {
   pointer!: CSSStyleDeclaration;
 
-  constructor() {
-    super();
-    this.pointer = (createRoot(this, template).querySelector(
-      '[part=pointer]'
-    ) as HTMLElement).style;
-    this.addEventListener('mousedown', this);
-    this.addEventListener('touchstart', this);
-    this.addEventListener('keydown', this);
-    this.setAttribute('role', 'slider');
-    this.setAttribute('tabindex', '0');
+  node!: HTMLElement;
+
+  constructor(host: HTMLElement) {
+    const part = this.getPart();
+    const root = createRoot(host, this.getTemplate());
+
+    this.pointer = (root.querySelector(`[part=${part}-pointer]`) as HTMLElement).style;
+
+    const node = root.querySelector(`[part=${part}]`) as HTMLElement;
+    node.addEventListener('mousedown', this);
+    node.addEventListener('touchstart', this);
+    node.addEventListener('keydown', this);
+    node.setAttribute('tabindex', '0');
+    this.node = node;
   }
 
   set dragging(state: boolean) {
@@ -130,6 +129,10 @@ export abstract class Interactive extends HTMLElement implements InteractiveInte
   }
 
   abstract getMove(interaction: Interaction, key?: boolean): Record<string, number>;
+
+  abstract getPart(): string;
+
+  abstract getTemplate(): HTMLTemplateElement;
 
   abstract get xy(): boolean;
 

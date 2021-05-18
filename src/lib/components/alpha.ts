@@ -1,32 +1,24 @@
-import { Interactive, Interaction } from './interactive.js';
+import { Slider, Interaction } from './slider.js';
 import { hsvaToHslaString } from '../utils/convert.js';
-import { createTemplate, createRoot } from '../utils/dom.js';
+import { createTemplate } from '../utils/dom.js';
 import { clamp, round } from '../utils/math.js';
 import styles from '../styles/alpha.js';
 import type { HsvaColor } from '../types';
 
-const template = createTemplate(`<style>${styles}</style><div id="gradient"></div>`);
+const template = createTemplate(`
+<style>${styles}</style>
+<div role="slider" part="alpha" aria-label="Alpha" aria-valuemin="0" aria-valuemax="1"><div part="alpha-pointer"></div></div><span part="gradient"></span>
+`);
 
-export class Alpha extends Interactive {
+export class Alpha extends Slider {
   private gradient!: HTMLElement;
 
-  constructor() {
-    super();
-    this.gradient = createRoot(this, template).querySelector('#gradient') as HTMLElement;
-    this.setAttribute('aria-label', 'Alpha');
-    this.setAttribute('aria-valuemin', '0');
-    this.setAttribute('aria-valuemax', '1');
-  }
-
-  connectedCallback(): void {
-    if (this.hasOwnProperty('hsva')) {
-      const value = this.hsva;
-      delete this['hsva' as keyof this];
-      this.hsva = value;
-    }
-  }
-
   private _hsva!: HsvaColor;
+
+  constructor(host: HTMLElement) {
+    super(host);
+    this.gradient = this.node.nextElementSibling as HTMLElement;
+  }
 
   get xy(): boolean {
     return false;
@@ -44,13 +36,20 @@ export class Alpha extends Interactive {
 
     this.gradient.style.backgroundImage = `linear-gradient(to right, ${colorFrom}, ${colorTo}`;
     this.setStyles({
-      top: '50%',
       left: `${value}%`,
       color: hsvaToHslaString(hsva)
     });
     const v = round(value);
-    this.setAttribute('aria-valuenow', `${v}`);
-    this.setAttribute('aria-valuetext', `${v}%`);
+    this.node.setAttribute('aria-valuenow', `${v}`);
+    this.node.setAttribute('aria-valuetext', `${v}%`);
+  }
+
+  getTemplate(): HTMLTemplateElement {
+    return template;
+  }
+
+  getPart(): string {
+    return 'alpha';
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
@@ -58,5 +57,3 @@ export class Alpha extends Interactive {
     return { a: key ? clamp(this.hsva.a + interaction.left) : interaction.left };
   }
 }
-
-customElements.define('vc-alpha', Alpha);
