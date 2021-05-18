@@ -5,22 +5,20 @@ import { clamp, round } from '../utils/math.js';
 import styles from '../styles/alpha.js';
 import type { HsvaColor } from '../types';
 
-const template = createTemplate(
-  `<style>${styles}</style><div role="slider" part="alpha"><div id="gradient"><div part="alpha-pointer"></div></div></div>`
-);
+const template = createTemplate(`
+<style>${styles}</style>
+<div role="slider" part="alpha" aria-label="Alpha" aria-valuemin="0" aria-valuemax="1"><div id="gradient"><div part="alpha-pointer"></div></div></div>
+`);
 
-export class AlphaController extends Interactive {
-  constructor(host: HTMLElement) {
-    super(host);
-    this.node.setAttribute('aria-label', 'Alpha');
-    this.node.setAttribute('aria-valuemin', '0');
-    this.node.setAttribute('aria-valuemax', '1');
-    this.gradient = this.node.querySelector('#gradient') as HTMLElement;
-  }
-
+export class Alpha extends Interactive {
   private gradient!: HTMLElement;
 
   private _hsva!: HsvaColor;
+
+  constructor(host: HTMLElement) {
+    super(host);
+    this.gradient = this.node.querySelector('#gradient') as HTMLElement;
+  }
 
   get xy(): boolean {
     return false;

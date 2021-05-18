@@ -1,12 +1,12 @@
 import { equalColorObjects } from '../utils/compare.js';
 import { createTemplate, createRoot } from '../utils/dom.js';
 import type { AnyColor, ColorModel, HsvaColor } from '../types';
-import { HueController } from './hue.js';
-import { SaturationController } from './saturation.js';
+import { Hue } from './hue.js';
+import { Saturation } from './saturation.js';
 import './hue.js';
 import './saturation.js';
 import styles from '../styles/color-picker.js';
-import interactiveStyles from '../styles/interactive';
+import interactiveStyles from '../styles/interactive.js';
 
 const template = createTemplate(`<style>${styles}${interactiveStyles}</style>`);
 
@@ -26,9 +26,9 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   protected abstract get colorModel(): ColorModel<C>;
 
-  private [$h]!: HueController;
+  private [$h]!: Hue;
 
-  private [$s]!: SaturationController;
+  private [$s]!: Saturation;
 
   private [$hsva]!: HsvaColor;
 
@@ -50,8 +50,8 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     super();
     const root = createRoot(this, template);
     root.addEventListener('move', this);
-    this[$s] = new SaturationController(this);
-    this[$h] = new HueController(this);
+    this[$s] = new Saturation(this);
+    this[$h] = new Hue(this);
   }
 
   connectedCallback(): void {

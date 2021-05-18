@@ -5,16 +5,12 @@ import { clamp, round } from '../utils/math.js';
 import styles from '../styles/saturation.js';
 import type { HsvaColor } from '../types';
 
-const template = createTemplate(
-  `<style>${styles}</style><div role="slider" part="saturation"><div part="saturation-pointer"></div></div>`
-);
+const template = createTemplate(`
+<style>${styles}</style>
+<div role="slider" part="saturation" aria-label="Color"><div part="saturation-pointer"></div></div>
+`);
 
-export class SaturationController extends Interactive {
-  constructor(host: HTMLElement) {
-    super(host);
-    this.node.setAttribute('aria-label', 'Color');
-  }
-
+export class Saturation extends Interactive {
   private _hsva!: HsvaColor;
 
   get xy(): boolean {

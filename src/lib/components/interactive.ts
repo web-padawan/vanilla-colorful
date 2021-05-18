@@ -88,8 +88,6 @@ export abstract class Interactive implements InteractiveInterface {
   node!: HTMLElement;
 
   constructor(host: HTMLElement) {
-    this.host = host;
-
     const root = createRoot(host, this.getTemplate());
 
     const pointer = this.getPointer(root);

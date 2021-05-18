@@ -4,18 +4,12 @@ import { createTemplate } from '../utils/dom.js';
 import { clamp, round } from '../utils/math.js';
 import styles from '../styles/hue.js';
 
-const template = createTemplate(
-  `<style>${styles}</style><div role="slider" part="hue"><div part="hue-pointer"></div></div>`
-);
+const template = createTemplate(`
+<style>${styles}</style>
+<div role="slider" part="hue" aria-label="Hue" aria-valuemin="0" aria-valuemax="360"><div part="hue-pointer"></div></div>
+`);
 
-export class HueController extends Interactive {
-  constructor(host: HTMLElement) {
-    super(host);
-    this.node.setAttribute('aria-label', 'Hue');
-    this.node.setAttribute('aria-valuemin', '0');
-    this.node.setAttribute('aria-valuemax', '360');
-  }
-
+export class Hue extends Interactive {
   private _h!: number;
 
   get xy(): boolean {
