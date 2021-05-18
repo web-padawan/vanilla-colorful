@@ -3,16 +3,6 @@ import { fixture, html } from '@open-wc/testing-helpers';
 import type { RgbaColorPicker } from '../rgba-color-picker';
 import '../rgba-color-picker.js';
 
-/*
-const getInteractive = (node: Hue | Saturation | Alpha) => {
-  return node.shadowRoot!.getElementById('interactive') as HTMLElement;
-};
-
-const getPointer = (node: Hue | Saturation | Alpha) => {
-  return node.shadowRoot!.querySelector('[part=pointer]') as HTMLElement;
-};
-*/
-
 const KEYS = {
   left: 37,
   up: 38,
