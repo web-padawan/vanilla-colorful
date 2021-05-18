@@ -6,7 +6,7 @@ import styles from '../styles/saturation.js';
 import type { HsvaColor } from '../types';
 
 const template = createTemplate(
-  `<style>${styles}</style><div interactive part="saturation"><div part="saturation-pointer"></div></div>`
+  `<style>${styles}</style><div role="slider" part="saturation"><div part="saturation-pointer"></div></div>`
 );
 
 export class SaturationController extends Interactive {

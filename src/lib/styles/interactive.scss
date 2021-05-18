@@ -1,4 +1,4 @@
-[interactive] {
+[role=slider] {
   position: absolute;
   left: 0;
   top: 0;
@@ -35,6 +35,6 @@
   background-color: currentColor;
 }
 
-[interactive]:focus [part$=pointer] {
+[role=slider]:focus [part$=pointer] {
   transform: translate(-50%, -50%) scale(1.1);
 }

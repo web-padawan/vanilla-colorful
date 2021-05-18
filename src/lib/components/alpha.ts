@@ -6,7 +6,7 @@ import styles from '../styles/alpha.js';
 import type { HsvaColor } from '../types';
 
 const template = createTemplate(
-  `<style>${styles}</style><div interactive part="alpha"><div id="gradient"><div part="alpha-pointer"></div></div></div>`
+  `<style>${styles}</style><div role="slider" part="alpha"><div id="gradient"><div part="alpha-pointer"></div></div></div>`
 );
 
 export class AlphaController extends Interactive {

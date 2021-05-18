@@ -99,7 +99,6 @@ export abstract class Interactive implements InteractiveInterface {
     node.addEventListener('mousedown', this);
     node.addEventListener('touchstart', this);
     node.addEventListener('keydown', this);
-    node.setAttribute('role', 'slider');
     node.setAttribute('tabindex', '0');
     this.node = node;
   }

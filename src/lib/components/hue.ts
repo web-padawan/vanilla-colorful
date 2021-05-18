@@ -5,7 +5,7 @@ import { clamp, round } from '../utils/math.js';
 import styles from '../styles/hue.js';
 
 const template = createTemplate(
-  `<style>${styles}</style><div interactive part="hue"><div part="hue-pointer"></div></div>`
+  `<style>${styles}</style><div role="slider" part="hue"><div part="hue-pointer"></div></div>`
 );
 
 export class HueController extends Interactive {
