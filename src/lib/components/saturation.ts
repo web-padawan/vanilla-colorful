@@ -13,17 +13,22 @@ export class Saturation extends Slider {
       'saturation',
       true
     );
+    this.nodes.push(this.el);
   }
 
   update(hsva: HsvaColor): void {
     this.hsva = hsva;
-    this.node.style.backgroundColor = hsvaToHslString({ h: hsva.h, s: 100, v: 100, a: 1 });
-    this.setStyles({
-      top: `${100 - hsva.v}%`,
-      left: `${hsva.s}%`,
-      color: hsvaToHslString(hsva)
-    });
-    this.node.setAttribute(
+    this.style([
+      {
+        top: `${100 - hsva.v}%`,
+        left: `${hsva.s}%`,
+        color: hsvaToHslString(hsva)
+      },
+      {
+        backgroundColor: hsvaToHslString({ h: hsva.h, s: 100, v: 100, a: 1 })
+      }
+    ]);
+    this.el.setAttribute(
       'aria-valuetext',
       `Saturation ${round(hsva.s)}%, Brightness ${round(hsva.v)}%`
     );
