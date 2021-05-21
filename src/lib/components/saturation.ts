@@ -13,8 +13,8 @@ const template = createTemplate(`
 export class Saturation extends Slider {
   private _hsva!: HsvaColor;
 
-  get xy(): boolean {
-    return true;
+  constructor(host: HTMLElement) {
+    super(host, template, 'saturation', true);
   }
 
   update(hsva: HsvaColor): void {
@@ -29,14 +29,6 @@ export class Saturation extends Slider {
       'aria-valuetext',
       `Saturation ${round(hsva.s)}%, Brightness ${round(hsva.v)}%`
     );
-  }
-
-  getTemplate(): HTMLTemplateElement {
-    return template;
-  }
-
-  getPart(): string {
-    return 'saturation';
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {

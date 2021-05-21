@@ -16,12 +16,8 @@ export class Alpha extends Slider {
   private _hsva!: HsvaColor;
 
   constructor(host: HTMLElement) {
-    super(host);
+    super(host, template, 'alpha', false);
     this.gradient = (this.node.nextElementSibling as HTMLElement).style;
-  }
-
-  get xy(): boolean {
-    return false;
   }
 
   update(hsva: HsvaColor): void {
@@ -38,14 +34,6 @@ export class Alpha extends Slider {
     const v = round(value);
     this.node.setAttribute('aria-valuenow', `${v}`);
     this.node.setAttribute('aria-valuetext', `${v}%`);
-  }
-
-  getTemplate(): HTMLTemplateElement {
-    return template;
-  }
-
-  getPart(): string {
-    return 'alpha';
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {

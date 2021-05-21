@@ -13,8 +13,8 @@ const template = createTemplate(`
 export class Hue extends Slider {
   private _h!: number;
 
-  get xy(): boolean {
-    return false;
+  constructor(host: HTMLElement) {
+    super(host, template, 'hue', false);
   }
 
   update({ h }: HsvaColor): void {
@@ -24,14 +24,6 @@ export class Hue extends Slider {
       color: hsvaToHslString({ h, s: 100, v: 100, a: 1 })
     });
     this.node.setAttribute('aria-valuenow', `${round(h)}`);
-  }
-
-  getTemplate(): HTMLTemplateElement {
-    return template;
-  }
-
-  getPart(): string {
-    return 'hue';
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
