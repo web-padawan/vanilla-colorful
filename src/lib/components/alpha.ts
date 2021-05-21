@@ -13,7 +13,7 @@ const template = createTemplate(`
 export class Alpha extends Slider {
   private gradient!: CSSStyleDeclaration;
 
-  private _hsva!: HsvaColor;
+  private hsva!: HsvaColor;
 
   constructor(host: HTMLElement) {
     super(host, template, 'alpha', false);
@@ -21,7 +21,7 @@ export class Alpha extends Slider {
   }
 
   update(hsva: HsvaColor): void {
-    this._hsva = hsva;
+    this.hsva = hsva;
     const colorFrom = hsvaToHslaString({ ...hsva, a: 0 });
     const colorTo = hsvaToHslaString({ ...hsva, a: 1 });
     const value = hsva.a * 100;
@@ -38,6 +38,6 @@ export class Alpha extends Slider {
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
     // Alpha always fit into [0, 1] range
-    return { a: key ? clamp(this._hsva.a + interaction.left) : interaction.left };
+    return { a: key ? clamp(this.hsva.a + interaction.left) : interaction.left };
   }
 }

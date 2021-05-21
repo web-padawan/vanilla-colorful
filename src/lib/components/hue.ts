@@ -11,14 +11,14 @@ const template = createTemplate(`
 `);
 
 export class Hue extends Slider {
-  private _h!: number;
+  private h!: number;
 
   constructor(host: HTMLElement) {
     super(host, template, 'hue', false);
   }
 
   update({ h }: HsvaColor): void {
-    this._h = h;
+    this.h = h;
     this.setStyles({
       left: `${(h / 360) * 100}%`,
       color: hsvaToHslString({ h, s: 100, v: 100, a: 1 })
@@ -28,6 +28,6 @@ export class Hue extends Slider {
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
     // Hue measured in degrees of the color circle ranging from 0 to 360
-    return { h: key ? clamp(this._h + interaction.left * 360, 0, 360) : 360 * interaction.left };
+    return { h: key ? clamp(this.h + interaction.left * 360, 0, 360) : 360 * interaction.left };
   }
 }
