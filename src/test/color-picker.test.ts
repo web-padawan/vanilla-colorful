@@ -312,6 +312,20 @@ describe('hex-color-picker', () => {
         elem.dispatchEvent(new FakeMouseEvent('mousemove', { pageX: left + 125, pageY: y })); // 4
         expect(spy.callCount).to.equal(2);
       });
+
+      it('should not reset hue after saturation is changed', () => {
+        picker.color = { r: 0, g: 0, b: 0, a: 1 };
+
+        const { x: hx, y: hy } = middleOfNode(hue);
+        hue.dispatchEvent(new FakeTouchEvent('touchstart', [{ pageX: hx, pageY: hy }]));
+        hue.dispatchEvent(new FakeTouchEvent('touchend', [{ pageX: hx, pageY: hy }]));
+
+        const { x: sx, y: sy } = middleOfNode(saturation);
+        saturation.dispatchEvent(new FakeTouchEvent('touchstart', [{ pageX: sx, pageY: sy }]));
+        saturation.dispatchEvent(new FakeTouchEvent('touchend', [{ pageX: sx, pageY: sy }]));
+
+        expect(picker.color).to.deep.equal({ r: 64, g: 128, b: 128, a: 1 });
+      });
     });
   });
 });

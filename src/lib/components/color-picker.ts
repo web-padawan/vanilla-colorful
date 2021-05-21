@@ -42,7 +42,7 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     if (!this[$isSame](newColor)) {
       const newHsva = this.colorModel.toHsva(newColor);
       this[$update](newHsva);
-      this[$change](newColor, newHsva);
+      this[$change](newColor);
     }
   }
 
@@ -77,14 +77,15 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   handleEvent(event: CustomEvent): void {
     // Merge the current HSV color object with updated params.
-    const newHsva = Object.assign({}, this[$hsva], event.detail);
+    const oldHsva = this[$hsva];
+    const newHsva = { ...oldHsva, ...event.detail };
     this[$update](newHsva);
     let newColor;
     if (
-      !equalColorObjects(newHsva, this[$hsva]) &&
+      !equalColorObjects(newHsva, oldHsva) &&
       !this[$isSame]((newColor = this.colorModel.fromHsva(newHsva)))
     ) {
-      this[$change](newColor, newHsva);
+      this[$change](newColor);
     }
   }
 
@@ -93,12 +94,12 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   }
 
   private [$update](hsva: HsvaColor): void {
+    this[$hsva] = hsva;
     this[$parts].forEach((part) => part.update(hsva));
   }
 
-  private [$change](color: C, hsva: HsvaColor): void {
+  private [$change](color: C): void {
     this[$color] = color;
-    this[$hsva] = hsva;
     this.dispatchEvent(
       new CustomEvent('color-changed', { bubbles: true, detail: { value: color } })
     );
