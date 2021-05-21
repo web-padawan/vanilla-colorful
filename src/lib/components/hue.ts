@@ -17,11 +17,13 @@ export class Hue extends Slider {
 
   update({ h }: HsvaColor): void {
     this.h = h;
-    this.setStyles({
-      left: `${(h / 360) * 100}%`,
-      color: hsvaToHslString({ h, s: 100, v: 100, a: 1 })
-    });
-    this.node.setAttribute('aria-valuenow', `${round(h)}`);
+    this.style([
+      {
+        left: `${(h / 360) * 100}%`,
+        color: hsvaToHslString({ h, s: 100, v: 100, a: 1 })
+      }
+    ]);
+    this.el.setAttribute('aria-valuenow', `${round(h)}`);
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {

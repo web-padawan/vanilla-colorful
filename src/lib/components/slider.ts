@@ -7,10 +7,6 @@ export interface Interaction {
   top: number;
 }
 
-export interface SliderInterface {
-  setStyles(properties: Record<string, string>): void;
-}
-
 let hasTouched = false;
 
 // Check if an event was triggered by touch
@@ -25,7 +21,7 @@ const isValid = (event: Event): boolean => {
 };
 
 const fireMove = (target: Slider, interaction: Interaction, key?: boolean): void => {
-  target.node.dispatchEvent(
+  target.el.dispatchEvent(
     new CustomEvent('move', {
       bubbles: true,
       detail: target.getMove(interaction, key)
@@ -35,7 +31,7 @@ const fireMove = (target: Slider, interaction: Interaction, key?: boolean): void
 
 const pointerMove = (target: Slider, event: Event): void => {
   const pointer = isTouch(event) ? event.touches[0] : (event as MouseEvent);
-  const rect = target.node.getBoundingClientRect();
+  const rect = target.el.getBoundingClientRect();
 
   fireMove(target, {
     left: clamp((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
@@ -79,26 +75,25 @@ const keyMove = (target: Slider, event: KeyboardEvent): void => {
   );
 };
 
-export abstract class Slider implements SliderInterface {
-  pointer!: CSSStyleDeclaration;
+export abstract class Slider {
+  nodes!: HTMLElement[];
 
-  node!: HTMLElement;
+  el!: HTMLElement;
 
   xy!: boolean;
 
   constructor(root: ShadowRoot, template: string, part: string, xy: boolean) {
-    this.xy = xy;
-
     root.appendChild(createTemplate(template).content.cloneNode(true));
 
-    this.pointer = (root.querySelector(`[part=${part}-pointer]`) as HTMLElement).style;
+    const el = root.querySelector(`[part=${part}]`) as HTMLElement;
+    el.addEventListener('mousedown', this);
+    el.addEventListener('touchstart', this);
+    el.addEventListener('keydown', this);
+    el.setAttribute('tabindex', '0');
+    this.el = el;
 
-    const node = root.querySelector(`[part=${part}]`) as HTMLElement;
-    node.addEventListener('mousedown', this);
-    node.addEventListener('touchstart', this);
-    node.addEventListener('keydown', this);
-    node.setAttribute('tabindex', '0');
-    this.node = node;
+    this.xy = xy;
+    this.nodes = [root.querySelector(`[part=${part}-pointer]`) as HTMLElement];
   }
 
   set dragging(state: boolean) {
@@ -136,9 +131,9 @@ export abstract class Slider implements SliderInterface {
 
   abstract update(hsva: HsvaColor): void;
 
-  setStyles(properties: Record<string, string>): void {
-    for (const p in properties) {
-      this.pointer.setProperty(p, properties[p]);
-    }
+  style(styles: Array<Record<string, string>>): void {
+    styles.forEach((style, i) => {
+      Object.assign(this.nodes[i].style, style);
+    });
   }
 }

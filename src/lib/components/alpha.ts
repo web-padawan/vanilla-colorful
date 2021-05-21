@@ -4,8 +4,6 @@ import { clamp, round } from '../utils/math.js';
 import type { HsvaColor } from '../types';
 
 export class Alpha extends Slider {
-  private gradient!: CSSStyleDeclaration;
-
   private hsva!: HsvaColor;
 
   constructor(root: ShadowRoot) {
@@ -15,7 +13,7 @@ export class Alpha extends Slider {
       'alpha',
       false
     );
-    this.gradient = (this.node.nextElementSibling as HTMLElement).style;
+    this.nodes.push(this.el.nextElementSibling as HTMLElement);
   }
 
   update(hsva: HsvaColor): void {
@@ -24,14 +22,19 @@ export class Alpha extends Slider {
     const colorTo = hsvaToHslaString({ ...hsva, a: 1 });
     const value = hsva.a * 100;
 
-    this.gradient.backgroundImage = `linear-gradient(to right, ${colorFrom}, ${colorTo}`;
-    this.setStyles({
-      left: `${value}%`,
-      color: hsvaToHslaString(hsva)
-    });
+    this.style([
+      {
+        left: `${value}%`,
+        color: hsvaToHslaString(hsva)
+      },
+      {
+        backgroundImage: `linear-gradient(to right, ${colorFrom}, ${colorTo}`
+      }
+    ]);
+
     const v = round(value);
-    this.node.setAttribute('aria-valuenow', `${v}`);
-    this.node.setAttribute('aria-valuetext', `${v}%`);
+    this.el.setAttribute('aria-valuenow', `${v}`);
+    this.el.setAttribute('aria-valuetext', `${v}%`);
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
