@@ -17,11 +17,7 @@ export class Saturation extends Slider {
     return true;
   }
 
-  get hsva(): HsvaColor {
-    return this._hsva;
-  }
-
-  set hsva(hsva: HsvaColor) {
+  update(hsva: HsvaColor): void {
     this._hsva = hsva;
     this.node.style.backgroundColor = hsvaToHslString({ h: hsva.h, s: 100, v: 100, a: 1 });
     this.setStyles({
@@ -46,9 +42,9 @@ export class Saturation extends Slider {
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
     // Saturation and brightness always fit into [0, 100] range
     return {
-      s: key ? clamp(this.hsva.s + interaction.left * 100, 0, 100) : interaction.left * 100,
+      s: key ? clamp(this._hsva.s + interaction.left * 100, 0, 100) : interaction.left * 100,
       v: key
-        ? clamp(this.hsva.v - interaction.top * 100, 0, 100)
+        ? clamp(this._hsva.v - interaction.top * 100, 0, 100)
         : Math.round(100 - interaction.top * 100)
     };
   }

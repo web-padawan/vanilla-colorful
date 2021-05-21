@@ -141,7 +141,7 @@
     },
     {
       "path": "rgba-string-color-picker.js",
-      "limit": "3.1 KB"
+      "limit": "3 KB"
     },
     {
       "path": "hex-input.js",

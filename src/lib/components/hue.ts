@@ -3,6 +3,7 @@ import { hsvaToHslString } from '../utils/convert.js';
 import { createTemplate } from '../utils/dom.js';
 import { clamp, round } from '../utils/math.js';
 import styles from '../styles/hue.js';
+import type { HsvaColor } from '../types';
 
 const template = createTemplate(`
 <style>${styles}</style>
@@ -16,11 +17,7 @@ export class Hue extends Slider {
     return false;
   }
 
-  get hue(): number {
-    return this._h;
-  }
-
-  set hue(h: number) {
+  update({ h }: HsvaColor): void {
     this._h = h;
     this.setStyles({
       left: `${(h / 360) * 100}%`,
@@ -39,6 +36,6 @@ export class Hue extends Slider {
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
     // Hue measured in degrees of the color circle ranging from 0 to 360
-    return { h: key ? clamp(this.hue + interaction.left * 360, 0, 360) : 360 * interaction.left };
+    return { h: key ? clamp(this._h + interaction.left * 360, 0, 360) : 360 * interaction.left };
   }
 }

@@ -1,3 +1,4 @@
+import type { HsvaColor } from '../types.js';
 import { createRoot } from '../utils/dom.js';
 import { clamp } from '../utils/math.js';
 
@@ -135,6 +136,8 @@ export abstract class Slider implements SliderInterface {
   abstract getTemplate(): HTMLTemplateElement;
 
   abstract get xy(): boolean;
+
+  abstract update(hsva: HsvaColor): void;
 
   setStyles(properties: Record<string, string>): void {
     for (const p in properties) {
