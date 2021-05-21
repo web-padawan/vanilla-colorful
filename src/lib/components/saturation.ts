@@ -7,13 +7,7 @@ export class Saturation extends Slider {
   private hsva!: HsvaColor;
 
   constructor(root: ShadowRoot) {
-    super(
-      root,
-      '<div role="slider" part="saturation" aria-label="Color"><div part="saturation-pointer"></div></div>',
-      'saturation',
-      true
-    );
-    this.nodes.push(this.el);
+    super(root, 'saturation', 'aria-label="Color"', true);
   }
 
   update(hsva: HsvaColor): void {
@@ -25,7 +19,7 @@ export class Saturation extends Slider {
         color: hsvaToHslString(hsva)
       },
       {
-        backgroundColor: hsvaToHslString({ h: hsva.h, s: 100, v: 100, a: 1 })
+        'background-color': hsvaToHslString({ h: hsva.h, s: 100, v: 100, a: 1 })
       }
     ]);
     this.el.setAttribute(
