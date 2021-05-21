@@ -4,14 +4,16 @@
   background-color: #fff;
 }
 
-[part=gradient] {
+[part=alpha]::after {
+  display: block;
+  content: "";
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 24px;
-  pointer-events: none;
-  border-radius: 0 0 8px 8px;
+  border-radius: inherit;
+  background-image: var(--gradient);
   /* Improve rendering on light backgrounds */
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }

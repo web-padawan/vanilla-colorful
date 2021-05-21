@@ -82,18 +82,20 @@ export abstract class Slider {
 
   xy!: boolean;
 
-  constructor(root: ShadowRoot, template: string, part: string, xy: boolean) {
-    root.appendChild(createTemplate(template).content.cloneNode(true));
+  constructor(root: ShadowRoot, part: string, aria: string, xy: boolean) {
+    const tpl = createTemplate(
+      `<div role="slider" tabindex="0" part="${part}" ${aria}><div part="${part}-pointer"></div></div>`
+    );
+    root.appendChild(tpl.content.cloneNode(true));
 
     const el = root.querySelector(`[part=${part}]`) as HTMLElement;
     el.addEventListener('mousedown', this);
     el.addEventListener('touchstart', this);
     el.addEventListener('keydown', this);
-    el.setAttribute('tabindex', '0');
     this.el = el;
 
     this.xy = xy;
-    this.nodes = [root.querySelector(`[part=${part}-pointer]`) as HTMLElement];
+    this.nodes = [el.firstElementChild as HTMLElement, el];
   }
 
   set dragging(state: boolean) {
@@ -133,7 +135,9 @@ export abstract class Slider {
 
   style(styles: Array<Record<string, string>>): void {
     styles.forEach((style, i) => {
-      Object.assign(this.nodes[i].style, style);
+      for (const p in style) {
+        this.nodes[i].style.setProperty(p, style[p]);
+      }
     });
   }
 }

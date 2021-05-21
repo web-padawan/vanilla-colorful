@@ -7,12 +7,7 @@ export class Hue extends Slider {
   private h!: number;
 
   constructor(root: ShadowRoot) {
-    super(
-      root,
-      '<div role="slider" part="hue" aria-label="Hue" aria-valuemin="0" aria-valuemax="360"><div part="hue-pointer"></div></div>',
-      'hue',
-      false
-    );
+    super(root, 'hue', 'aria-label="Hue" aria-valuemin="0" aria-valuemax="360"', false);
   }
 
   update({ h }: HsvaColor): void {

@@ -16,7 +16,6 @@ import { RgbaStringBase } from './lib/entrypoints/rgba-string.js';
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
  * @csspart alpha-pointer - An alpha pointer element.
- * @csspart alpha-gradient - An alpha gradient element.
  */
 export class RgbaStringColorPicker extends RgbaStringBase {}
 

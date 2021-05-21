@@ -7,13 +7,7 @@ export class Alpha extends Slider {
   private hsva!: HsvaColor;
 
   constructor(root: ShadowRoot) {
-    super(
-      root,
-      '<div role="slider" part="alpha" aria-label="Alpha" aria-valuemin="0" aria-valuemax="1"><div part="alpha-pointer"></div></div><span part="gradient"></span>',
-      'alpha',
-      false
-    );
-    this.nodes.push(this.el.nextElementSibling as HTMLElement);
+    super(root, 'alpha', 'aria-label="Alpha" aria-valuemin="0" aria-valuemax="1"', false);
   }
 
   update(hsva: HsvaColor): void {
@@ -28,7 +22,7 @@ export class Alpha extends Slider {
         color: hsvaToHslaString(hsva)
       },
       {
-        backgroundImage: `linear-gradient(to right, ${colorFrom}, ${colorTo}`
+        '--gradient': `linear-gradient(90deg, ${colorFrom}, ${colorTo}`
       }
     ]);
 
