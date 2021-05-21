@@ -1,5 +1,5 @@
 import type { HsvaColor } from '../types.js';
-import { createRoot } from '../utils/dom.js';
+import { createTemplate } from '../utils/dom.js';
 import { clamp } from '../utils/math.js';
 
 export interface Interaction {
@@ -86,10 +86,10 @@ export abstract class Slider implements SliderInterface {
 
   xy!: boolean;
 
-  constructor(host: HTMLElement, template: HTMLTemplateElement, part: string, xy: boolean) {
+  constructor(root: ShadowRoot, template: string, part: string, xy: boolean) {
     this.xy = xy;
 
-    const root = createRoot(host, template);
+    root.appendChild(createTemplate(template).content.cloneNode(true));
 
     this.pointer = (root.querySelector(`[part=${part}-pointer]`) as HTMLElement).style;
 

@@ -1,20 +1,18 @@
 import { Slider, Interaction } from './slider.js';
 import { hsvaToHslString } from '../utils/convert.js';
-import { createTemplate } from '../utils/dom.js';
 import { clamp, round } from '../utils/math.js';
-import styles from '../styles/saturation.js';
 import type { HsvaColor } from '../types';
-
-const template = createTemplate(`
-<style>${styles}</style>
-<div role="slider" part="saturation" aria-label="Color"><div part="saturation-pointer"></div></div>
-`);
 
 export class Saturation extends Slider {
   private hsva!: HsvaColor;
 
-  constructor(host: HTMLElement) {
-    super(host, template, 'saturation', true);
+  constructor(root: ShadowRoot) {
+    super(
+      root,
+      '<div role="slider" part="saturation" aria-label="Color"><div part="saturation-pointer"></div></div>',
+      'saturation',
+      true
+    );
   }
 
   update(hsva: HsvaColor): void {

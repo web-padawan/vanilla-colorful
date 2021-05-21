@@ -1,22 +1,20 @@
 import { Slider, Interaction } from './slider.js';
 import { hsvaToHslaString } from '../utils/convert.js';
-import { createTemplate } from '../utils/dom.js';
 import { clamp, round } from '../utils/math.js';
-import styles from '../styles/alpha.js';
 import type { HsvaColor } from '../types';
-
-const template = createTemplate(`
-<style>${styles}</style>
-<div role="slider" part="alpha" aria-label="Alpha" aria-valuemin="0" aria-valuemax="1"><div part="alpha-pointer"></div></div><span part="gradient"></span>
-`);
 
 export class Alpha extends Slider {
   private gradient!: CSSStyleDeclaration;
 
   private hsva!: HsvaColor;
 
-  constructor(host: HTMLElement) {
-    super(host, template, 'alpha', false);
+  constructor(root: ShadowRoot) {
+    super(
+      root,
+      '<div role="slider" part="alpha" aria-label="Alpha" aria-valuemin="0" aria-valuemax="1"><div part="alpha-pointer"></div></div><span part="gradient"></span>',
+      'alpha',
+      false
+    );
     this.gradient = (this.node.nextElementSibling as HTMLElement).style;
   }
 
