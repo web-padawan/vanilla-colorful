@@ -12,8 +12,10 @@ export type { HsvaColor } from './lib/types';
  *
  * @csspart hue - A hue selector container.
  * @csspart saturation - A saturation selector container
+ * @csspart alpha - An alpha selector container.
  * @csspart hue-pointer - A hue pointer element.
  * @csspart saturation-pointer - A saturation pointer element.
+ * @csspart alpha-pointer - An alpha pointer element.
  */
 export class HsvaColorPicker extends HsvaBase {}
 
