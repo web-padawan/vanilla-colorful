@@ -1,3 +1,4 @@
+import type { HsvaColor } from '../types.js';
 import { createRoot } from '../utils/dom.js';
 import { clamp } from '../utils/math.js';
 
@@ -83,9 +84,12 @@ export abstract class Slider implements SliderInterface {
 
   node!: HTMLElement;
 
-  constructor(host: HTMLElement) {
-    const part = this.getPart();
-    const root = createRoot(host, this.getTemplate());
+  xy!: boolean;
+
+  constructor(host: HTMLElement, template: HTMLTemplateElement, part: string, xy: boolean) {
+    this.xy = xy;
+
+    const root = createRoot(host, template);
 
     this.pointer = (root.querySelector(`[part=${part}-pointer]`) as HTMLElement).style;
 
@@ -130,11 +134,7 @@ export abstract class Slider implements SliderInterface {
 
   abstract getMove(interaction: Interaction, key?: boolean): Record<string, number>;
 
-  abstract getPart(): string;
-
-  abstract getTemplate(): HTMLTemplateElement;
-
-  abstract get xy(): boolean;
+  abstract update(hsva: HsvaColor): void;
 
   setStyles(properties: Record<string, string>): void {
     for (const p in properties) {

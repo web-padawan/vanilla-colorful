@@ -11,18 +11,14 @@ const template = createTemplate(`
 `);
 
 export class Saturation extends Slider {
-  private _hsva!: HsvaColor;
+  private hsva!: HsvaColor;
 
-  get xy(): boolean {
-    return true;
+  constructor(host: HTMLElement) {
+    super(host, template, 'saturation', true);
   }
 
-  get hsva(): HsvaColor {
-    return this._hsva;
-  }
-
-  set hsva(hsva: HsvaColor) {
-    this._hsva = hsva;
+  update(hsva: HsvaColor): void {
+    this.hsva = hsva;
     this.node.style.backgroundColor = hsvaToHslString({ h: hsva.h, s: 100, v: 100, a: 1 });
     this.setStyles({
       top: `${100 - hsva.v}%`,
@@ -33,14 +29,6 @@ export class Saturation extends Slider {
       'aria-valuetext',
       `Saturation ${round(hsva.s)}%, Brightness ${round(hsva.v)}%`
     );
-  }
-
-  getTemplate(): HTMLTemplateElement {
-    return template;
-  }
-
-  getPart(): string {
-    return 'saturation';
   }
 
   getMove(interaction: Interaction, key?: boolean): Record<string, number> {
