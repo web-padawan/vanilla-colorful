@@ -1,5 +1,5 @@
 import { validHex } from '../utils/validate.js';
-import { createTemplate, createRoot } from '../utils/dom.js';
+import { createTemplate } from '../utils/dom.js';
 
 const template = createTemplate('<slot><input part="input" spellcheck="false"></slot>');
 
@@ -32,7 +32,9 @@ export class HexInputBase extends HTMLElement {
   }
 
   connectedCallback(): void {
-    const slot = createRoot(this, template).firstElementChild as HTMLSlotElement;
+    const root = this.attachShadow({ mode: 'open' });
+    root.appendChild(template.content.cloneNode(true));
+    const slot = root.firstElementChild as HTMLSlotElement;
     const setInput = () => {
       let input = this.querySelector('input');
       if (!input) {

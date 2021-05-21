@@ -1,12 +1,12 @@
 import { equalColorObjects } from '../utils/compare.js';
-import { createTemplate, createRoot } from '../utils/dom.js';
+import { createTemplate } from '../utils/dom.js';
 import type { AnyColor, ColorModel, HsvaColor } from '../types';
 import { Hue } from './hue.js';
 import { Saturation } from './saturation.js';
 import type { Slider } from './slider.js';
-import styles from '../styles/color-picker.js';
-
-const template = createTemplate(`<style>${styles}</style>`);
+import css from '../styles/color-picker.js';
+import hueCss from '../styles/hue.js';
+import saturationCss from '../styles/saturation.js';
 
 const $isSame = Symbol('same');
 const $color = Symbol('color');
@@ -14,11 +14,16 @@ const $hsva = Symbol('hsva');
 const $change = Symbol('change');
 const $update = Symbol('update');
 
+export const $css = Symbol('css');
 export const $parts = Symbol('parts');
 
 export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   static get observedAttributes(): string[] {
     return ['color'];
+  }
+
+  protected get [$css](): string[] {
+    return [css, hueCss, saturationCss];
   }
 
   protected abstract get colorModel(): ColorModel<C>;
@@ -43,8 +48,11 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   constructor() {
     super();
-    createRoot(this, template).addEventListener('move', this);
-    this[$parts] = [new Saturation(this), new Hue(this)];
+    const template = createTemplate(`<style>${this[$css].join('')}</style>`);
+    const root = this.attachShadow({ mode: 'open' });
+    root.appendChild(template.content.cloneNode(true));
+    root.addEventListener('move', this);
+    this[$parts] = [new Saturation(root), new Hue(root)];
   }
 
   connectedCallback(): void {
