@@ -1,3 +1,4 @@
+import type { ColorPickerEventListener, ColorPickerEventMap } from '../types';
 import { validHex } from '../utils/validate.js';
 import { createTemplate } from '../utils/dom.js';
 
@@ -10,6 +11,20 @@ const $color = Symbol('color');
 const $saved = Symbol('saved');
 const $input = Symbol('saved');
 const $update = Symbol('update');
+
+export interface HexInputBase {
+  addEventListener<T extends keyof ColorPickerEventMap<string>>(
+    type: T,
+    listener: ColorPickerEventListener<ColorPickerEventMap<string>[T]>,
+    options?: boolean | AddEventListenerOptions
+  ): void;
+
+  removeEventListener<T extends keyof ColorPickerEventMap<string>>(
+    type: T,
+    listener: ColorPickerEventListener<ColorPickerEventMap<string>[T]>,
+    options?: boolean | EventListenerOptions
+  ): void;
+}
 
 export class HexInputBase extends HTMLElement {
   static get observedAttributes(): string[] {

@@ -1,4 +1,4 @@
-import type { ColorModel, HsvColor } from '../types';
+import type { ColorModel, ColorPickerEventListener, ColorPickerEventMap, HsvColor } from '../types';
 import { ColorPicker } from '../components/color-picker.js';
 import { hsvaToHsv } from '../utils/convert.js';
 import { equalColorObjects } from '../utils/compare.js';
@@ -10,6 +10,20 @@ const colorModel: ColorModel<HsvColor> = {
   equal: equalColorObjects,
   fromAttr: (color) => JSON.parse(color)
 };
+
+export interface HsvBase {
+  addEventListener<T extends keyof ColorPickerEventMap<HsvColor>>(
+    type: T,
+    listener: ColorPickerEventListener<ColorPickerEventMap<HsvColor>[T]>,
+    options?: boolean | AddEventListenerOptions
+  ): void;
+
+  removeEventListener<T extends keyof ColorPickerEventMap<HsvColor>>(
+    type: T,
+    listener: ColorPickerEventListener<ColorPickerEventMap<HsvColor>[T]>,
+    options?: boolean | EventListenerOptions
+  ): void;
+}
 
 export class HsvBase extends ColorPicker<HsvColor> {
   protected get colorModel(): ColorModel<HsvColor> {

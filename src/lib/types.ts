@@ -39,3 +39,19 @@ export interface ColorModel<T extends AnyColor> {
   equal: (first: T, second: T) => boolean;
   fromAttr: (attr: string) => T;
 }
+
+export interface ColorChangedEventListener<T> {
+  (evt: T): void;
+}
+
+export interface ColorChangedEventListenerObject<T> {
+  handleEvent(evt: T): void;
+}
+
+export interface ColorPickerEventMap<T> extends HTMLElementEventMap {
+  'color-changed': CustomEvent<{ value: T }>;
+}
+
+export type ColorPickerEventListener<T> =
+  | ColorChangedEventListener<T>
+  | ColorChangedEventListenerObject<T>;

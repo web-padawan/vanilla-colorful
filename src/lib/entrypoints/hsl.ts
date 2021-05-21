@@ -1,4 +1,4 @@
-import type { ColorModel, HslColor } from '../types';
+import type { ColorModel, ColorPickerEventListener, ColorPickerEventMap, HslColor } from '../types';
 import { ColorPicker } from '../components/color-picker.js';
 import { hslaToHsva, hsvaToHsla, hslaToHsl } from '../utils/convert.js';
 import { equalColorObjects } from '../utils/compare.js';
@@ -10,6 +10,20 @@ const colorModel: ColorModel<HslColor> = {
   equal: equalColorObjects,
   fromAttr: (color) => JSON.parse(color)
 };
+
+export interface HslBase {
+  addEventListener<T extends keyof ColorPickerEventMap<HslColor>>(
+    type: T,
+    listener: ColorPickerEventListener<ColorPickerEventMap<HslColor>[T]>,
+    options?: boolean | AddEventListenerOptions
+  ): void;
+
+  removeEventListener<T extends keyof ColorPickerEventMap<HslColor>>(
+    type: T,
+    listener: ColorPickerEventListener<ColorPickerEventMap<HslColor>[T]>,
+    options?: boolean | EventListenerOptions
+  ): void;
+}
 
 export class HslBase extends ColorPicker<HslColor> {
   protected get colorModel(): ColorModel<HslColor> {
