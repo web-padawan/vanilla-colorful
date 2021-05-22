@@ -1,8 +1,8 @@
 import type { ColorPickerEventListener, ColorPickerEventMap } from '../types';
 import { validHex } from '../utils/validate.js';
-import { createTemplate } from '../utils/dom.js';
+import { tpl } from '../utils/dom.js';
 
-const template = createTemplate('<slot><input part="input" spellcheck="false"></slot>');
+const template = tpl('<slot><input part="input" spellcheck="false"></slot>');
 
 // Escapes all non-hexadecimal characters including "#"
 const escape = (hex: string) => hex.replace(/([^0-9A-F]+)/gi, '').substr(0, 6);

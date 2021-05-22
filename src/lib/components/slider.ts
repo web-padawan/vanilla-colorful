@@ -1,5 +1,5 @@
 import type { HsvaColor } from '../types.js';
-import { createTemplate } from '../utils/dom.js';
+import { fire, tpl } from '../utils/dom.js';
 import { clamp } from '../utils/math.js';
 
 export interface Interaction {
@@ -20,23 +20,18 @@ const isValid = (event: Event): boolean => {
   return true;
 };
 
-const fireMove = (target: Slider, interaction: Interaction, key?: boolean): void => {
-  target.el.dispatchEvent(
-    new CustomEvent('move', {
-      bubbles: true,
-      detail: target.getMove(interaction, key)
-    })
-  );
-};
-
 const pointerMove = (target: Slider, event: Event): void => {
   const pointer = isTouch(event) ? event.touches[0] : (event as MouseEvent);
   const rect = target.el.getBoundingClientRect();
 
-  fireMove(target, {
-    left: clamp((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
-    top: clamp((pointer.pageY - (rect.top + window.pageYOffset)) / rect.height)
-  });
+  fire(
+    target.el,
+    'move',
+    target.getMove({
+      left: clamp((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
+      top: clamp((pointer.pageY - (rect.top + window.pageYOffset)) / rect.height)
+    })
+  );
 };
 
 const keyMove = (target: Slider, event: KeyboardEvent): void => {
@@ -47,31 +42,34 @@ const keyMove = (target: Slider, event: KeyboardEvent): void => {
   // Do not scroll page by keys when color picker element has focus.
   event.preventDefault();
   // Send relative offset to the parent component.
-  fireMove(
-    target,
-    {
-      left:
-        keyCode === 39 // Arrow Right
-          ? 0.01
-          : keyCode === 37 // Arrow Left
-          ? -0.01
-          : keyCode === 34 // Page Down
-          ? 0.05
-          : keyCode === 33 // Page Up
-          ? -0.05
-          : keyCode === 35 // End
-          ? 1
-          : keyCode === 36 // Home
-          ? -1
-          : 0,
-      top:
-        keyCode === 40 // Arrow down
-          ? 0.01
-          : keyCode === 38 // Arrow Up
-          ? -0.01
-          : 0
-    },
-    true
+  fire(
+    target.el,
+    'move',
+    target.getMove(
+      {
+        left:
+          keyCode === 39 // Arrow Right
+            ? 0.01
+            : keyCode === 37 // Arrow Left
+            ? -0.01
+            : keyCode === 34 // Page Down
+            ? 0.05
+            : keyCode === 33 // Page Up
+            ? -0.05
+            : keyCode === 35 // End
+            ? 1
+            : keyCode === 36 // Home
+            ? -1
+            : 0,
+        top:
+          keyCode === 40 // Arrow down
+            ? 0.01
+            : keyCode === 38 // Arrow Up
+            ? -0.01
+            : 0
+      },
+      true
+    )
   );
 };
 
@@ -83,10 +81,10 @@ export abstract class Slider {
   xy!: boolean;
 
   constructor(root: ShadowRoot, part: string, aria: string, xy: boolean) {
-    const tpl = createTemplate(
+    const template = tpl(
       `<div role="slider" tabindex="0" part="${part}" ${aria}><div part="${part}-pointer"></div></div>`
     );
-    root.appendChild(tpl.content.cloneNode(true));
+    root.appendChild(template.content.cloneNode(true));
 
     const el = root.querySelector(`[part=${part}]`) as HTMLElement;
     el.addEventListener('mousedown', this);
