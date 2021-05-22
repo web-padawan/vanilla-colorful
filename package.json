@@ -148,6 +148,22 @@
       "limit": "1 KB"
     }
   ],
+  "sideEffects": [
+    "hex-input.js",
+    "hex-color-picker.js",
+    "hsl-color-picker.js",
+    "hsl-string-color-picker.js",
+    "hsla-color-picker.js",
+    "hsla-string-color-picker.js",
+    "hsv-color-picker.js",
+    "hsv-string-color-picker.js",
+    "hsva-color-picker.js",
+    "hsva-string-color-picker.js",
+    "rgb-color-picker.js",
+    "rgb-string-color-picker.js",
+    "rgba-color-picker.js",
+    "rgba-string-color-picker.js"
+  ],
   "dependencies": {},
   "devDependencies": {
     "@esm-bundle/chai": "^4.3.4",
