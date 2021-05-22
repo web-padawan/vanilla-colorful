@@ -1,5 +1,5 @@
 import { equalColorObjects } from '../utils/compare.js';
-import { createTemplate } from '../utils/dom.js';
+import { fire, tpl } from '../utils/dom.js';
 import type { AnyColor, ColorModel, HsvaColor } from '../types';
 import { Hue } from './hue.js';
 import { Saturation } from './saturation.js';
@@ -13,9 +13,12 @@ const $color = Symbol('color');
 const $hsva = Symbol('hsva');
 const $change = Symbol('change');
 const $update = Symbol('update');
+const $parts = Symbol('parts');
 
 export const $css = Symbol('css');
-export const $parts = Symbol('parts');
+export const $sliders = Symbol('sliders');
+
+export type Sliders = Array<new (root: ShadowRoot) => Slider>;
 
 export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   static get observedAttributes(): string[] {
@@ -26,13 +29,17 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     return [css, hueCss, saturationCss];
   }
 
+  protected get [$sliders](): Sliders {
+    return [Saturation, Hue];
+  }
+
   protected abstract get colorModel(): ColorModel<C>;
 
   private [$hsva]!: HsvaColor;
 
   private [$color]!: C;
 
-  protected [$parts]: Slider[] = [];
+  private [$parts]!: Slider[];
 
   get color(): C {
     return this[$color];
@@ -48,11 +55,11 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   constructor() {
     super();
-    const template = createTemplate(`<style>${this[$css].join('')}</style>`);
+    const template = tpl(`<style>${this[$css].join('')}</style>`);
     const root = this.attachShadow({ mode: 'open' });
     root.appendChild(template.content.cloneNode(true));
     root.addEventListener('move', this);
-    this[$parts] = [new Saturation(root), new Hue(root)];
+    this[$parts] = this[$sliders].map((slider) => new slider(root));
   }
 
   connectedCallback(): void {
@@ -98,10 +105,8 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     this[$parts].forEach((part) => part.update(hsva));
   }
 
-  private [$change](color: C): void {
-    this[$color] = color;
-    this.dispatchEvent(
-      new CustomEvent('color-changed', { bubbles: true, detail: { value: color } })
-    );
+  private [$change](value: C): void {
+    this[$color] = value;
+    fire(this, 'color-changed', { value });
   }
 }
