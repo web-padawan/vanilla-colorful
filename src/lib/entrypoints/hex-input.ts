@@ -56,7 +56,7 @@ export class HexInputBase extends HTMLElement {
         // remove all child node if no input found
         let c;
         while ((c = this.firstChild)) {
-          this.removeChild(c);
+          c.remove();
         }
         input = slot.firstChild as HTMLInputElement;
       }

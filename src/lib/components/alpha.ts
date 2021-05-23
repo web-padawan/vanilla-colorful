@@ -1,4 +1,4 @@
-import { Slider, Interaction } from './slider.js';
+import { Slider, Offset } from './slider.js';
 import { hsvaToHslaString } from '../utils/convert.js';
 import { clamp, round } from '../utils/math.js';
 import type { HsvaColor } from '../types';
@@ -31,8 +31,8 @@ export class Alpha extends Slider {
     this.el.setAttribute('aria-valuetext', `${v}%`);
   }
 
-  getMove(interaction: Interaction, key?: boolean): Record<string, number> {
+  getMove(offset: Offset, key?: boolean): Record<string, number> {
     // Alpha always fit into [0, 1] range
-    return { a: key ? clamp(this.hsva.a + interaction.left) : interaction.left };
+    return { a: key ? clamp(this.hsva.a + offset.x) : offset.x };
   }
 }
