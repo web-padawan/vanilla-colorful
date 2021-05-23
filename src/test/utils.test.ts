@@ -2,6 +2,7 @@ import { expect } from '@esm-bundle/chai';
 import { clamp, round } from '../lib/utils/math.js';
 import {
   hexToHsva,
+  hslaStringToHsva,
   hslaToHsl,
   hslaToHsva,
   hslStringToHsva,
@@ -17,6 +18,7 @@ import {
   hsvaToRgbaString,
   hsvaToRgbString,
   hsvStringToHsva,
+  rgbaStringToHsva,
   rgbaToHsva,
   rgbaToRgb,
   rgbStringToHsva,
@@ -91,6 +93,15 @@ describe('Utils', () => {
     expect(hslStringToHsva('hsl(200, 25%, 32%)')).to.deep.equal({ h: 200, s: 40, v: 40, a: 1 });
   });
 
+  it('Converts HSLA string to HSVA', () => {
+    const test = (input: string, output: HsvaColor) =>
+      expect(hslaStringToHsva(input)).to.deep.equal(output);
+
+    test('hsla(0deg, 0%, 0%, 0.5)', { h: 0, s: 0, v: 0, a: 0.5 });
+    test('hsla(200, 25%, 32%, 1)', { h: 200, s: 40, v: 40, a: 1 });
+    test('hsla(.5turn 25% 32% / 50%)', { h: 180, s: 40, v: 40, a: 0.5 });
+  });
+
   it('Converts HSVA to RGBA', () => {
     const test = (input: HsvaColor, output: RgbaColor) =>
       expect(hsvaToRgba(input)).to.deep.equal(output);
@@ -112,11 +123,20 @@ describe('Utils', () => {
     expect(rgbStringToHsva('rgb(255, 255, 255)')).to.deep.equal({ h: 0, s: 0, v: 100, a: 1 });
     expect(rgbStringToHsva('rgb(0,0,0)')).to.deep.equal({ h: 0, s: 0, v: 0, a: 1 });
     expect(rgbStringToHsva('rgb(61, 88, 102)')).to.deep.equal({ h: 200, s: 40, v: 40, a: 1 });
+    expect(rgbStringToHsva('rgb(100% 100% 100%)')).to.deep.equal({ h: 0, s: 0, v: 100, a: 1 });
+    expect(rgbStringToHsva('rgb(50% 45.9% 25%)')).to.deep.equal({ h: 50, s: 50, v: 50, a: 1 });
   });
 
   it('Converts HSVA to RGB string', () => {
     expect(hsvaToRgbString({ h: 0, s: 0, v: 100, a: 1 })).to.equal('rgb(255, 255, 255)');
     expect(hsvaToRgbString({ h: 200, s: 40, v: 40, a: 1 })).to.equal('rgb(61, 88, 102)');
+  });
+
+  it('Converts RGBA string to HSVA', () => {
+    const test = (input: string, output: HsvaColor) =>
+      expect(rgbaStringToHsva(input)).to.deep.equal(output);
+    test('rgba(61, 88, 102, 0.5)', { h: 200, s: 40, v: 40, a: 0.5 });
+    test('rgba(23.9% 34.5% 40% / 99%)', { h: 200, s: 40, v: 40, a: 0.99 });
   });
 
   it('Converts HSVA to RGBA string', () => {
@@ -135,11 +155,16 @@ describe('Utils', () => {
   });
 
   it('Converts HSV string to HSVA', () => {
-    expect(hsvStringToHsva('hsv(0, 10.5%, 0%)')).to.deep.equal({ h: 0, s: 11, v: 0, a: 1 });
+    expect(hsvStringToHsva('hsv(0, 11%, 0%)')).to.deep.equal({ h: 0, s: 11, v: 0, a: 1 });
+    expect(hsvStringToHsva('hsv(90deg 20% 10%)')).to.deep.equal({ h: 90, s: 20, v: 10, a: 1 });
+    expect(hsvStringToHsva('hsv(100grad 20% 10%)')).to.deep.equal({ h: 90, s: 20, v: 10, a: 1 });
+    expect(hsvStringToHsva('hsv(0.25turn 20% 10%)')).to.deep.equal({ h: 90, s: 20, v: 10, a: 1 });
+    expect(hsvStringToHsva('hsv(1.5708rad 20% 10%)')).to.deep.equal({ h: 90, s: 20, v: 10, a: 1 });
   });
 
   it('Converts HSVA string to HSVA', () => {
-    expect(hsvaStringToHsva('hsva(0, 10.5%, 0, 0.5)')).to.deep.equal({ h: 0, s: 11, v: 0, a: 0.5 });
+    expect(hsvaStringToHsva('hsva(0, 11%, 0, 0.5)')).to.deep.equal({ h: 0, s: 11, v: 0, a: 0.5 });
+    expect(hsvStringToHsva('hsv(5deg 9% 7% / 40%)')).to.deep.equal({ h: 5, s: 9, v: 7, a: 0.4 });
   });
 
   it('Converts HSVA to HSV', () => {
