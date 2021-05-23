@@ -79,10 +79,8 @@
     "test:update": "UPDATE_REFS=true wtr src/test/visual/*.ts",
     "watch": "tsc-watch"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
     "*.ts": [
@@ -185,7 +183,6 @@
     "eslint-plugin-prettier": "^3.4.0",
     "gh-pages": "^3.1.0",
     "glob": "^7.1.7",
-    "husky": "^4.3.8",
     "lint-staged": "^11.0.0",
     "lit-html": "^1.4.1",
     "prettier": "^2.3.0",
@@ -193,6 +190,7 @@
     "rollup": "^2.47.0",
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.32.12",
+    "simple-git-hooks": "^2.4.1",
     "sinon": "^10.0.0",
     "size-limit": "^4.10.2",
     "standard-version": "^9.3.0",
