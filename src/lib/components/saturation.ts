@@ -1,4 +1,4 @@
-import { Slider, Interaction } from './slider.js';
+import { Slider, Offset } from './slider.js';
 import { hsvaToHslString } from '../utils/convert.js';
 import { clamp, round } from '../utils/math.js';
 import type { HsvaColor } from '../types';
@@ -28,13 +28,11 @@ export class Saturation extends Slider {
     );
   }
 
-  getMove(interaction: Interaction, key?: boolean): Record<string, number> {
+  getMove(offset: Offset, key?: boolean): Record<string, number> {
     // Saturation and brightness always fit into [0, 100] range
     return {
-      s: key ? clamp(this.hsva.s + interaction.left * 100, 0, 100) : interaction.left * 100,
-      v: key
-        ? clamp(this.hsva.v - interaction.top * 100, 0, 100)
-        : Math.round(100 - interaction.top * 100)
+      s: key ? clamp(this.hsva.s + offset.x * 100, 0, 100) : offset.x * 100,
+      v: key ? clamp(this.hsva.v - offset.y * 100, 0, 100) : Math.round(100 - offset.y * 100)
     };
   }
 }

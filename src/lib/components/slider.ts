@@ -2,9 +2,9 @@ import type { HsvaColor } from '../types.js';
 import { fire, tpl } from '../utils/dom.js';
 import { clamp } from '../utils/math.js';
 
-export interface Interaction {
-  left: number;
-  top: number;
+export interface Offset {
+  x: number;
+  y: number;
 }
 
 let hasTouched = false;
@@ -28,8 +28,8 @@ const pointerMove = (target: Slider, event: Event): void => {
     target.el,
     'move',
     target.getMove({
-      left: clamp((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
-      top: clamp((pointer.pageY - (rect.top + window.pageYOffset)) / rect.height)
+      x: clamp((pointer.pageX - (rect.left + window.pageXOffset)) / rect.width),
+      y: clamp((pointer.pageY - (rect.top + window.pageYOffset)) / rect.height)
     })
   );
 };
@@ -47,7 +47,7 @@ const keyMove = (target: Slider, event: KeyboardEvent): void => {
     'move',
     target.getMove(
       {
-        left:
+        x:
           keyCode === 39 // Arrow Right
             ? 0.01
             : keyCode === 37 // Arrow Left
@@ -61,7 +61,7 @@ const keyMove = (target: Slider, event: KeyboardEvent): void => {
             : keyCode === 36 // Home
             ? -1
             : 0,
-        top:
+        y:
           keyCode === 40 // Arrow down
             ? 0.01
             : keyCode === 38 // Arrow Up
@@ -93,7 +93,7 @@ export abstract class Slider {
     this.el = el;
 
     this.xy = xy;
-    this.nodes = [el.firstElementChild as HTMLElement, el];
+    this.nodes = [el.firstChild as HTMLElement, el];
   }
 
   set dragging(state: boolean) {
@@ -127,7 +127,7 @@ export abstract class Slider {
     }
   }
 
-  abstract getMove(interaction: Interaction, key?: boolean): Record<string, number>;
+  abstract getMove(offset: Offset, key?: boolean): Record<string, number>;
 
   abstract update(hsva: HsvaColor): void;
 

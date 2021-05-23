@@ -1,4 +1,4 @@
-import { Slider, Interaction } from './slider.js';
+import { Slider, Offset } from './slider.js';
 import { hsvaToHslString } from '../utils/convert.js';
 import { clamp, round } from '../utils/math.js';
 import type { HsvaColor } from '../types';
@@ -21,8 +21,8 @@ export class Hue extends Slider {
     this.el.setAttribute('aria-valuenow', `${round(h)}`);
   }
 
-  getMove(interaction: Interaction, key?: boolean): Record<string, number> {
+  getMove(offset: Offset, key?: boolean): Record<string, number> {
     // Hue measured in degrees of the color circle ranging from 0 to 360
-    return { h: key ? clamp(this.h + interaction.left * 360, 0, 360) : 360 * interaction.left };
+    return { h: key ? clamp(this.h + offset.x * 360, 0, 360) : 360 * offset.x };
   }
 }
