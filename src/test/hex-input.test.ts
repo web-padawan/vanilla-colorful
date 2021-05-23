@@ -1,4 +1,5 @@
 import { expect } from '@esm-bundle/chai';
+import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import { fixture, html } from '@open-wc/testing-helpers';
 import type { HexInput } from '../hex-input';
@@ -10,17 +11,6 @@ describe('hex-input', () => {
   function getTarget(input: HexInput) {
     const root = input.shadowRoot as ShadowRoot;
     return root.querySelector('input') as HTMLInputElement;
-  }
-
-  function inputChar(char: string) {
-    target.value += char;
-    target.dispatchEvent(new CustomEvent('input', { bubbles: true, composed: true }));
-  }
-
-  function inputText(text: string) {
-    for (let i = 0; i < text.length; i++) {
-      inputChar(text[i]);
-    }
   }
 
   describe('lazy upgrade', () => {
@@ -179,24 +169,29 @@ describe('hex-input', () => {
     beforeEach(async () => {
       input = await fixture(html`<hex-input color="#488"></hex-input>`);
       target = getTarget(input);
+      target.focus();
     });
 
-    it('should dispatch color-changed event on valid hex input', () => {
+    it('should dispatch color-changed event on valid hex input', async () => {
       const spy = sinon.spy();
       input.addEventListener('color-changed', spy);
-      inputText('369');
+      await sendKeys({ press: '3' });
+      await sendKeys({ press: '6' });
+      await sendKeys({ press: '9' });
       expect(spy.callCount).to.equal(1);
     });
 
-    it('should not dispatch color-changed event on invalid input', () => {
+    it('should not dispatch color-changed event on invalid input', async () => {
       const spy = sinon.spy();
       input.addEventListener('color-changed', spy);
-      inputText('36');
+      await sendKeys({ press: '3' });
+      await sendKeys({ press: '6' });
       expect(spy.callCount).to.equal(0);
     });
 
-    it('should restore color value on blur after invalid input', () => {
-      inputText('36');
+    it('should restore color value on blur after invalid input', async () => {
+      await sendKeys({ press: '3' });
+      await sendKeys({ press: '6' });
       target.dispatchEvent(new Event('blur'));
       expect(input.color).to.equal('#488');
       expect(target.value).to.equal('488');

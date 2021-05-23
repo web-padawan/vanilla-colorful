@@ -1,25 +1,8 @@
 import { expect } from '@esm-bundle/chai';
+import { sendKeys } from '@web/test-runner-commands';
 import { fixture, html } from '@open-wc/testing-helpers';
 import type { RgbaColorPicker } from '../rgba-color-picker';
 import '../rgba-color-picker.js';
-
-const KEYS = {
-  left: 37,
-  up: 38,
-  right: 39,
-  down: 40,
-  pageUp: 33,
-  pageDown: 34,
-  end: 35,
-  home: 36
-};
-
-const pressKey = (node: HTMLElement, keyCode: number) => {
-  const event = new CustomEvent('keydown');
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (event as any).keyCode = keyCode;
-  node.dispatchEvent(event);
-};
 
 describe('accessibility', () => {
   let picker: RgbaColorPicker;
@@ -32,7 +15,7 @@ describe('accessibility', () => {
   describe('saturation', () => {
     let element: HTMLElement;
 
-    beforeEach(async () => {
+    beforeEach(() => {
       const root = picker.shadowRoot as ShadowRoot;
       element = root.querySelector('[part="saturation"]') as HTMLElement;
     });
@@ -65,45 +48,46 @@ describe('accessibility', () => {
 
       beforeEach(() => {
         picker.color = color;
+        element.focus();
       });
 
-      it('should update color on ArrowLeft key', () => {
-        pressKey(element, KEYS.left);
+      it('should update color on ArrowLeft key', async () => {
+        await sendKeys({ press: 'ArrowLeft' });
         expect(picker.color).to.deep.equal({ ...color, r: 32, g: 137 });
       });
 
-      it('should update color on ArrowRight key', () => {
-        pressKey(element, KEYS.right);
+      it('should update color on ArrowRight key', async () => {
+        await sendKeys({ press: 'ArrowRight' });
         expect(picker.color).to.deep.equal({ ...color, r: 28, g: 135 });
       });
 
-      it('should update color on ArrowDown key', () => {
-        pressKey(element, KEYS.down);
+      it('should update color on ArrowDown key', async () => {
+        await sendKeys({ press: 'ArrowDown' });
         expect(picker.color).to.deep.equal({ ...color, g: 135, b: 227 });
       });
 
-      it('should update color on ArrowUp key', () => {
-        pressKey(element, KEYS.up);
+      it('should update color on ArrowUp key', async () => {
+        await sendKeys({ press: 'ArrowUp' });
         expect(picker.color).to.deep.equal({ ...color, g: 138, b: 232 });
       });
 
-      it('should not update color on PageUp key', () => {
-        pressKey(element, KEYS.pageUp);
+      it('should not update color on PageUp key', async () => {
+        await sendKeys({ press: 'PageUp' });
         expect(picker.color).to.deep.equal(color);
       });
 
-      it('should not update color on PageDown key', () => {
-        pressKey(element, KEYS.pageDown);
+      it('should not update color on PageDown key', async () => {
+        await sendKeys({ press: 'PageDown' });
         expect(picker.color).to.deep.equal(color);
       });
 
-      it('should not update color on Home key', () => {
-        pressKey(element, KEYS.home);
+      it('should not update color on Home key', async () => {
+        await sendKeys({ press: 'Home' });
         expect(picker.color).to.deep.equal(color);
       });
 
-      it('should not update color on End key', () => {
-        pressKey(element, KEYS.end);
+      it('should not update color on End key', async () => {
+        await sendKeys({ press: 'End' });
         expect(picker.color).to.deep.equal(color);
       });
     });
@@ -112,7 +96,7 @@ describe('accessibility', () => {
   describe('hue', () => {
     let element: HTMLElement;
 
-    beforeEach(async () => {
+    beforeEach(() => {
       const root = picker.shadowRoot as ShadowRoot;
       element = root.querySelector('[part="hue"]') as HTMLElement;
     });
@@ -153,45 +137,46 @@ describe('accessibility', () => {
 
       beforeEach(() => {
         picker.color = color;
+        element.focus();
       });
 
-      it('should update color on ArrowLeft key', () => {
-        pressKey(element, KEYS.left);
+      it('should update color on ArrowLeft key', async () => {
+        await sendKeys({ press: 'ArrowLeft' });
         expect(picker.color).to.deep.equal({ ...color, g: 148 });
       });
 
-      it('should update color on ArrowRight key', () => {
-        pressKey(element, KEYS.right);
+      it('should update color on ArrowRight key', async () => {
+        await sendKeys({ press: 'ArrowRight' });
         expect(picker.color).to.deep.equal({ ...color, g: 124 });
       });
 
-      it('should not update color on ArrowDown key', () => {
-        pressKey(element, KEYS.down);
+      it('should not update color on ArrowDown key', async () => {
+        await sendKeys({ press: 'ArrowDown' });
         expect(picker.color).to.deep.equal(color);
       });
 
-      it('should not update color on ArrowUp key', () => {
-        pressKey(element, KEYS.up);
+      it('should not update color on ArrowUp key', async () => {
+        await sendKeys({ press: 'ArrowUp' });
         expect(picker.color).to.deep.equal(color);
       });
 
-      it('should update color on PageUp key', () => {
-        pressKey(element, KEYS.pageUp);
+      it('should update color on PageUp key', async () => {
+        await sendKeys({ press: 'PageUp' });
         expect(picker.color).to.deep.equal({ ...color, g: 196 });
       });
 
-      it('should update color on PageDown key', () => {
-        pressKey(element, KEYS.pageDown);
+      it('should update color on PageDown key', async () => {
+        await sendKeys({ press: 'PageDown' });
         expect(picker.color).to.deep.equal({ ...color, g: 76 });
       });
 
-      it('should update color on Home key', () => {
-        pressKey(element, KEYS.home);
+      it('should update color on Home key', async () => {
+        await sendKeys({ press: 'Home' });
         expect(picker.color).to.deep.equal({ r: 230, g: 30, b: 30, a: 1 });
       });
 
-      it('should update color on End key', () => {
-        pressKey(element, KEYS.end);
+      it('should update color on End key', async () => {
+        await sendKeys({ press: 'End' });
         expect(picker.color).to.deep.equal({ r: 230, g: 30, b: 30, a: 1 });
       });
     });
@@ -200,7 +185,7 @@ describe('accessibility', () => {
   describe('alpha', () => {
     let element: HTMLElement;
 
-    beforeEach(async () => {
+    beforeEach(() => {
       const root = picker.shadowRoot as ShadowRoot;
       element = root.querySelector('[part="alpha"]') as HTMLElement;
     });
@@ -232,45 +217,46 @@ describe('accessibility', () => {
 
       beforeEach(() => {
         picker.color = color;
+        element.focus();
       });
 
-      it('should update color on ArrowLeft key', () => {
-        pressKey(element, KEYS.left);
+      it('should update color on ArrowLeft key', async () => {
+        await sendKeys({ press: 'ArrowLeft' });
         expect(picker.color).to.deep.equal({ ...color, a: 0.49 });
       });
 
-      it('should update color on ArrowRight key', () => {
-        pressKey(element, KEYS.right);
+      it('should update color on ArrowRight key', async () => {
+        await sendKeys({ press: 'ArrowRight' });
         expect(picker.color).to.deep.equal({ ...color, a: 0.51 });
       });
 
-      it('should not update color on ArrowDown key', () => {
-        pressKey(element, KEYS.down);
+      it('should not update color on ArrowDown key', async () => {
+        await sendKeys({ press: 'ArrowDown' });
         expect(picker.color).to.deep.equal(color);
       });
 
-      it('should not update color on ArrowUp key', () => {
-        pressKey(element, KEYS.up);
+      it('should not update color on ArrowUp key', async () => {
+        await sendKeys({ press: 'ArrowUp' });
         expect(picker.color).to.deep.equal(color);
       });
 
-      it('should update color on PageUp key', () => {
-        pressKey(element, KEYS.pageUp);
+      it('should update color on PageUp key', async () => {
+        await sendKeys({ press: 'PageUp' });
         expect(picker.color).to.deep.equal({ ...color, a: 0.45 });
       });
 
-      it('should update color on PageDown key', () => {
-        pressKey(element, KEYS.pageDown);
+      it('should update color on PageDown key', async () => {
+        await sendKeys({ press: 'PageDown' });
         expect(picker.color).to.deep.equal({ ...color, a: 0.55 });
       });
 
-      it('should update color on Home key', () => {
-        pressKey(element, KEYS.home);
+      it('should update color on Home key', async () => {
+        await sendKeys({ press: 'Home' });
         expect(picker.color).to.deep.equal({ ...color, a: 0 });
       });
 
-      it('should update color on End key', () => {
-        pressKey(element, KEYS.end);
+      it('should update color on End key', async () => {
+        await sendKeys({ press: 'End' });
         expect(picker.color).to.deep.equal({ ...color, a: 1 });
       });
     });
