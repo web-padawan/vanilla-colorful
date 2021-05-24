@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.5.3...v0.6.0) (2021-05-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* simplify internal elements (#25)
+
+### Features
+
+* add color-changed event typings ([#31](https://github.com/web-padawan/vanilla-colorful/issues/31)) ([4776869](https://github.com/web-padawan/vanilla-colorful/commit/4776869d257fc180b1d47c86908e88cc9fc243b2))
+* support modern CSS color notations ([#39](https://github.com/web-padawan/vanilla-colorful/issues/39)) ([db0eed3](https://github.com/web-padawan/vanilla-colorful/commit/db0eed3a4a986c263f8cf9fed17128af41440ace))
+
+
+### Bug Fixes
+
+* prevent hue from being reset ([#33](https://github.com/web-padawan/vanilla-colorful/issues/33)) ([02b1423](https://github.com/web-padawan/vanilla-colorful/commit/02b142380d1048b493f6628f7fb17d7aa96e8318))
+
+
+### Internal Changes
+
+* simplify internal elements ([#25](https://github.com/web-padawan/vanilla-colorful/issues/25)) ([0deca42](https://github.com/web-padawan/vanilla-colorful/commit/0deca42f6de5fef5831fcb584d4ae831e2dbc7a9))
+
 ### [0.5.3](https://github.com/web-padawan/vanilla-colorful/compare/v0.5.2...v0.5.3) (2020-12-25)
 
 
