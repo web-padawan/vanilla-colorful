@@ -63,7 +63,19 @@
         setFaviconColor(color)();
       });
 
-      picker.color = { r: 30, g: 136, b: 229, a: 1 };
+      const getRandomColor = () => {
+        const colors = [
+          { r: 209, g: 97, b: 28, a: 1 }, // orange
+          { r: 30, g: 136, b: 229, a: 1 }, // blue
+          { r: 102, g: 51, b: 153, a: 1 }, // purple
+          { r: 21, g: 139, b: 59, a: 1 }, // green
+          { r: 189, g: 60, b: 60, a: 1 }, // salmon
+        ];
+
+        return colors[Math.floor(Math.random() * colors.length)];
+      };
+
+      picker.color = getRandomColor();
     </script>
   </body>
 </html>
