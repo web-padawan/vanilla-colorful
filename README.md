@@ -201,7 +201,9 @@ customElements.define('custom-color-picker', class extends RgbBase {});
 **vanilla-colorful** supports TypeScript and ships with types in the library itself; no need for any other install.
 
 <details>
-  <summary>How you can get the most from our TypeScript support</summary><br />
+  <summary>How you can get the most from our TypeScript support</summary>
+
+### Custom types
 
 While not only typing its own class methods and variables, it can also help you type yours. Depending on
 the element you are using, you can also import the type that is associated with the element.
@@ -213,9 +215,25 @@ import type { HslColor } from 'vanilla-colorful/hsl-color-picker';
 const myHslValue: HslColor = { h: 0, s: 0, l: 0 };
 ```
 
+### Typed events
+
+All the included custom elements provide overrides for `addEventListener` and `removeEventListener` methods
+to include typings for the `color-changed` custom event `detail` property:
+
+```ts
+const picker = document.querySelector('rgba-color-picker');
+
+picker.addEventListener('color-changed', (event) => {
+  console.log(event.detail.value.a); // (property) RgbaColor.a: number
+});
+```
+
+### Lit plugin
+
 All the included custom elements are compatible with [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) and
 [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) extension for Visual
-Studio Code, so you can benefit from type checking in lit-html templates.
+Studio Code, so you can benefit from type checking in [Lit](https://lit.dev) templates, for example
+[validating binding names](https://github.com/runem/lit-analyzer/blob/master/docs/readme/rules.md#validating-binding-names).
 
 </details>
 
