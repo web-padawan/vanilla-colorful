@@ -25,14 +25,15 @@
 
 ## Features
 
-- **Small**: Just 2,7 KB (minified and gzipped). [Size Limit](https://github.com/ai/size-limit) controls the size.
-- **Fast**: Built with standards based Custom Elements.
-- **Bulletproof**: Written in strict TypeScript and covered by 100+ tests.
-- **Simple**: The interface is straight forward and easy to use.
-- **Accessible**: Follows the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) guidelines to support users of assistive technologies.
-- **Mobile-friendly**: Works well on mobile devices and touch screens.
-- **Framework-agnostic**: Can be used [with any framework](https://custom-elements-everywhere.com/).
-- **No dependencies**
+- 🗜　**Small**: Just 2,7 KB (minified and gzipped). [Size Limit](https://github.com/ai/size-limit) controls the size.
+- 🚀　**Fast**: Built with standards based Custom Elements.
+- 🛡　**Bulletproof**: Written in strict TypeScript and covered by 100+ tests.
+- 🗂　**Typed**: Ships with [types included](#typescript-support)
+- 😍　**Simple**: The interface is straight forward and easy to use.
+- 💬　**Accessible**: Follows the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) guidelines to support users of assistive technologies.
+- 📲　**Mobile-friendly**: Works well on mobile devices and touch screens.
+- 👫　**Framework-agnostic**: Can be used [with any framework](https://custom-elements-everywhere.com/).
+- 💨　**No dependencies**
 
 ## Live demo
 
