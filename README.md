@@ -215,16 +215,10 @@ import type { HslColor } from 'vanilla-colorful/hsl-color-picker';
 const myHslValue: HslColor = { h: 0, s: 0, l: 0 };
 ```
 
-### Lit plugin
-
-All the included custom elements are compatible with [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) and
-[lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) extension for Visual
-Studio Code, so you can benefit from type checking in [Lit](https://lit.dev) templates.
-
 ### Typed events
 
-All the included elements provide overrides for `addEventListener` and `removeEventListener` methods
-to include typings for the `color-changed` custom event:
+All the included custom elements provide overrides for `addEventListener` and `removeEventListener` methods
+to include typings for the `color-changed` custom event `detail` property:
 
 ```ts
 const picker = document.querySelector('rgba-color-picker');
@@ -233,6 +227,12 @@ picker.addEventListener('color-changed', (event) => {
   console.log(event.detail.value.a);  // (property) RgbaColor.a: number
 });
 ```
+
+### Lit plugin
+
+All the included custom elements are compatible with [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) and
+[lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) extension for Visual
+Studio Code, so you can benefit from type checking in [Lit](https://lit.dev) templates.
 
 </details>
 
