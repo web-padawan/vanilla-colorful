@@ -13,7 +13,7 @@ module.exports = {
     nodeResolve(),
     terser(),
     copy({
-      patterns: ['*.css'],
+      patterns: ['*.css', './assets/*.png'],
       rootDir: './demo/'
     })
   ]
