@@ -224,7 +224,7 @@ to include typings for the `color-changed` custom event `detail` property:
 const picker = document.querySelector('rgba-color-picker');
 
 picker.addEventListener('color-changed', (event) => {
-  console.log(event.detail.value.a);  // (property) RgbaColor.a: number
+  console.log(event.detail.value.a); // (property) RgbaColor.a: number
 });
 ```
 
