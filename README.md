@@ -232,7 +232,8 @@ picker.addEventListener('color-changed', (event) => {
 
 All the included custom elements are compatible with [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) and
 [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) extension for Visual
-Studio Code, so you can benefit from type checking in [Lit](https://lit.dev) templates.
+Studio Code, so you can benefit from type checking in [Lit](https://lit.dev) templates, for example
+[validating binding names](https://github.com/runem/lit-analyzer/blob/master/docs/readme/rules.md#validating-binding-names).
 
 </details>
 
