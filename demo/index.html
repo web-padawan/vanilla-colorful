@@ -2,8 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <title>vanilla-colorful</title>
+    <meta
+      name="description"
+      content="A tiny (2,7 KB) color picker web component for modern web apps"
+    />
+    <meta name="keywords" content="color, picker, component, accessible, hex, rgb, hsl, hsv" />
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      name="viewport"
+    />
+    <meta property="og:image" content="assets/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Recursive&amp;family=PT+Mono&amp;display=swap"
@@ -69,7 +80,7 @@
           { r: 30, g: 136, b: 229, a: 1 }, // blue
           { r: 102, g: 51, b: 153, a: 1 }, // purple
           { r: 21, g: 139, b: 59, a: 1 }, // green
-          { r: 189, g: 60, b: 60, a: 1 }, // salmon
+          { r: 189, g: 60, b: 60, a: 1 } // salmon
         ];
 
         return colors[Math.floor(Math.random() * colors.length)];
