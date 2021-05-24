@@ -201,7 +201,7 @@ customElements.define('custom-color-picker', class extends RgbBase {});
 **vanilla-colorful** supports TypeScript and ships with types in the library itself; no need for any other install.
 
 <details>
-  <summary>How you can get the most from our TypeScript support</summary><br />
+  <summary>How you can get the most from our TypeScript support</summary>
 
 ### Custom types
 
