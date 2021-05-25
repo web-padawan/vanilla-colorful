@@ -25,21 +25,21 @@
 
 ## Features
 
-- 🗜　**Small**: Just 2,7 KB (minified and gzipped). [Size Limit](https://github.com/ai/size-limit) controls the size.
-- 🚀　**Fast**: Built with standards based Custom Elements.
-- 🛡　**Bulletproof**: Written in strict TypeScript and covered by 100+ tests.
-- 🗂　**Typed**: Ships with [types included](#typescript-support).
-- 😍　**Simple**: The interface is straight forward and easy to use.
-- 💬　**Accessible**: Follows the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) guidelines to support users of assistive technologies.
-- 📲　**Mobile-friendly**: Works well on mobile devices and touch screens.
-- 👫　**Framework-agnostic**: Can be used [with any framework](https://custom-elements-everywhere.com/).
-- 💨　**No dependencies**
+- 🗜 **Small**: Just 2,7 KB (minified and gzipped). [Size Limit](https://github.com/ai/size-limit) controls the size.
+- 🚀 **Fast**: Built with standards based Custom Elements.
+- 🛡 **Bulletproof**: Written in strict TypeScript and covered by 100+ tests.
+- 🗂 **Typed**: Ships with [types included](#typescript-support).
+- 😍 **Simple**: The interface is straight forward and easy to use.
+- 💬 **Accessible**: Follows the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) guidelines to support users of assistive technologies.
+- 📲 **Mobile-friendly**: Works well on mobile devices and touch screens.
+- 👫 **Framework-agnostic**: Can be used [with any framework](https://custom-elements-everywhere.com/).
+- 💨 **No dependencies**
 
-## Live demo
+## Live demos
 
 - [Website](https://web-padawan.github.io/vanilla-colorful/)
 - [Angular example](https://components.studio/edit/MGLIUt626MIwrLZ1c2E8)
-- [LitElement example](https://components.studio/edit/5F8uPtFM41MCEQBsDbIF)
+- [Lit example](https://lit.dev/playground/#project=W3sibmFtZSI6ImluZGV4Lmh0bWwiLCJjb250ZW50IjoiPCFET0NUWVBFIGh0bWw-XG48aGVhZD5cbiAgPHNjcmlwdCB0eXBlPVwibW9kdWxlXCIgc3JjPVwiLi9jb2xvci1leGFtcGxlLmpzXCI-PC9zY3JpcHQ-XG48L2hlYWQ-XG48Ym9keT5cbiAgPHN0eWxlPlxuICAgIC53cmFwcGVyIHtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgICAgbWluLWhlaWdodDogMTAwdmg7XG4gICAgICBmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBcIlNlZ29lIFVJXCIsIFJvYm90bywgT3h5Z2VuLVNhbnMsIFVidW50dSwgQ2FudGFyZWxsLCBcIkhlbHZldGljYSBOZXVlXCIsIHNhbnMtc2VyaWY7ICAgIFxuICAgIH1cbiAgPC9zdHlsZT5cbiAgPGRpdiBjbGFzcz1cIndyYXBwZXJcIj5cbiAgICA8Y29sb3ItZXhhbXBsZT48L2NvbG9yLWV4YW1wbGU-XG4gIDwvZGl2PlxuPC9ib2R5PlxuIn0seyJuYW1lIjoiY29sb3ItZXhhbXBsZS5qcyIsImNvbnRlbnQiOiJpbXBvcnQgeyBMaXRFbGVtZW50LCBodG1sLCBjc3MgfSBmcm9tICdsaXQnO1xuaW1wb3J0ICd2YW5pbGxhLWNvbG9yZnVsJztcblxuZXhwb3J0IGNsYXNzIENvbG9yRXhhbXBsZSBleHRlbmRzIExpdEVsZW1lbnQge1xuICBzdGF0aWMgZ2V0IHByb3BlcnRpZXMoKSB7XG4gICAgcmV0dXJuIHtcbiAgICAgIGNvbG9yOiB7IHR5cGU6IFN0cmluZyB9LFxuICAgIH07XG4gIH1cblxuICBzdGF0aWMgZ2V0IHN0eWxlcygpIHtcbiAgICByZXR1cm4gY3NzYFxuICAgICAgb3V0cHV0IHtcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICAgIG1hcmdpbi10b3A6IDEwcHg7XG4gICAgICAgIGZvbnQtc2l6ZTogMS4yNXJlbTtcbiAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgICAgfVxuICAgIGA7XG4gIH1cblxuICBjb25zdHJ1Y3RvcigpIHtcbiAgICBzdXBlcigpO1xuICAgIHRoaXMuY29sb3IgPSAnIzFlODhlNSc7XG4gIH1cblxuICByZW5kZXIoKSB7XG4gICAgcmV0dXJuIGh0bWxgXG4gICAgICA8aGV4LWNvbG9yLXBpY2tlclxuICAgICAgICAuY29sb3I9XCIke3RoaXMuY29sb3J9XCJcbiAgICAgICAgQGNvbG9yLWNoYW5nZWQ9XCIke3RoaXMuaGFuZGxlQ29sb3JDaGFuZ2VkfVwiXG4gICAgICA-PC9oZXgtY29sb3ItcGlja2VyPlxuICAgICAgPG91dHB1dD4ke3RoaXMuY29sb3J9PC9vdXRwdXQ-XG4gICAgYDtcbiAgfVxuXG4gIGhhbmRsZUNvbG9yQ2hhbmdlZChldmVudCkge1xuICAgIHRoaXMuY29sb3IgPSBldmVudC5kZXRhaWwudmFsdWU7XG4gIH1cbn1cblxuY3VzdG9tRWxlbWVudHMuZGVmaW5lKCdjb2xvci1leGFtcGxlJywgQ29sb3JFeGFtcGxlKTtcbiJ9XQ)
 - [React example](https://components.studio/edit/dXQXpT6ggwihpoxPqioI)
 - [Svelte example](https://components.studio/edit/CpWY9ofL287dfvJaQJIA)
 - [Vue example](https://components.studio/edit/xACXVNs47cgdWFSafS70)
