@@ -2,34 +2,32 @@ const fs = require('fs');
 const glob = require('glob');
 const util = require('util');
 
-const sass = require('sass');
+const csso = require('csso');
 
-const renderSass = util.promisify(sass.render);
 const writeFile = util.promisify(fs.writeFile);
+const readFile = util.promisify(fs.readFile);
 
 const delimiter = /<%\s*content\s*%>/;
 
-async function sassToCss(sassFile) {
-  const result = await renderSass({
-    file: sassFile,
-    outputStyle: 'compressed'
-  });
-  return result.css.toString();
+async function minifyCss(cssFile) {
+  const data = await readFile(cssFile);
+  const result = csso.minify(data);
+  return result.css;
 }
 
 const template = 'export default `<% content %>`;\n';
 
-async function sassRender(sourceFile) {
-  const replacement = await sassToCss(sourceFile);
+async function processFile(sourceFile) {
+  const replacement = await minifyCss(sourceFile);
   const newContent = template.replace(delimiter, replacement);
-  const outputFile = sourceFile.replace('.scss', '.ts');
+  const outputFile = sourceFile.replace('.css', '.ts');
   return writeFile(outputFile, newContent, 'utf-8');
 }
 
-glob('./src/lib/styles/*.scss', (err, files) => {
+glob('./src/lib/styles/*.css', (err, files) => {
   files
     .forEach(file => {
-      sassRender(file).catch(error => {
+      processFile(file).catch(error => {
         console.error(error);
         process.exit(-1);
       });

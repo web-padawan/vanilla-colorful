@@ -1,4 +1,4 @@
-[part=saturation] {
+[part='saturation'] {
   display: block;
   position: relative;
   flex-grow: 1;
@@ -11,6 +11,6 @@
 }
 
 /* Display the saturation pointer over the hue one */
-[part=saturation-pointer] {
+[part='saturation-pointer'] {
   z-index: 3;
 }
