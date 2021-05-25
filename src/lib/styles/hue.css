@@ -1,8 +1,4 @@
 [part='hue'] {
-  position: relative;
-  bottom: 0;
-  left: 0;
-  right: 0;
   flex: 0 0 24px;
   background: linear-gradient(
     to right,

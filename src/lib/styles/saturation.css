@@ -1,6 +1,4 @@
 [part='saturation'] {
-  display: block;
-  position: relative;
   flex-grow: 1;
   border-bottom: 12px solid #000;
   border-radius: 8px 8px 0 0;

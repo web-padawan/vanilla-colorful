@@ -1,7 +1,5 @@
 [part='alpha'] {
-  position: relative;
   flex: 0 0 24px;
-  background-color: #fff;
 }
 
 [part='alpha']::after {
