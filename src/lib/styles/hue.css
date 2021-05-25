@@ -1,4 +1,4 @@
-[part=hue] {
+[part='hue'] {
   position: relative;
   bottom: 0;
   left: 0;
@@ -16,7 +16,7 @@
   );
 }
 
-[part=hue-pointer] {
+[part='hue-pointer'] {
   top: 50%;
   /* Display the hue pointer over the alpha one */
   z-index: 2;
