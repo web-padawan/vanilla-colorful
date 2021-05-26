@@ -194,6 +194,13 @@ import { RgbBase } from 'vanilla-colorful/lib/entrypoints/rgb.js';
 customElements.define('custom-color-picker', class extends RgbBase {});
 ```
 
+## Code Recipes
+
+- [Custom styles and layout](https://webcomponents.dev/edit/VRYGVWFu1LIQGN7aXO54/www/styles.css)
+- [Prevent flash of unstyled content](https://webcomponents.dev/edit/NpMKtEifbhOKOw91El9Z/www/index.html)
+- [Prevent flash of unstyled content (picker with alpha)](https://webcomponents.dev/edit/D3XAGOGkyc7yMVyWefkl/www/index.html)
+- [Text field to be able to type/copy/paste a color](https://webcomponents.dev/edit/zz7e9YqnJsqtmdkWL9GI/www/index.html)
+
 ## TypeScript support
 
 **vanilla-colorful** supports TypeScript and ships with types in the library itself; no need for any other install.
@@ -221,7 +228,7 @@ to include typings for the `color-changed` custom event `detail` property:
 ```ts
 const picker = document.querySelector('rgba-color-picker');
 
-picker.addEventListener('color-changed', (event) => {
+picker.addEventListener('color-changed', (event) => {
   console.log(event.detail.value.a); // (property) RgbaColor.a: number
 });
 ```
