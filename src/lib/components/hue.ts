@@ -4,7 +4,7 @@ import { clamp, round } from '../utils/math.js';
 import type { HsvaColor } from '../types';
 
 export class Hue extends Slider {
-  private h!: number;
+  declare h: number;
 
   constructor(root: ShadowRoot) {
     super(root, 'hue', 'aria-label="Hue" aria-valuemin="0" aria-valuemax="360"', false);

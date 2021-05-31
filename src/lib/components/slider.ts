@@ -74,11 +74,11 @@ const keyMove = (target: Slider, event: KeyboardEvent): void => {
 };
 
 export abstract class Slider {
-  nodes!: HTMLElement[];
+  declare nodes: HTMLElement[];
 
-  el!: HTMLElement;
+  declare el: HTMLElement;
 
-  xy!: boolean;
+  declare xy: boolean;
 
   constructor(root: ShadowRoot, part: string, aria: string, xy: boolean) {
     const template = tpl(
