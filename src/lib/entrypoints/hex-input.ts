@@ -31,11 +31,11 @@ export class HexInputBase extends HTMLElement {
     return ['color'];
   }
 
-  private [$color]!: string;
+  private declare [$color]: string;
 
-  private [$saved]!: string;
+  private declare [$saved]: string;
 
-  private [$input]!: HTMLInputElement;
+  private declare [$input]: HTMLInputElement;
 
   get color(): string {
     return this[$color];

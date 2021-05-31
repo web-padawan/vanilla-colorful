@@ -4,7 +4,7 @@ import { clamp, round } from '../utils/math.js';
 import type { HsvaColor } from '../types';
 
 export class Alpha extends Slider {
-  private hsva!: HsvaColor;
+  declare hsva: HsvaColor;
 
   constructor(root: ShadowRoot) {
     super(root, 'alpha', 'aria-label="Alpha" aria-valuemin="0" aria-valuemax="1"', false);

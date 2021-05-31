@@ -4,7 +4,7 @@ import { clamp, round } from '../utils/math.js';
 import type { HsvaColor } from '../types';
 
 export class Saturation extends Slider {
-  private hsva!: HsvaColor;
+  declare hsva: HsvaColor;
 
   constructor(root: ShadowRoot) {
     super(root, 'saturation', 'aria-label="Color"', true);
