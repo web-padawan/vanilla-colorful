@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://github.com/web-padawan/vanilla-colorful/compare/v0.6.0...v0.6.1) (2021-05-31)
+
+
+### Bug Fixes
+
+* resolve rounded corner rendering bug ([#54](https://github.com/web-padawan/vanilla-colorful/issues/54)) ([49c8a8e](https://github.com/web-padawan/vanilla-colorful/commit/49c8a8ebb8c7f678b4bc1376a01f7de606f60263))
+
 ## [0.6.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.5.3...v0.6.0) (2021-05-24)
 
 
