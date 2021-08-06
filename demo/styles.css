@@ -119,7 +119,7 @@ a:hover {
 @media (max-width: 767px) {
   .header {
     max-width: 360px;
-    padding: 40px 20px;
+    padding: 100px 20px 0;
     flex-direction: column;
   }
 
