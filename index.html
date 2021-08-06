@@ -12,14 +12,14 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
       name="viewport"
     />
-    <meta property="og:image" content="assets/og.png" />
+    <meta property="og:image" content="demo/assets/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Recursive&amp;family=PT+Mono&amp;display=swap"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="demo/styles.css" />
   </head>
   <body>
     <div class="wrapper" style="color: var(--contrast, #fff)">
@@ -57,8 +57,8 @@
     </div>
 
     <script type="module">
-      import '../rgba-color-picker.js';
-      import { setFaviconColor } from './favicon.js';
+      import './rgba-color-picker.js';
+      import { setFaviconColor } from './demo/favicon.js';
 
       // See http://www.w3.org/TR/AERT#color-contrast
       const getBrightness = ({ r, g, b }) => (r * 299 + g * 587 + b * 114) / 1000;
@@ -74,19 +74,7 @@
         setFaviconColor(color)();
       });
 
-      const getRandomColor = () => {
-        const colors = [
-          { r: 209, g: 97, b: 28, a: 1 }, // orange
-          { r: 30, g: 136, b: 229, a: 1 }, // blue
-          { r: 102, g: 51, b: 153, a: 1 }, // purple
-          { r: 21, g: 139, b: 59, a: 1 }, // green
-          { r: 189, g: 60, b: 60, a: 1 } // salmon
-        ];
-
-        return colors[Math.floor(Math.random() * colors.length)];
-      };
-
-      picker.color = getRandomColor();
+      picker.color = picker.color = { r: 30, g: 136, b: 229, a: 1 };
     </script>
   </body>
 </html>

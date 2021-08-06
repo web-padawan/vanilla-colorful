@@ -1,20 +1,15 @@
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const { terser } = require('rollup-plugin-terser');
-const { copy } = require('@web/rollup-plugin-copy');
-const html = require('@open-wc/rollup-plugin-html');
+const html = require('@web/rollup-plugin-html').default;
 
 module.exports = {
-  input: './demo/index.html',
+  input: './index.html',
   output: {
     dir: './dist'
   },
   plugins: [
     html(),
     nodeResolve(),
-    terser(),
-    copy({
-      patterns: ['*.css', './assets/*.png'],
-      rootDir: './demo/'
-    })
+    terser()
   ]
 };

@@ -1,4 +1,4 @@
-import { throttle } from 'throttle-debounce';
+import { throttle } from '../node_modules/throttle-debounce/esm/index.js';
 
 const ICON_SIZE = 64;
 const OUTLINE_RADIUS = 28;

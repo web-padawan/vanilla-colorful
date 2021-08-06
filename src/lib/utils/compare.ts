@@ -1,4 +1,4 @@
-import { hexToRgba } from './convert';
+import { hexToRgba } from './convert.js';
 import type { ObjectColor } from '../types';
 
 export const equalColorObjects = (first: ObjectColor, second: ObjectColor): boolean => {
@@ -11,8 +11,8 @@ export const equalColorObjects = (first: ObjectColor, second: ObjectColor): bool
     // we must cast our object to unknown (as RGB demands `r` be a key, while `Record<string, x>` does not care if
     // there is or not), and then as a type TS can iterate over.
     if (
-      ((first as unknown) as Record<string, number>)[prop] !==
-      ((second as unknown) as Record<string, number>)[prop]
+      (first as unknown as Record<string, number>)[prop] !==
+      (second as unknown as Record<string, number>)[prop]
     )
       return false;
   }
