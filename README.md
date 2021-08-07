@@ -64,6 +64,12 @@ Or use one of the following content delivery networks:
 <script type="module" src="https://cdn.skypack.dev/vanilla-colorful"></script>
 ```
 
+[JSPM CDN](https://jspm.org):
+
+```html
+<script type="module" src="https://jspm.dev/vanilla-colorful"></script>
+```
+
 ## Usage
 
 ```html
