@@ -109,6 +109,7 @@ export abstract class Slider {
         event.preventDefault();
         // event.button is 0 in mousedown for left button activation
         if (!isValid(event) || (!hasTouched && (event as MouseEvent).button != 0)) return;
+        this.el.focus();
         pointerMove(this, event);
         this.dragging = true;
         break;

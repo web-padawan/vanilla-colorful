@@ -234,6 +234,13 @@ describe('hex-color-picker', () => {
     });
 
     describe('interaction', () => {
+      it('should focus the slider on mousedown', () => {
+        const spy = sinon.spy(hue, 'focus');
+        const { x, y } = middleOfNode(hue);
+        hue.dispatchEvent(new FakeMouseEvent('mousedown', { pageX: x + 10, pageY: y }));
+        expect(spy.callCount).to.equal(1);
+      });
+
       it('should dispatch color-changed event on mousedown', () => {
         const spy = sinon.spy();
         picker.addEventListener('color-changed', spy);
