@@ -13,6 +13,7 @@ const $color = Symbol('color');
 const $hsva = Symbol('hsva');
 const $change = Symbol('change');
 const $update = Symbol('update');
+const $picked = Symbol('picked');
 const $parts = Symbol('parts');
 
 export const $css = Symbol('css');
@@ -93,6 +94,7 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
       !this[$isSame]((newColor = this.colorModel.fromHsva(newHsva)))
     ) {
       this[$change](newColor);
+      this[$picked](newColor);
     }
   }
 
@@ -108,5 +110,10 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   private [$change](value: C): void {
     this[$color] = value;
     fire(this, 'color-changed', { value });
+  }
+
+  private [$picked](value: C): void {
+    this[$color] = value;
+    fire(this, 'color-picked', { value });
   }
 }
