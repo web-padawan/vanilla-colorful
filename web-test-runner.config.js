@@ -1,7 +1,7 @@
-const { esbuildPlugin } = require('@web/dev-server-esbuild');
-const { visualRegressionPlugin } = require('@web/test-runner-visual-regression/plugin');
+import { esbuildPlugin } from '@web/dev-server-esbuild';
+import { visualRegressionPlugin } from '@web/test-runner-visual-regression/plugin';
 
-module.exports = {
+export default {
   nodeResolve: true,
   plugins: [
     esbuildPlugin({ ts: true }),
