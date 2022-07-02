@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.6.2...v0.7.0) (2022-07-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* do not fire event on setting color (#72)
+
+### Features
+
+* set type in package.json to module ([#73](https://github.com/web-padawan/vanilla-colorful/issues/73)) ([f31219e](https://github.com/web-padawan/vanilla-colorful/commit/f31219e16d6641a029f2dafe82b868f08162f78a))
+* use Custom Elements Manifest analyzer ([#74](https://github.com/web-padawan/vanilla-colorful/issues/74)) ([5422770](https://github.com/web-padawan/vanilla-colorful/commit/5422770e49d9c8a01595b013cb25427059c4200a))
+
+
+### Internal Changes
+
+* do not fire event on setting color ([#72](https://github.com/web-padawan/vanilla-colorful/issues/72)) ([de8ceeb](https://github.com/web-padawan/vanilla-colorful/commit/de8ceebc69beb6924da8496ddfd53ddac1362b47))
+
 ### [0.6.2](https://github.com/web-padawan/vanilla-colorful/compare/v0.6.1...v0.6.2) (2021-08-07)
 
 
