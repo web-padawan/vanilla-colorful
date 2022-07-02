@@ -11,7 +11,6 @@ import saturationCss from '../styles/saturation.js';
 const $isSame = Symbol('same');
 const $color = Symbol('color');
 const $hsva = Symbol('hsva');
-const $change = Symbol('change');
 const $update = Symbol('update');
 const $parts = Symbol('parts');
 
@@ -49,7 +48,7 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
     if (!this[$isSame](newColor)) {
       const newHsva = this.colorModel.toHsva(newColor);
       this[$update](newHsva);
-      this[$change](newColor);
+      this[$color] = newColor;
     }
   }
 
@@ -92,7 +91,8 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
       !equalColorObjects(newHsva, oldHsva) &&
       !this[$isSame]((newColor = this.colorModel.fromHsva(newHsva)))
     ) {
-      this[$change](newColor);
+      this[$color] = newColor;
+      fire(this, 'color-changed', { value: newColor });
     }
   }
 
@@ -103,10 +103,5 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
   private [$update](hsva: HsvaColor): void {
     this[$hsva] = hsva;
     this[$parts].forEach((part) => part.update(hsva));
-  }
-
-  private [$change](value: C): void {
-    this[$color] = value;
-    fire(this, 'color-changed', { value });
   }
 }
