@@ -92,7 +92,7 @@
   "size-limit": [
     {
       "path": "hex-color-picker.js",
-      "limit": "2.7 KB"
+      "limit": "2.75 KB"
     },
     {
       "path": "hsl-color-picker.js",
@@ -100,7 +100,7 @@
     },
     {
       "path": "hsl-string-color-picker.js",
-      "limit": "2.6 KB"
+      "limit": "2.7 KB"
     },
     {
       "path": "hsla-color-picker.js",
@@ -112,19 +112,19 @@
     },
     {
       "path": "hsv-color-picker.js",
-      "limit": "2.4 KB"
+      "limit": "2.5 KB"
     },
     {
       "path": "hsv-string-color-picker.js",
-      "limit": "2.6 KB"
-    },
-    {
-      "path": "hsva-color-picker.js",
       "limit": "2.7 KB"
     },
     {
+      "path": "hsva-color-picker.js",
+      "limit": "2.75 KB"
+    },
+    {
       "path": "hsva-string-color-picker.js",
-      "limit": "2.9 KB"
+      "limit": "2.95 KB"
     },
     {
       "path": "rgb-color-picker.js",
@@ -132,7 +132,7 @@
     },
     {
       "path": "rgb-string-color-picker.js",
-      "limit": "2.7 KB"
+      "limit": "2.8 KB"
     },
     {
       "path": "rgba-color-picker.js",
@@ -170,7 +170,7 @@
     "@esm-bundle/chai": "^4.3.4",
     "@open-wc/testing-helpers": "~2.1.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
-    "@size-limit/preset-small-lib": "^6.0.0",
+    "@size-limit/preset-small-lib": "^7.0.8",
     "@types/sinon": "^10.0.12",
     "@typescript-eslint/eslint-plugin": "^5.30.3",
     "@typescript-eslint/parser": "^5.30.3",
@@ -194,7 +194,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "simple-git-hooks": "^2.8.0",
     "sinon": "^14.0.0",
-    "size-limit": "^6.0.0",
+    "size-limit": "^7.0.8",
     "standard-version": "^9.5.0",
     "throttle-debounce": "^5.0.0",
     "tsc-watch": "^5.0.3",
