@@ -10,7 +10,7 @@ const readFile = util.promisify(fs.readFile);
 const delimiter = /<%\s*content\s*%>/;
 
 async function minifyCss(cssFile) {
-  const data = await readFile(cssFile);
+  const data = await readFile(cssFile, 'utf8');
   const result = csso.minify(data);
   return result.css;
 }
