@@ -85,50 +85,11 @@ describe('hex-color-picker', () => {
       expect(picker.getAttribute('color')).to.equal(null);
     });
 
-    it('should fire color-change event when property changes', () => {
+    it('should not fire color-changed event when property changes', () => {
       const spy = sinon.spy();
       picker.addEventListener('color-changed', spy);
       picker.color = '#123';
-      expect(spy.callCount).to.equal(1);
-    });
-
-    it('should not fire color-change event for same HEX property', () => {
-      const spy = sinon.spy();
-      picker.addEventListener('color-changed', spy);
-      picker.color = '#cccccc';
-      expect(spy.callCount).to.equal(0);
-    });
-  });
-
-  describe('color-changed event', () => {
-    afterEach(() => {
-      document.body.removeChild(picker);
-    });
-
-    it('should fire when component is attached', () => {
-      const spy = sinon.spy();
-      picker = document.createElement('hex-color-picker');
-      picker.addEventListener('color-changed', spy);
-      document.body.appendChild(picker);
-      expect(spy.callCount).to.equal(1);
-    });
-  });
-
-  describe('event propagation', () => {
-    let div: HTMLDivElement;
-
-    afterEach(() => {
-      document.body.removeChild(div);
-    });
-
-    it('should fire when component is attached', () => {
-      div = document.createElement('div');
-      const spy = sinon.spy();
-      picker = document.createElement('hex-color-picker');
-      div.addEventListener('color-changed', spy);
-      document.body.appendChild(div);
-      div.appendChild(picker);
-      expect(spy.callCount).to.equal(1);
+      expect(spy.called).to.be.false;
     });
   });
 
@@ -158,18 +119,11 @@ describe('hex-color-picker', () => {
       expect(picker.color).to.equal('#ccc');
     });
 
-    it('should fire color-change event when attribute changes', () => {
+    it('should not fire color-changed event when attribute changes', () => {
       const spy = sinon.spy();
       picker.addEventListener('color-changed', spy);
       picker.setAttribute('color', '#123');
-      expect(spy.callCount).to.equal(1);
-    });
-
-    it('should not fire color-change event for same HEX attribute', () => {
-      const spy = sinon.spy();
-      picker.addEventListener('color-changed', spy);
-      picker.setAttribute('color', '#448888');
-      expect(spy.callCount).to.equal(0);
+      expect(spy.called).to.be.false;
     });
   });
 
