@@ -32,6 +32,8 @@
   box-sizing: border-box;
   width: 28px;
   height: 28px;
+  display: flex;
+  place-content: center center;
   transform: translate(-50%, -50%);
   background-color: #fff;
   border: 2px solid #fff;
@@ -40,13 +42,9 @@
 }
 
 [part$='pointer']::after {
-  display: block;
   content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   border-radius: inherit;
   background-color: currentColor;
 }
