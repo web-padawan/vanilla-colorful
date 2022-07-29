@@ -88,15 +88,18 @@ export class HexInputBase extends HTMLElement {
       case 'input':
         const hex = escape(value);
         this[$saved] = this.color;
-        if (validHex(hex)) {
+        if (validHex(hex) || value === '') {
           this.color = hex;
           this.dispatchEvent(
-            new CustomEvent('color-changed', { bubbles: true, detail: { value: '#' + hex } })
+            new CustomEvent('color-changed', {
+              bubbles: true,
+              detail: { value: hex ? '#' + hex : '' }
+            })
           );
         }
         break;
       case 'blur':
-        if (!validHex(value)) {
+        if (value && !validHex(value)) {
           this.color = this[$saved];
         }
     }

@@ -196,5 +196,22 @@ describe('hex-input', () => {
       expect(input.color).to.equal('#488');
       expect(target.value).to.equal('488');
     });
+
+    it('should dispatch color-changed event on blur after clearing input', async () => {
+      const spy = sinon.spy();
+      input.addEventListener('color-changed', spy);
+      target.select();
+      await sendKeys({ press: 'Backspace' });
+      target.dispatchEvent(new Event('blur'));
+      expect(spy.callCount).to.equal(1);
+    });
+
+    it('should not restore color value on blur after clearing input', async () => {
+      target.select();
+      await sendKeys({ press: 'Backspace' });
+      target.dispatchEvent(new Event('blur'));
+      expect(input.color).to.equal('');
+      expect(target.value).to.equal('');
+    });
   });
 });
