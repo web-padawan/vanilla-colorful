@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.1](https://github.com/web-padawan/vanilla-colorful/compare/v0.7.0...v0.7.1) (2022-07-29)
+
+
+### Features
+
+* add Web Types support for IntelliJ ([#79](https://github.com/web-padawan/vanilla-colorful/issues/79)) ([787330d](https://github.com/web-padawan/vanilla-colorful/commit/787330d94fdb7b6590849eaf54f6c5dac109d6eb))
+
+
+### Bug Fixes
+
+* center pointer fill using flexbox ([#76](https://github.com/web-padawan/vanilla-colorful/issues/76)) ([8421a6e](https://github.com/web-padawan/vanilla-colorful/commit/8421a6e7aea802438cd9da1bbe40c3b7ed657854))
+* do not restore value after clearing ([#77](https://github.com/web-padawan/vanilla-colorful/issues/77)) ([fefce0d](https://github.com/web-padawan/vanilla-colorful/commit/fefce0d1a36ff71bfc0e924427aa294bf673e8a5))
+
 ## [0.7.0](https://github.com/web-padawan/vanilla-colorful/compare/v0.6.2...v0.7.0) (2022-07-02)
 
 
