@@ -33,8 +33,7 @@
   width: 28px;
   height: 28px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  place-content: center center;
   transform: translate(-50%, -50%);
   background-color: #fff;
   border: 2px solid #fff;
