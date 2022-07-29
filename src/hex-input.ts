@@ -1,7 +1,7 @@
 import { HexInputBase } from './lib/entrypoints/hex-input.js';
 
 /**
- * A color picker custom element that uses HEX format.
+ * A custom element for entering color in HEX format.
  *
  * @element hex-input
  *
