@@ -121,6 +121,7 @@ you need another color model, we provide 12 additional color picker bundles.
 | File to import                  | HTML element                 | Value example                      |
 | ------------------------------- | ---------------------------- | ---------------------------------- |
 | `"hex-color-picker.js"`         | `<hex-color-picker>`         | `"#ffffff"`                        |
+| `"hex-alpha-color-picker.js"`   | `<hex-alpha-color-picker>`   | `"#ffffff88"`                      |
 | `"hsl-color-picker.js"`         | `<hsl-color-picker>`         | `{ h: 0, s: 0, l: 100 }`           |
 | `"hsl-string-color-picker.js"`  | `<hsl-string-color-picker>`  | `"hsl(0, 0%, 100%)"`               |
 | `"hsla-color-picker.js"`        | `<hsla-color-picker>`        | `{ h: 0, s: 0, l: 100, a: 1 }`     |
