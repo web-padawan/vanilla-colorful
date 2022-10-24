@@ -164,7 +164,7 @@ describe('Utils', () => {
 
   it('Converts HSVA string to HSVA', () => {
     expect(hsvaStringToHsva('hsva(0, 11%, 0, 0.5)')).to.deep.equal({ h: 0, s: 11, v: 0, a: 0.5 });
-    expect(hsvStringToHsva('hsv(5deg 9% 7% / 40%)')).to.deep.equal({ h: 5, s: 9, v: 7, a: 0.4 });
+    expect(hsvaStringToHsva('hsva(5deg 9% 7% / 40%)')).to.deep.equal({ h: 5, s: 9, v: 7, a: 0.4 });
   });
 
   it('Converts HSVA to HSV', () => {
@@ -177,6 +177,18 @@ describe('Utils', () => {
 
   it('Converts RGBA to RGB', () => {
     expect(rgbaToRgb({ r: 255, g: 255, b: 255, a: 1 })).to.deep.equal({ r: 255, g: 255, b: 255 });
+  });
+
+  it('Handles incorrect HSLA string', () => {
+    expect(hslaStringToHsva('rgba(0,0,0,1)')).to.deep.equal({ h: 0, s: 0, v: 0, a: 1 });
+  });
+
+  it('Handles incorrect HSVA string', () => {
+    expect(hsvaStringToHsva('hsla(0,0,0,1)')).to.deep.equal({ h: 0, s: 0, v: 0, a: 1 });
+  });
+
+  it('Handles incorrect RGBA string', () => {
+    expect(rgbaStringToHsva('hsva(0,0,0,1)')).to.deep.equal({ h: 0, s: 0, v: 0, a: 1 });
   });
 
   it('Rounds HSVA', () => {
@@ -199,6 +211,11 @@ describe('Utils', () => {
     expect(equalColorObjects({ h: 100, s: 50, v: 50 }, { h: 100, s: 50, v: 50 })).to.equal(true);
     expect(equalColorObjects({ h: 50, s: 0, v: 0 }, { h: 100, s: 0, v: 0 })).to.equal(false);
     expect(equalColorObjects({ h: 1, s: 2, v: 3 }, { h: 4, s: 5, v: 6 })).to.equal(false);
+  });
+
+  it('Compares two equivalent objects', () => {
+    const sameObject = { h: 0, s: 0, v: 100 };
+    expect(equalColorObjects(sameObject, sameObject)).to.equal(true);
   });
 
   it('Compares two color strings', () => {
