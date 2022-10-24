@@ -70,6 +70,12 @@ Or use one of the following content delivery networks:
 <script type="module" src="https://jspm.dev/vanilla-colorful"></script>
 ```
 
+[ESM CDN](https://esm.sh):
+
+```html
+<script type="module" src="https://esm.sh/vanilla-colorful"></script>
+```
+
 ## Usage
 
 ```html
