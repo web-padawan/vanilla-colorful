@@ -29,7 +29,7 @@
 - 🚀 **Fast**: Built with standards based Custom Elements.
 - 🛡 **Bulletproof**: Written in strict TypeScript and has 100% test coverage.
 - 🗂 **Typed**: Ships with [types included](#typescript-support).
-- 😍 **Simple**: The interface is straight forward and easy to use.
+- 😍 **Simple**: The interface is straightforward and easy to use.
 - 💬 **Accessible**: Follows the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) guidelines to support users of assistive technologies.
 - 📲 **Mobile-friendly**: Works well on mobile devices and touch screens.
 - 👫 **Framework-agnostic**: Can be used [with any framework](https://custom-elements-everywhere.com/).
@@ -97,13 +97,16 @@ Or use one of the following content delivery networks:
 ## ES modules
 
 **vanilla-colorful** is authored using ES modules which are [natively supported](https://caniuse.com/es6-module)
-by modern browsers. However, it also uses "bare module imports" which are [not yet standardized](https://github.com/WICG/import-maps)
-and require a small transform.
+by modern browsers. However, all the code examples listed here use so-called "bare module specifiers":
+`import 'vanilla-colorful'`.
 
-We recommend to use one of the modern tools that leverage ES modules based development, such as
-[`snowpack`](https://www.snowpack.dev), [`vite`](https://vitejs.dev),
-[`@web/dev-server`](https://modern-web.dev/docs/dev-server/overview/), or [`wmr`](https://www.npmjs.com/package/wmr).
-None of these tools are needed when importing the component from CDN.
+There is now a feature in the HTML Standard called [import maps](https://html.spec.whatwg.org/multipage/webappapis.html#import-maps)
+that enables resolving bare module specifiers without requiring any tools. As of October 2022, import
+maps are not yet [shipped](https://caniuse.com/import-maps) in all browsers.
+
+In the meantime, we recommend using one of the tools that leverage ES modules based development, such as
+[`vite`](https://vitejs.dev), [`@web/dev-server`](https://modern-web.dev/docs/dev-server/overview/),
+or [`wmr`](https://www.npmjs.com/package/wmr). None of these tools are needed when importing from CDN.
 
 ## Supported color models
 
