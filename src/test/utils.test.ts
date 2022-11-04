@@ -1,6 +1,7 @@
 import { expect } from '@esm-bundle/chai';
 import { clamp, round } from '../lib/utils/math.js';
 import {
+  hexToRgba,
   hexToHsva,
   hslaStringToHsva,
   hslaToHsl,
@@ -19,6 +20,7 @@ import {
   hsvaToRgbString,
   hsvStringToHsva,
   rgbaStringToHsva,
+  rgbaToHex,
   rgbaToHsva,
   rgbaToRgb,
   rgbStringToHsva,
@@ -42,6 +44,18 @@ describe('Utils', () => {
     expect(hexToHsva('#FF0')).to.deep.equal({ h: 60, s: 100, v: 100, a: 1 });
     expect(hexToHsva('#F00')).to.deep.equal({ h: 0, s: 100, v: 100, a: 1 });
     expect(hexToHsva('#ABC')).to.deep.equal({ h: 210, s: 17, v: 80, a: 1 });
+  });
+
+  it('Converts HEX with alpha to RGBA', () => {
+    expect(hexToRgba('#11223399')).to.deep.equal({ r: 17, g: 34, b: 51, a: 0.6 });
+    expect(hexToRgba('#11223300')).to.deep.equal({ r: 17, g: 34, b: 51, a: 0 });
+    expect(hexToRgba('#112233')).to.deep.equal({ r: 17, g: 34, b: 51, a: 1 });
+  });
+
+  it('Converts shorthand HEX with alpha to RGBA', () => {
+    expect(hexToRgba('#1239')).to.deep.equal({ r: 17, g: 34, b: 51, a: 0.6 });
+    expect(hexToRgba('#1230')).to.deep.equal({ r: 17, g: 34, b: 51, a: 0 });
+    expect(hexToRgba('#123')).to.deep.equal({ r: 17, g: 34, b: 51, a: 1 });
   });
 
   it('Converts HSV to HEX', () => {
@@ -117,6 +131,12 @@ describe('Utils', () => {
 
     test({ r: 255, g: 255, b: 255, a: 1 }, { h: 0, s: 0, v: 100, a: 1 });
     test({ r: 255, g: 0, b: 0, a: 1 }, { h: 0, s: 100, v: 100, a: 1 });
+  });
+
+  it('Converts RGBA to HEX', () => {
+    expect(rgbaToHex({ r: 17, g: 34, b: 51, a: 0.6 })).to.deep.equal('#11223399');
+    expect(rgbaToHex({ r: 17, g: 34, b: 51, a: 0 })).to.deep.equal('#11223300');
+    expect(rgbaToHex({ r: 17, g: 34, b: 51, a: 1 })).to.deep.equal('#112233');
   });
 
   it('Converts RGB string to HSVA', () => {

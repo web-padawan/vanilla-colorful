@@ -128,6 +128,24 @@ describe('hex-color-picker', () => {
       expect(spy.called).to.be.false;
     });
   });
+
+  describe('interaction', () => {
+    let hue: HTMLElement;
+
+    beforeEach(async () => {
+      const root = picker.shadowRoot as ShadowRoot;
+      hue = root.querySelector('[part="hue"]') as HTMLElement;
+    });
+
+    it('should dispatch color-changed event on mousedown', () => {
+      const spy = sinon.spy();
+      picker.addEventListener('color-changed', spy);
+      const { x, y } = middleOfNode(hue);
+      hue.dispatchEvent(new FakeMouseEvent('mousedown', { pageX: x + 10, pageY: y }));
+      hue.dispatchEvent(new FakeMouseEvent('mouseup', { pageX: x + 10, pageY: y }));
+      expect(spy.callCount).to.equal(1);
+    });
+  });
 });
 
 describe('hex-alpha-color-picker', () => {
@@ -136,7 +154,7 @@ describe('hex-alpha-color-picker', () => {
 
   beforeEach(async () => {
     picker = document.createElement('hex-alpha-color-picker');
-    picker.color = '#112233';
+    picker.setAttribute('color', '#112233');
     document.body.appendChild(picker);
     await nextFrame();
     const root = picker.shadowRoot as ShadowRoot;
