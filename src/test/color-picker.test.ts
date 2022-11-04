@@ -2,8 +2,10 @@ import { expect } from '@esm-bundle/chai';
 import sinon from 'sinon';
 import { fixture, html, nextFrame } from '@open-wc/testing-helpers';
 import { hsvaToRgbString, rgbaToHsva } from '../lib/utils/convert';
+import type { HexAlphaColorPicker } from '../hex-alpha-color-picker';
 import type { HexColorPicker } from '../hex-color-picker';
 import type { RgbaColorPicker } from '../rgba-color-picker';
+import '../hex-alpha-color-picker.js';
 import '../rgba-color-picker.js';
 
 class FakeMouseEvent extends MouseEvent {
@@ -125,6 +127,32 @@ describe('hex-color-picker', () => {
       picker.setAttribute('color', '#123');
       expect(spy.called).to.be.false;
     });
+  });
+});
+
+describe('hex-alpha-color-picker', () => {
+  let picker: HexAlphaColorPicker;
+  let alpha: HTMLElement;
+
+  beforeEach(async () => {
+    picker = document.createElement('hex-alpha-color-picker');
+    picker.color = '#112233';
+    document.body.appendChild(picker);
+    await nextFrame();
+    const root = picker.shadowRoot as ShadowRoot;
+    alpha = root.querySelector('[part="alpha"]') as HTMLElement;
+  });
+
+  afterEach(() => {
+    document.body.removeChild(picker);
+  });
+
+  it('should use #rrggbbaa format if alpha channel value is less than 1', () => {
+    const { x, y } = middleOfNode(alpha);
+    alpha.dispatchEvent(new FakeMouseEvent('mousedown', { pageX: x, pageY: y }));
+    alpha.dispatchEvent(new FakeMouseEvent('mousemove', { pageX: x + 20, pageY: y }));
+    alpha.dispatchEvent(new FakeMouseEvent('mouseup', { pageX: x + 20, pageY: y }));
+    expect(picker.color).to.equal('#11223399');
   });
 });
 
