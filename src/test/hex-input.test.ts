@@ -17,9 +17,11 @@ describe('hex-input', () => {
     it('should work with color property set before upgrade', async () => {
       const element = document.createElement('hex-input');
       document.body.appendChild(element);
+      element.alpha = true;
       element.color = '#123';
       await import('../hex-input');
       expect(element.color).to.equal('#123');
+      expect(element.alpha).to.be.true;
       target = getTarget(element);
       expect(target.value).to.equal('123');
       document.body.removeChild(element);
@@ -212,6 +214,124 @@ describe('hex-input', () => {
       target.dispatchEvent(new Event('blur'));
       expect(input.color).to.equal('');
       expect(target.value).to.equal('');
+    });
+  });
+
+  describe('alpha', () => {
+    describe('property', () => {
+      beforeEach(async () => {
+        input = await fixture(html`<hex-input></hex-input>`);
+        input.alpha = true;
+        input.color = '#11223344';
+        target = getTarget(input);
+      });
+
+      it('should allow setting 8 digits HEX when alpha is set with property', () => {
+        expect(input.color).to.equal('#11223344');
+        expect(target.value).to.equal('11223344');
+      });
+
+      it('should set alpha attribute when property is set to true', () => {
+        expect(input.hasAttribute('alpha')).to.be.true;
+      });
+
+      it('should remove alpha attribute when property is set to false', () => {
+        input.alpha = false;
+        expect(input.hasAttribute('alpha')).to.be.false;
+      });
+
+      it('should update input value to 6 digits when alpha is set to false', () => {
+        input.alpha = false;
+        expect(input.color).to.equal('#112233');
+        expect(target.value).to.equal('112233');
+      });
+
+      it('should update non-prefixed value to 6 digits when alpha is set to false', () => {
+        input.color = '11223344';
+        input.alpha = false;
+        expect(input.color).to.equal('112233');
+        expect(target.value).to.equal('112233');
+      });
+
+      it('should update shorthand value to 3 digits when alpha is set to false', () => {
+        input.color = '#1234';
+        input.alpha = false;
+        expect(input.color).to.equal('#123');
+        expect(target.value).to.equal('123');
+      });
+
+      it('should update non-prefixed shorthand value to 3 digits when alpha is set to false', () => {
+        input.color = '1234';
+        input.alpha = false;
+        expect(input.color).to.equal('123');
+        expect(target.value).to.equal('123');
+      });
+
+      it('should not allow using 8 digits HEX when alpha is set to false', async () => {
+        input.alpha = false;
+        input.focus();
+
+        await sendKeys({ press: '3' });
+        await sendKeys({ press: '6' });
+        target.dispatchEvent(new Event('blur'));
+
+        expect(target.value).to.equal('112233');
+      });
+    });
+
+    describe('attribute', () => {
+      beforeEach(async () => {
+        input = await fixture(html`<hex-input color="#11223344" alpha></hex-input>`);
+        target = getTarget(input);
+      });
+
+      it('should allow setting 8 digits HEX when alpha is set with attribute', () => {
+        expect(input.color).to.equal('#11223344');
+        expect(target.value).to.equal('11223344');
+      });
+
+      it('should set alpha property to false when attribute is removed', () => {
+        input.removeAttribute('alpha');
+        expect(input.alpha).to.be.false;
+      });
+
+      it('should update input value to 6 digits when attribute is removed', () => {
+        input.removeAttribute('alpha');
+        expect(input.color).to.equal('#112233');
+        expect(target.value).to.equal('112233');
+      });
+
+      it('should update non-prefixed value to 6 digits when attribute is removed', () => {
+        input.color = '11223344';
+        input.removeAttribute('alpha');
+        expect(input.color).to.equal('112233');
+        expect(target.value).to.equal('112233');
+      });
+
+      it('should update shorthand value to 3 digits when attribute is removed', () => {
+        input.color = '#1234';
+        input.removeAttribute('alpha');
+        expect(input.color).to.equal('#123');
+        expect(target.value).to.equal('123');
+      });
+
+      it('should update non-prefixed shorthand value to 3 digits when attribute is removed', () => {
+        input.color = '1234';
+        input.removeAttribute('alpha');
+        expect(input.color).to.equal('123');
+        expect(target.value).to.equal('123');
+      });
+
+      it('should not allow using 8 digits HEX when attribute is removed', async () => {
+        input.removeAttribute('alpha');
+        input.focus();
+
+        await sendKeys({ press: '3' });
+        await sendKeys({ press: '6' });
+        target.dispatchEvent(new Event('blur'));
+
+        expect(target.value).to.equal('112233');
+      });
     });
   });
 });
