@@ -5,7 +5,7 @@ import { tpl } from '../utils/dom.js';
 const template = tpl('<slot><input part="input" spellcheck="false"></slot>');
 
 // Escapes all non-hexadecimal characters including "#"
-const escape = (hex: string) => hex.replace(/([^0-9A-F]+)/gi, '').substr(0, 6);
+const escape = (hex: string) => hex.replace(/([^0-9A-F]+)/gi, '').substring(0, 6);
 
 const $color = Symbol('color');
 const $saved = Symbol('saved');
