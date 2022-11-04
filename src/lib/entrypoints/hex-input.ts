@@ -59,8 +59,11 @@ export class HexInputBase extends HTMLElement {
     this.toggleAttribute('alpha', alpha);
 
     // When alpha set to false, update color
-    if (this.color && !validHex(this.color, alpha)) {
-      this.color = '#' + escape(this.color, alpha);
+    const color = this.color;
+    if (color && !validHex(color, alpha)) {
+      this.color = color.startsWith('#')
+        ? color.substring(0, color.length === 5 ? 4 : 7)
+        : color.substring(0, color.length === 4 ? 3 : 6);
     }
   }
 
