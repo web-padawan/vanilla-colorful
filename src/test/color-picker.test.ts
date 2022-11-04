@@ -262,12 +262,11 @@ describe('rgba-color-picker', () => {
     });
 
     it('should dispatch color-changed event on touchstart', () => {
-      const elem = saturation;
       const spy = sinon.spy();
       picker.addEventListener('color-changed', spy);
-      const { x, y } = middleOfNode(elem);
-      elem.dispatchEvent(new FakeTouchEvent('touchstart', [{ pageX: x + 10, pageY: y }]));
-      elem.dispatchEvent(new FakeTouchEvent('touchend', [{ pageX: x + 10, pageY: y }]));
+      const { x, y } = middleOfNode(saturation);
+      saturation.dispatchEvent(new FakeTouchEvent('touchstart', [{ pageX: x + 10, pageY: y }]));
+      saturation.dispatchEvent(new FakeTouchEvent('touchend', [{ pageX: x + 10, pageY: y }]));
       expect(spy.callCount).to.equal(1);
     });
 
