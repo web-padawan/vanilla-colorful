@@ -1,6 +1,7 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
 import { fixture } from '@open-wc/testing-helpers';
 import '../../hex-color-picker.js';
+import '../../hex-alpha-color-picker.js';
 import '../../hsl-color-picker.js';
 import '../../hsl-string-color-picker.js';
 import '../../hsla-color-picker.js';
@@ -19,6 +20,7 @@ describe('visual tests', () => {
 
   [
     'hex',
+    'hex-alpha',
     'hsl',
     'hsl-string',
     'hsla',

@@ -49,6 +49,7 @@
     ".": "./hex-color-picker.js",
     "./hex-input.js": "./hex-input.js",
     "./hex-color-picker.js": "./hex-color-picker.js",
+    "./hex-alpha-color-picker.js": "./hex-alpha-color-picker.js",
     "./hsl-color-picker.js": "./hsl-color-picker.js",
     "./hsl-string-color-picker.js": "./hsl-string-color-picker.js",
     "./hsla-color-picker.js": "./hsla-color-picker.js",
@@ -94,7 +95,11 @@
   "size-limit": [
     {
       "path": "hex-color-picker.js",
-      "limit": "2.75 KB"
+      "limit": "2.8 KB"
+    },
+    {
+      "path": "hex-alpha-color-picker.js",
+      "limit": "3.15 KB"
     },
     {
       "path": "hsl-color-picker.js",
@@ -152,6 +157,7 @@
   "sideEffects": [
     "hex-input.js",
     "hex-color-picker.js",
+    "hex-alpha-color-picker.js",
     "hsl-color-picker.js",
     "hsl-string-color-picker.js",
     "hsla-color-picker.js",
