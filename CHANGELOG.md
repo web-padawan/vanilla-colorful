@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.2](https://github.com/web-padawan/vanilla-colorful/compare/v0.7.1...v0.7.2) (2022-11-05)
+
+
+### Features
+
+* add hex-alpha-color-picker component ([#81](https://github.com/web-padawan/vanilla-colorful/issues/81)) ([32c9c14](https://github.com/web-padawan/vanilla-colorful/commit/32c9c146bc1902ae9aff4eda184cbc60ee44d7c0))
+* add prefixed property to hex-input ([#92](https://github.com/web-padawan/vanilla-colorful/issues/92)) ([45cdc57](https://github.com/web-padawan/vanilla-colorful/commit/45cdc57b4df5e1e3268c8da855d6337278c1bc7a))
+* add support for alpha to hex-input ([#91](https://github.com/web-padawan/vanilla-colorful/issues/91)) ([f6a5d4c](https://github.com/web-padawan/vanilla-colorful/commit/f6a5d4cc61d1b17194d2ef9fa16d3a8e4d1a5261))
+
+
+### Bug Fixes
+
+* handle reattach and changing input ([#93](https://github.com/web-padawan/vanilla-colorful/issues/93)) ([901150b](https://github.com/web-padawan/vanilla-colorful/commit/901150bb2419ba16eb4cbb5aec0a3b0c31549419))
+
 ### [0.7.1](https://github.com/web-padawan/vanilla-colorful/compare/v0.7.0...v0.7.1) (2022-07-29)
 
 
