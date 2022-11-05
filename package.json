@@ -17,9 +17,9 @@
   "type": "module",
   "exports": {
     ".": "./hex-color-picker.js",
-    "./hex-input.js": "./hex-input.js",
-    "./hex-color-picker.js": "./hex-color-picker.js",
     "./hex-alpha-color-picker.js": "./hex-alpha-color-picker.js",
+    "./hex-color-picker.js": "./hex-color-picker.js",
+    "./hex-input.js": "./hex-input.js",
     "./hsl-color-picker.js": "./hsl-color-picker.js",
     "./hsl-string-color-picker.js": "./hsl-string-color-picker.js",
     "./hsla-color-picker.js": "./hsla-color-picker.js",
