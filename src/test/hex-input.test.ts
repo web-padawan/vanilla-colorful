@@ -1,7 +1,7 @@
 import { expect } from '@esm-bundle/chai';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import { fixture, html } from '@open-wc/testing-helpers';
+import { fixture, html, nextFrame } from '@open-wc/testing-helpers';
 import type { HexInput } from '../hex-input';
 
 describe('hex-input', () => {
@@ -70,6 +70,15 @@ describe('hex-input', () => {
 
     it('should handle attribute set before adding to the DOM', () => {
       input.setAttribute('color', '#123');
+      document.body.appendChild(input);
+      expect(getTarget(input).value).to.equal('123');
+    });
+
+    it('should not throw when removing and adding from the DOM', async () => {
+      input.color = '#123';
+      document.body.appendChild(input);
+      document.body.removeChild(input);
+      await nextFrame();
       document.body.appendChild(input);
       expect(getTarget(input).value).to.equal('123');
     });
@@ -156,6 +165,21 @@ describe('hex-input', () => {
     it('should pass property value to custom input', () => {
       input.color = '#ccc';
       expect(target.value).to.equal('ccc');
+    });
+
+    it('should use default input if custom input removed', async () => {
+      input.removeChild(target);
+      await nextFrame();
+      expect(getTarget(input).value).to.equal('488');
+    });
+
+    it('should update custom input if removed and added', async () => {
+      input.removeChild(target);
+      target.value = '';
+      await nextFrame();
+      input.appendChild(target);
+      await nextFrame();
+      expect(target.value).to.equal('488');
     });
   });
 
