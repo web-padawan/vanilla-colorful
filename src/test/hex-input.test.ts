@@ -169,6 +169,7 @@ describe('hex-input', () => {
 
     it('should use default input if custom input removed', async () => {
       input.removeChild(target);
+      target.value = '';
       await nextFrame();
       expect(getTarget(input).value).to.equal('488');
     });
