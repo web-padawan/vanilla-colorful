@@ -199,9 +199,12 @@ hex-color-picker::part(hue-pointer) {
 `<hex-input>` renders an unstyled `<input>` element inside a slot and exposes it for styling using
 `part`. You can also pass your own `<input>` element as a child if you want to fully configure it.
 
-| Property | Default | Description                                  |
-| -------- | ------- | -------------------------------------------- |
-| `alpha`  | `false` | Allows `#rgba` and `#rrggbbaa` color formats |
+In addition to `color` property, `<hex-input>` supports the following boolean properties:
+
+| Property   | Default | Description                                  |
+| ---------- | ------- | -------------------------------------------- |
+| `alpha`    | `false` | Allows `#rgba` and `#rrggbbaa` color formats |
+| `prefixed` | `false` | Enables `#` prefix displaying                |
 
 ## Base classes
 

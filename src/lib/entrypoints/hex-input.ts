@@ -11,7 +11,8 @@ const escape = (hex: string, alpha: boolean) =>
 const $alpha = Symbol('alpha');
 const $color = Symbol('color');
 const $saved = Symbol('saved');
-const $input = Symbol('saved');
+const $input = Symbol('input');
+const $prefix = Symbol('prefix');
 const $update = Symbol('update');
 
 export interface HexInputBase {
@@ -30,12 +31,14 @@ export interface HexInputBase {
 
 export class HexInputBase extends HTMLElement {
   static get observedAttributes(): string[] {
-    return ['alpha', 'color'];
+    return ['alpha', 'color', 'prefixed'];
   }
 
   private declare [$color]: string;
 
   private declare [$alpha]: boolean;
+
+  private declare [$prefix]: boolean;
 
   private declare [$saved]: string;
 
@@ -65,6 +68,16 @@ export class HexInputBase extends HTMLElement {
         ? color.substring(0, color.length === 5 ? 4 : 7)
         : color.substring(0, color.length === 4 ? 3 : 6);
     }
+  }
+
+  get prefixed(): boolean {
+    return this[$prefix];
+  }
+
+  set prefixed(prefixed: boolean) {
+    this[$prefix] = prefixed;
+    this.toggleAttribute('prefixed', prefixed);
+    this[$update](this.color);
   }
 
   connectedCallback(): void {
@@ -97,6 +110,14 @@ export class HexInputBase extends HTMLElement {
       this.alpha = value;
     } else {
       this.alpha = this.hasAttribute('alpha');
+    }
+
+    if (this.hasOwnProperty('prefixed')) {
+      const value = this.prefixed;
+      delete this['prefixed' as keyof this];
+      this.prefixed = value;
+    } else {
+      this.prefixed = this.hasAttribute('prefixed');
     }
 
     if (this.hasOwnProperty('color')) {
@@ -139,17 +160,24 @@ export class HexInputBase extends HTMLElement {
       this.color = newVal;
     }
 
+    const hasBooleanAttr = newVal != null;
     if (attr === 'alpha') {
-      const hasAlpha = newVal != null;
-      if (this.alpha !== hasAlpha) {
-        this.alpha = hasAlpha;
+      if (this.alpha !== hasBooleanAttr) {
+        this.alpha = hasBooleanAttr;
+      }
+    }
+
+    if (attr === 'prefixed') {
+      if (this.prefixed !== hasBooleanAttr) {
+        this.prefixed = hasBooleanAttr;
       }
     }
   }
 
   private [$update](hex: string): void {
     if (this[$input]) {
-      this[$input].value = hex == null || hex == '' ? '' : escape(hex, this.alpha);
+      this[$input].value =
+        hex == null || hex == '' ? '' : (this.prefixed ? '#' : '') + escape(hex, this.alpha);
     }
   }
 }

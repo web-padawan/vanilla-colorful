@@ -14,16 +14,18 @@ describe('hex-input', () => {
   }
 
   describe('lazy upgrade', () => {
-    it('should work with color property set before upgrade', async () => {
+    it('should work with all properties set before upgrade', async () => {
       const element = document.createElement('hex-input');
       document.body.appendChild(element);
       element.alpha = true;
+      element.prefixed = true;
       element.color = '#123';
       await import('../hex-input');
       expect(element.color).to.equal('#123');
       expect(element.alpha).to.be.true;
+      expect(element.prefixed).to.be.true;
       target = getTarget(element);
-      expect(target.value).to.equal('123');
+      expect(target.value).to.equal('#123');
       document.body.removeChild(element);
     });
   });
@@ -330,6 +332,60 @@ describe('hex-input', () => {
         await sendKeys({ press: '6' });
         target.dispatchEvent(new Event('blur'));
 
+        expect(target.value).to.equal('112233');
+      });
+    });
+  });
+
+  describe('prefixed', () => {
+    describe('property', () => {
+      beforeEach(async () => {
+        input = await fixture(html`<hex-input></hex-input>`);
+        input.prefixed = true;
+        input.color = '#112233';
+        target = getTarget(input);
+      });
+
+      it('should set prefixed attribute when prefixed property is set', () => {
+        expect(input.hasAttribute('prefixed')).to.be.true;
+      });
+
+      it('should set # to the input when prefixed property is set', () => {
+        expect(target.value).to.equal('#112233');
+      });
+
+      it('should remove prefixed attribute when prefixed property is set to false', () => {
+        input.prefixed = false;
+        expect(input.hasAttribute('prefixed')).to.be.false;
+      });
+
+      it('should remove # from the input when prefixed property is set to false', () => {
+        input.prefixed = false;
+        expect(target.value).to.equal('112233');
+      });
+    });
+
+    describe('attribute', () => {
+      beforeEach(async () => {
+        input = await fixture(html`<hex-input color="#112233" prefixed></hex-input>`);
+        target = getTarget(input);
+      });
+
+      it('should set prefixed to true when prefixed attribute is set', () => {
+        expect(input.prefixed).to.be.true;
+      });
+
+      it('should set # to the input when prefixed attribute is set', () => {
+        expect(target.value).to.equal('#112233');
+      });
+
+      it('should set prefixed to false when prefixed attribute is removed', () => {
+        input.removeAttribute('prefixed');
+        expect(input.prefixed).to.be.false;
+      });
+
+      it('should remove # from the input when prefixed attribute is removed', () => {
+        input.removeAttribute('prefixed');
         expect(target.value).to.equal('112233');
       });
     });
