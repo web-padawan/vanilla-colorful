@@ -12,6 +12,7 @@ const $alpha = Symbol('alpha');
 const $color = Symbol('color');
 const $saved = Symbol('saved');
 const $input = Symbol('input');
+const $init = Symbol('init');
 const $prefix = Symbol('prefix');
 const $update = Symbol('update');
 
@@ -80,26 +81,17 @@ export class HexInputBase extends HTMLElement {
     this[$update](this.color);
   }
 
-  connectedCallback(): void {
+  constructor() {
+    super();
+
     const root = this.attachShadow({ mode: 'open' });
     root.appendChild(template.content.cloneNode(true));
     const slot = root.firstElementChild as HTMLSlotElement;
-    const setInput = () => {
-      let input = this.querySelector('input');
-      if (!input) {
-        // remove all child node if no input found
-        let c;
-        while ((c = this.firstChild)) {
-          c.remove();
-        }
-        input = slot.firstChild as HTMLInputElement;
-      }
-      input.addEventListener('input', this);
-      input.addEventListener('blur', this);
-      this[$input] = input;
-    };
-    slot.addEventListener('slotchange', setInput);
-    setInput();
+    slot.addEventListener('slotchange', () => this[$init](root));
+  }
+
+  connectedCallback(): void {
+    this[$init](this.shadowRoot as ShadowRoot);
 
     // A user may set a property on an _instance_ of an element,
     // before its prototype has been connected to this class.
@@ -172,6 +164,23 @@ export class HexInputBase extends HTMLElement {
         this.prefixed = hasBooleanAttr;
       }
     }
+  }
+
+  private [$init](root: ShadowRoot): void {
+    let input = this.querySelector('input');
+    if (!input) {
+      // remove all child node if no input found
+      let c;
+      while ((c = this.firstChild)) {
+        c.remove();
+      }
+
+      input = root.querySelector('input') as HTMLInputElement;
+    }
+    input.addEventListener('input', this);
+    input.addEventListener('blur', this);
+    this[$input] = input;
+    this[$update](this.color);
   }
 
   private [$update](hex: string): void {
