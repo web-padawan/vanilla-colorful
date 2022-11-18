@@ -22,7 +22,7 @@ export class Alpha extends Slider {
         color: hsvaToHslaString(hsva)
       },
       {
-        '--gradient': `linear-gradient(90deg, ${colorFrom}, ${colorTo}`
+        '--gradient': `linear-gradient(45deg, ${colorFrom}, ${colorTo}`
       }
     ]);
 
