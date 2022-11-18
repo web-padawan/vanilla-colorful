@@ -272,13 +272,22 @@
       "command": "node ./scripts/build-styles.cjs"
     },
     "test": {
-      "command": "wtr src/test/*.ts --coverage"
+      "command": "wtr src/test/*.ts --coverage",
+      "dependencies": [
+        "build"
+      ]
     },
     "test:update": {
-      "command": "UPDATE_REFS=true wtr src/test/visual/*.ts"
+      "command": "UPDATE_REFS=true wtr src/test/visual/*.ts",
+      "dependencies": [
+        "build"
+      ]
     },
     "test:visual": {
-      "command": "wtr src/test/visual/*.ts"
+      "command": "wtr src/test/visual/*.ts",
+      "dependencies": [
+        "build"
+      ]
     },
     "watch": {
       "command": "tsc-watch",
