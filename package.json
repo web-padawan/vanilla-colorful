@@ -36,22 +36,24 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "analyze": "cem analyze --globs '*.js' 'lib/components/*.js' 'lib/entrypoints/*.js' && node ./scripts/build-web-types.cjs",
-    "build": "npm run styles && tsc",
-    "deploy": "npm run dist && gh-pages -d dist",
-    "dev": "npm run watch & npm run serve",
-    "dist": "npm run build && rimraf dist && rollup -c rollup.config.cjs",
-    "lint": "eslint src --ext .ts",
-    "prepublishOnly": "npm run build && npm run analyze",
+    "analyze": "wireit",
+    "build": "wireit",
+    "clean": "wireit",
+    "deploy": "wireit",
+    "dev": "wireit",
+    "dist": "wireit",
+    "generate:types": "wireit",
+    "lint": "wireit",
+    "prepack": "npm run generate:types",
     "release": "standard-version",
-    "serve": "web-dev-server --node-resolve --open",
-    "size": "npm run build && size-limit",
-    "start": "web-dev-server --app-index dist/index.html --open",
-    "styles": "node ./scripts/build-styles.cjs",
-    "test": "wtr src/test/*.ts --coverage",
-    "test:update": "UPDATE_REFS=true wtr src/test/visual/*.ts",
-    "test:visual": "wtr src/test/visual/*.ts",
-    "watch": "tsc-watch"
+    "serve": "wireit",
+    "size": "wireit",
+    "start": "wireit",
+    "styles": "wireit",
+    "test": "wireit",
+    "test:update": "wireit",
+    "test:visual": "wireit",
+    "watch": "wireit"
   },
   "files": [
     "*-color-picker.js",
@@ -116,7 +118,8 @@
     "standard-version": "^9.5.0",
     "throttle-debounce": "^5.0.0",
     "tsc-watch": "^5.0.3",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "wireit": "^0.7.3"
   },
   "types": "hex-color-picker.d.ts",
   "customElements": "custom-elements.json",
@@ -211,5 +214,84 @@
   "web-types": [
     "web-types.json",
     "web-types.lit.json"
-  ]
+  ],
+  "wireit": {
+    "analyze": {
+      "command": "cem analyze --globs '*.js' 'lib/components/*.js' 'lib/entrypoints/*.js'",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build": {
+      "command": "tsc",
+      "dependencies": [
+        "styles"
+      ]
+    },
+    "clean": {
+      "command": "rimraf dist"
+    },
+    "deploy": {
+      "command": "gh-pages -d dist",
+      "dependencies": [
+        "dist"
+      ]
+    },
+    "dev": {
+      "command": "web-dev-server --node-resolve --open",
+      "dependencies": [
+        "watch"
+      ]
+    },
+    "dist": {
+      "command": "rollup -c rollup.config.cjs",
+      "dependencies": [
+        "clean",
+        "build"
+      ]
+    },
+    "generate:types": {
+      "command": "node ./scripts/build-web-types.cjs",
+      "dependencies": [
+        "analyze"
+      ]
+    },
+    "lint": {
+      "command": "eslint src --ext .ts"
+    },
+    "size": {
+      "command": "size-limit",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "start": {
+      "command": "web-dev-server --app-index dist/index.html --open"
+    },
+    "styles": {
+      "command": "node ./scripts/build-styles.cjs"
+    },
+    "test": {
+      "command": "wtr src/test/*.ts --coverage",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test:update": {
+      "command": "UPDATE_REFS=true wtr src/test/visual/*.ts",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test:visual": {
+      "command": "wtr src/test/visual/*.ts",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "watch": {
+      "command": "tsc-watch",
+      "service": true
+    }
+  }
 }
