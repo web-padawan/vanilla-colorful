@@ -1,8 +1,6 @@
 import type { ColorPickerEventListener, ColorPickerEventMap } from '../types';
 import { validHex } from '../utils/validate.js';
-import { tpl } from '../utils/dom.js';
-
-const template = tpl('<slot><input part="input" spellcheck="false"></slot>');
+import { render } from '../utils/dom.js';
 
 // Escapes all non-hexadecimal characters including "#"
 const escape = (hex: string, alpha: boolean) =>
@@ -85,7 +83,7 @@ export class HexInputBase extends HTMLElement {
     super();
 
     const root = this.attachShadow({ mode: 'open' });
-    root.appendChild(template.content.cloneNode(true));
+    render(root, '<slot><input part="input" spellcheck="false"></slot>');
     const slot = root.firstElementChild as HTMLSlotElement;
     slot.addEventListener('slotchange', () => this[$init](root));
   }

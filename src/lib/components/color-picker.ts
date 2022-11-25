@@ -1,5 +1,5 @@
 import { equalColorObjects } from '../utils/compare.js';
-import { fire, tpl } from '../utils/dom.js';
+import { fire, render } from '../utils/dom.js';
 import type { AnyColor, ColorModel, HsvaColor } from '../types';
 import { Hue } from './hue.js';
 import { Saturation } from './saturation.js';
@@ -54,9 +54,8 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   constructor() {
     super();
-    const template = tpl(`<style>${this[$css].join('')}</style>`);
     const root = this.attachShadow({ mode: 'open' });
-    root.appendChild(template.content.cloneNode(true));
+    render(root, `<style>${this[$css].join('')}</style>`);
     root.addEventListener('move', this);
     this[$parts] = this[$sliders].map((slider) => new slider(root));
   }
