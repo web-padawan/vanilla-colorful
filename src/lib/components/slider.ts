@@ -1,5 +1,5 @@
 import type { HsvaColor } from '../types.js';
-import { fire, tpl } from '../utils/dom.js';
+import { fire, render } from '../utils/dom.js';
 import { clamp } from '../utils/math.js';
 
 export interface Offset {
@@ -81,10 +81,10 @@ export abstract class Slider {
   declare xy: boolean;
 
   constructor(root: ShadowRoot, part: string, aria: string, xy: boolean) {
-    const template = tpl(
+    render(
+      root,
       `<div role="slider" tabindex="0" part="${part}" ${aria}><div part="${part}-pointer"></div></div>`
     );
-    root.appendChild(template.content.cloneNode(true));
 
     const el = root.querySelector(`[part=${part}]`) as HTMLElement;
     el.addEventListener('mousedown', this);
