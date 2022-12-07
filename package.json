@@ -244,7 +244,7 @@
       ]
     },
     "dist": {
-      "command": "rollup -c rollup.config.cjs",
+      "command": "rollup -c",
       "dependencies": [
         "clean",
         "build"
@@ -257,7 +257,7 @@
       ]
     },
     "lint": {
-      "command": "eslint src --ext .ts"
+      "command": "eslint . --ext .ts --ext .js --ignore-path .gitignore"
     },
     "size": {
       "command": "size-limit",

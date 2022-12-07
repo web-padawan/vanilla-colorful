@@ -19,6 +19,6 @@
     "strict": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "demo/*.js", "*.js"],
   "exclude": []
 }
