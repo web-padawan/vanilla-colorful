@@ -4,8 +4,8 @@
   position: relative;
   width: 200px;
   height: 200px;
-  user-select: none;
   -webkit-user-select: none;
+  user-select: none;
   cursor: default;
 }
 
@@ -16,8 +16,8 @@
 [role='slider'] {
   position: relative;
   touch-action: none;
-  user-select: none;
   -webkit-user-select: none;
+  user-select: none;
   outline: none;
 }
 
