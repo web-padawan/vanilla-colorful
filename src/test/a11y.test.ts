@@ -1,4 +1,4 @@
-import { expect } from '@esm-bundle/chai';
+import { expect } from 'chai';
 import { sendKeys } from '@web/test-runner-commands';
 import { fixture, html } from '@open-wc/testing-helpers';
 import type { RgbaColorPicker } from '../rgba-color-picker';

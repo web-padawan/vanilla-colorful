@@ -1,4 +1,4 @@
-import { expect } from '@esm-bundle/chai';
+import { expect } from 'chai';
 import { clamp, round } from '../lib/utils/math.js';
 import {
   hexToRgba,
