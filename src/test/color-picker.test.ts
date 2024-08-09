@@ -1,4 +1,4 @@
-import { expect } from '@esm-bundle/chai';
+import { expect } from 'chai';
 import sinon from 'sinon';
 import { fixture, html, nextFrame } from '@open-wc/testing-helpers';
 import { hsvaToRgbString, rgbaToHsva } from '../lib/utils/convert';
