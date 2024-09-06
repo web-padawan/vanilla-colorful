@@ -22,6 +22,7 @@
       "files": [ "src/test/*.test.ts" ],
       "rules": {
         "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-unused-expressions": "off",
         "@typescript-eslint/ban-ts-comment": ["error", {
           "ts-expect-error": false
         }]

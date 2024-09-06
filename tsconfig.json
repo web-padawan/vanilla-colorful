@@ -8,6 +8,7 @@
     "sourceMap": true,
     "inlineSources": true,
     "lib": ["esnext", "es2017", "dom"],
+    "checkJs": true,
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
