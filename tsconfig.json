@@ -8,7 +8,6 @@
     "sourceMap": true,
     "inlineSources": true,
     "lib": ["esnext", "es2017", "dom"],
-    "checkJs": true,
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
@@ -20,6 +19,6 @@
     "strict": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*.ts", "demo/*.js", "*.js"],
+  "include": ["src/**/*.ts"],
   "exclude": []
 }

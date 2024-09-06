@@ -9,7 +9,7 @@
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2018,
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.eslint.json"
   },
   "env": {
     "browser": true
