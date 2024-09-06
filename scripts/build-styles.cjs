@@ -1,5 +1,5 @@
 const fs = require('fs');
-const glob = require('glob');
+const { globSync } = require('glob');
 const util = require('util');
 
 const csso = require('csso');
@@ -24,12 +24,10 @@ async function processFile(sourceFile) {
   return writeFile(outputFile, newContent, 'utf-8');
 }
 
-glob('./src/lib/styles/*.css', (err, files) => {
-  files
-    .forEach(file => {
-      processFile(file).catch(error => {
-        console.error(error);
-        process.exit(-1);
-      });
-    });
+const files = globSync('./src/lib/styles/*.css');
+files.forEach((file) => {
+  processFile(file).catch((error) => {
+    console.error(error);
+    process.exit(-1);
+  });
 });
