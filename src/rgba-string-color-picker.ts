@@ -19,7 +19,7 @@ import { RgbaStringBase } from './lib/entrypoints/rgba-string.js';
  */
 export class RgbaStringColorPicker extends RgbaStringBase {}
 
-customElements.define('rgba-string-color-picker', RgbaStringColorPicker);
+customElements.get('rgba-string-color-picker') || customElements.define('rgba-string-color-picker', RgbaStringColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

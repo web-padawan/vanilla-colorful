@@ -19,7 +19,7 @@ import { HslaStringBase } from './lib/entrypoints/hsla-string.js';
  */
 export class HslaStringColorPicker extends HslaStringBase {}
 
-customElements.define('hsla-string-color-picker', HslaStringColorPicker);
+customElements.get('hsla-string-color-picker') || customElements.define('hsla-string-color-picker', HslaStringColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

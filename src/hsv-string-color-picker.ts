@@ -17,7 +17,7 @@ import { HsvStringBase } from './lib/entrypoints/hsv-string.js';
  */
 export class HsvStringColorPicker extends HsvStringBase {}
 
-customElements.define('hsv-string-color-picker', HsvStringColorPicker);
+customElements.get('hsv-string-color-picker') || customElements.define('hsv-string-color-picker', HsvStringColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

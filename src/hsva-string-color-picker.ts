@@ -19,7 +19,7 @@ import { HsvaStringBase } from './lib/entrypoints/hsva-string.js';
  */
 export class HsvaStringColorPicker extends HsvaStringBase {}
 
-customElements.define('hsva-string-color-picker', HsvaStringColorPicker);
+customElements.get('hsva-string-color-picker') || customElements.define('hsva-string-color-picker', HsvaStringColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

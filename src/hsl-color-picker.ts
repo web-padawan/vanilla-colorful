@@ -17,7 +17,7 @@ export type { HslColor } from './lib/types';
  */
 export class HslColorPicker extends HslBase {}
 
-customElements.define('hsl-color-picker', HslColorPicker);
+customElements.get('hsl-color-picker') || customElements.define('hsl-color-picker', HslColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

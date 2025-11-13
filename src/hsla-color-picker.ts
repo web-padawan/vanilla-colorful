@@ -19,7 +19,7 @@ export type { HslaColor } from './lib/types';
  */
 export class HslaColorPicker extends HslaBase {}
 
-customElements.define('hsla-color-picker', HslaColorPicker);
+customElements.get('hsla-color-picker') || customElements.define('hsla-color-picker', HslaColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

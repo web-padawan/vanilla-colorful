@@ -17,7 +17,7 @@ export type { RgbColor } from './lib/types';
  */
 export class RgbColorPicker extends RgbBase {}
 
-customElements.define('rgb-color-picker', RgbColorPicker);
+customElements.get('rgb-color-picker') || customElements.define('rgb-color-picker', RgbColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

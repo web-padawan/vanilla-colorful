@@ -17,7 +17,7 @@ export type { HsvColor } from './lib/types';
  */
 export class HsvColorPicker extends HsvBase {}
 
-customElements.define('hsv-color-picker', HsvColorPicker);
+customElements.get('hsv-color-picker') || customElements.define('hsv-color-picker', HsvColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -17,7 +17,7 @@ import { RgbStringBase } from './lib/entrypoints/rgb-string.js';
  */
 export class RgbStringColorPicker extends RgbStringBase {}
 
-customElements.define('rgb-string-color-picker', RgbStringColorPicker);
+customElements.get('rgb-string-color-picker') || customElements.define('rgb-string-color-picker', RgbStringColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

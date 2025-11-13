@@ -17,7 +17,7 @@ import { HexBase } from './lib/entrypoints/hex.js';
  */
 export class HexColorPicker extends HexBase {}
 
-customElements.define('hex-color-picker', HexColorPicker);
+customElements.get('hex-color-picker') || customElements.define('hex-color-picker', HexColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

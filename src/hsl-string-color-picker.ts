@@ -17,7 +17,7 @@ import { HslStringBase } from './lib/entrypoints/hsl-string.js';
  */
 export class HslStringColorPicker extends HslStringBase {}
 
-customElements.define('hsl-string-color-picker', HslStringColorPicker);
+customElements.get('hsl-string-color-picker') || customElements.define('hsl-string-color-picker', HslStringColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

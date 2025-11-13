@@ -19,7 +19,7 @@ import { HexAlphaBase } from './lib/entrypoints/hex-alpha.js';
  */
 export class HexAlphaColorPicker extends HexAlphaBase {}
 
-customElements.define('hex-alpha-color-picker', HexAlphaColorPicker);
+customElements.get('hex-alpha-color-picker') || customElements.define('hex-alpha-color-picker', HexAlphaColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {

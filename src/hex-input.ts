@@ -18,7 +18,7 @@ import { HexInputBase } from './lib/entrypoints/hex-input.js';
  */
 export class HexInput extends HexInputBase {}
 
-customElements.define('hex-input', HexInput);
+customElements.get('hex-input') || customElements.define('hex-input', HexInput);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -19,7 +19,7 @@ export type { RgbaColor } from './lib/types';
  */
 export class RgbaColorPicker extends RgbaBase {}
 
-customElements.define('rgba-color-picker', RgbaColorPicker);
+customElements.get('rgba-color-picker') || customElements.define('rgba-color-picker', RgbaColorPicker);
 
 declare global {
   interface HTMLElementTagNameMap {
