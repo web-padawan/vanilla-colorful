@@ -3,6 +3,7 @@ import { visualRegressionPlugin } from '@web/test-runner-visual-regression/plugi
 
 export default {
   nodeResolve: true,
+  concurrency: 1,
   plugins: [
     esbuildPlugin({ ts: true }),
     visualRegressionPlugin({
