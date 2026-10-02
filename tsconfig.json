@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./",
+    "rootDir": "./src",
     "target": "esNext",
     "module": "esNext",
     "declaration": true,
@@ -8,7 +9,7 @@
     "sourceMap": true,
     "inlineSources": true,
     "lib": ["esnext", "es2017", "dom"],
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -17,7 +18,8 @@
     "noUnusedParameters": true,
     "skipLibCheck": true,
     "strict": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "types": ["mocha"]
   },
   "include": ["src/**/*.ts"],
   "exclude": []
