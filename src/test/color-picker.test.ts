@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { fixture, html, nextFrame } from '@open-wc/testing-helpers';
+import { fixtureSync, middleOfNode } from '@vaadin/testing-helpers';
 import { hsvaToRgbString, rgbaToHsva } from '../lib/utils/convert';
 import type { HexAlphaColorPicker } from '../hex-alpha-color-picker';
 import type { HexColorPicker } from '../hex-color-picker';
@@ -36,11 +36,6 @@ class FakeTouchEvent extends TouchEvent {
   }
 }
 
-const middleOfNode = (node: Element) => {
-  const bcr = node.getBoundingClientRect();
-  return { y: bcr.top + bcr.height / 2, x: bcr.left + bcr.width / 2 };
-};
-
 describe('hex-color-picker', () => {
   let picker: HexColorPicker;
 
@@ -56,8 +51,8 @@ describe('hex-color-picker', () => {
   });
 
   describe('default', () => {
-    beforeEach(async () => {
-      picker = await fixture(html`<hex-color-picker></hex-color-picker>`);
+    beforeEach(() => {
+      picker = fixtureSync('<hex-color-picker></hex-color-picker>');
     });
 
     it('should set default color property value', () => {
@@ -75,8 +70,9 @@ describe('hex-color-picker', () => {
   });
 
   describe('color property', () => {
-    beforeEach(async () => {
-      picker = await fixture(html`<hex-color-picker .color="${'#ccc'}"></hex-color-picker>`);
+    beforeEach(() => {
+      picker = fixtureSync('<hex-color-picker></hex-color-picker>');
+      picker.color = '#ccc';
     });
 
     it('should accept color set as a property', () => {
@@ -96,15 +92,8 @@ describe('hex-color-picker', () => {
   });
 
   describe('color attribute', () => {
-    beforeEach(async () => {
-      picker = document.createElement('hex-color-picker');
-      picker.setAttribute('color', '#488');
-      await nextFrame();
-      document.body.appendChild(picker);
-    });
-
-    afterEach(() => {
-      document.body.removeChild(picker);
+    beforeEach(() => {
+      picker = fixtureSync('<hex-color-picker color="#488"></hex-color-picker>');
     });
 
     it('should set color based on the attribute value', () => {
@@ -132,7 +121,8 @@ describe('hex-color-picker', () => {
   describe('interaction', () => {
     let hue: HTMLElement;
 
-    beforeEach(async () => {
+    beforeEach(() => {
+      picker = fixtureSync('<hex-color-picker color="#488"></hex-color-picker>');
       const root = picker.shadowRoot as ShadowRoot;
       hue = root.querySelector('[part="hue"]') as HTMLElement;
     });
@@ -152,17 +142,10 @@ describe('hex-alpha-color-picker', () => {
   let picker: HexAlphaColorPicker;
   let alpha: HTMLElement;
 
-  beforeEach(async () => {
-    picker = document.createElement('hex-alpha-color-picker');
-    picker.setAttribute('color', '#112233');
-    document.body.appendChild(picker);
-    await nextFrame();
+  beforeEach(() => {
+    picker = fixtureSync('<hex-alpha-color-picker color="#112233"></hex-alpha-color-picker>');
     const root = picker.shadowRoot as ShadowRoot;
     alpha = root.querySelector('[part="alpha"]') as HTMLElement;
-  });
-
-  afterEach(() => {
-    document.body.removeChild(picker);
   });
 
   it('should use #rrggbbaa format if alpha channel value is less than 1', () => {
@@ -181,19 +164,13 @@ describe('rgba-color-picker', () => {
   let saturation: HTMLElement;
   let alpha: HTMLElement;
 
-  beforeEach(async () => {
-    picker = document.createElement('rgba-color-picker');
+  beforeEach(() => {
+    picker = fixtureSync('<rgba-color-picker></rgba-color-picker>');
     picker.setAttribute('color', JSON.stringify({ r: 68, b: 136, g: 136, a: 1 }));
-    await nextFrame();
-    document.body.appendChild(picker);
     const root = picker.shadowRoot as ShadowRoot;
     hue = root.querySelector('[part="hue"]') as HTMLElement;
     saturation = root.querySelector('[part="saturation"]') as HTMLElement;
     alpha = root.querySelector('[part="alpha"]') as HTMLElement;
-  });
-
-  afterEach(() => {
-    document.body.removeChild(picker);
   });
 
   describe('pointers', () => {

@@ -1,5 +1,5 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
-import { fixture } from '@open-wc/testing-helpers';
+import { fixtureSync, nextFrame } from '@vaadin/testing-helpers';
 import '../../hex-color-picker.js';
 import '../../hex-alpha-color-picker.js';
 import '../../hsl-color-picker.js';
@@ -36,11 +36,12 @@ describe('visual tests', () => {
   ].forEach((type) => {
     describe(`${type}-color-picker`, () => {
       beforeEach(async () => {
-        picker = await fixture(`
+        picker = fixtureSync(`
           <div style="display: flex; justify-content: center; width: 216px; padding: 8px">
             <${type}-color-picker></${type}-color-picker>
           </div>
         `);
+        await nextFrame();
       });
 
       it('should match screenshot', async () => {

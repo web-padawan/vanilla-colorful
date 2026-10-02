@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import { fixture, html, nextFrame } from '@open-wc/testing-helpers';
+import { fixtureSync, nextFrame } from '@vaadin/testing-helpers';
 import type { HexInput } from '../hex-input';
 
 describe('hex-input', () => {
@@ -31,8 +31,8 @@ describe('hex-input', () => {
   });
 
   describe('default', () => {
-    beforeEach(async () => {
-      input = await fixture(html`<hex-input></hex-input>`);
+    beforeEach(() => {
+      input = fixtureSync('<hex-input></hex-input>');
       target = getTarget(input);
     });
 
@@ -54,7 +54,7 @@ describe('hex-input', () => {
   });
 
   describe('initialization', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
       input = document.createElement('hex-input');
     });
 
@@ -85,8 +85,9 @@ describe('hex-input', () => {
   });
 
   describe('color property', () => {
-    beforeEach(async () => {
-      input = await fixture(html`<hex-input .color="${'#ccc'}"></hex-input>`);
+    beforeEach(() => {
+      input = fixtureSync('<hex-input></hex-input>');
+      input.color = '#ccc';
       target = getTarget(input);
     });
 
@@ -104,8 +105,8 @@ describe('hex-input', () => {
   });
 
   describe('color attribute', () => {
-    beforeEach(async () => {
-      input = await fixture(html`<hex-input color="#488"></hex-input>`);
+    beforeEach(() => {
+      input = fixtureSync('<hex-input color="#488"></hex-input>');
       target = getTarget(input);
     });
 
@@ -129,8 +130,8 @@ describe('hex-input', () => {
   });
 
   describe('empty value', () => {
-    beforeEach(async () => {
-      input = await fixture(html`<hex-input color="#488"></hex-input>`);
+    beforeEach(() => {
+      input = fixtureSync('<hex-input color="#488"></hex-input>');
       target = getTarget(input);
     });
 
@@ -153,8 +154,8 @@ describe('hex-input', () => {
   });
 
   describe('custom input', () => {
-    beforeEach(async () => {
-      input = await fixture(html`<hex-input color="#488"><input type="text" /></hex-input>`);
+    beforeEach(() => {
+      input = fixtureSync('<hex-input color="#488"><input type="text" /></hex-input>');
       target = input.querySelector('input') as HTMLInputElement;
     });
 
@@ -185,8 +186,8 @@ describe('hex-input', () => {
   });
 
   describe('invalid content', () => {
-    beforeEach(async () => {
-      input = await fixture(html`<hex-input color="#488"><span></span></hex-input>`);
+    beforeEach(() => {
+      input = fixtureSync('<hex-input color="#488"><span></span></hex-input>');
     });
 
     it('should remove invalid slotted content', () => {
@@ -195,8 +196,8 @@ describe('hex-input', () => {
   });
 
   describe('events', () => {
-    beforeEach(async () => {
-      input = await fixture(html`<hex-input color="#488"></hex-input>`);
+    beforeEach(() => {
+      input = fixtureSync('<hex-input color="#488"></hex-input>');
       target = getTarget(input);
       target.focus();
     });
@@ -246,8 +247,8 @@ describe('hex-input', () => {
 
   describe('alpha', () => {
     describe('property', () => {
-      beforeEach(async () => {
-        input = await fixture(html`<hex-input></hex-input>`);
+      beforeEach(() => {
+        input = fixtureSync('<hex-input></hex-input>');
         input.alpha = true;
         input.color = '#11223344';
         target = getTarget(input);
@@ -307,8 +308,8 @@ describe('hex-input', () => {
     });
 
     describe('attribute', () => {
-      beforeEach(async () => {
-        input = await fixture(html`<hex-input color="#11223344" alpha></hex-input>`);
+      beforeEach(() => {
+        input = fixtureSync('<hex-input color="#11223344" alpha></hex-input>');
         target = getTarget(input);
       });
 
@@ -364,8 +365,8 @@ describe('hex-input', () => {
 
   describe('prefixed', () => {
     describe('property', () => {
-      beforeEach(async () => {
-        input = await fixture(html`<hex-input></hex-input>`);
+      beforeEach(() => {
+        input = fixtureSync('<hex-input></hex-input>');
         input.prefixed = true;
         input.color = '#112233';
         target = getTarget(input);
@@ -391,8 +392,8 @@ describe('hex-input', () => {
     });
 
     describe('attribute', () => {
-      beforeEach(async () => {
-        input = await fixture(html`<hex-input color="#112233" prefixed></hex-input>`);
+      beforeEach(() => {
+        input = fixtureSync('<hex-input color="#112233" prefixed></hex-input>');
         target = getTarget(input);
       });
 
