@@ -86,6 +86,7 @@
   ],
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.10.3",
+    "@eslint/compat": "^2.1.1",
     "@open-wc/testing-helpers": "^3.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
@@ -93,8 +94,6 @@
     "@types/chai": "^5.2.3",
     "@types/mocha": "^10.0.7",
     "@types/sinon": "^17.0.3",
-    "@typescript-eslint/eslint-plugin": "^8.4.0",
-    "@typescript-eslint/parser": "^8.4.0",
     "@web/dev-server": "^1.0.0",
     "@web/dev-server-esbuild": "^2.0.0",
     "@web/rollup-plugin-html": "^4.0.0",
@@ -103,11 +102,12 @@
     "@web/test-runner-visual-regression": "^1.0.0",
     "chai": "^6.3.0",
     "csso": "^5.0.5",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
     "gh-pages": "^6.1.1",
     "glob": "^10.4.5",
+    "globals": "^17.13.0",
     "lint-staged": "^15.2.10",
     "lit-html": "^3.2.0",
     "prettier": "^3.9.9",
@@ -120,14 +120,14 @@
     "throttle-debounce": "^5.0.2",
     "tsc-watch": "^6.2.0",
     "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.0",
     "wireit": "^0.14.9"
   },
   "types": "hex-color-picker.d.ts",
   "customElements": "custom-elements.json",
   "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "prettier --write"
+    "*.{ts,js}": [
+      "eslint --fix"
     ]
   },
   "sideEffects": [
@@ -258,7 +258,7 @@
       ]
     },
     "lint": {
-      "command": "eslint . --ext .ts --ext .js --ignore-path .gitignore"
+      "command": "eslint ."
     },
     "size": {
       "command": "size-limit",
