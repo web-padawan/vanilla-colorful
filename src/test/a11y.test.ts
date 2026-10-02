@@ -1,14 +1,14 @@
 import { expect } from 'chai';
 import { sendKeys } from '@web/test-runner-commands';
-import { fixture, html } from '@open-wc/testing-helpers';
+import { fixtureSync } from '@vaadin/testing-helpers';
 import type { RgbaColorPicker } from '../rgba-color-picker';
 import '../rgba-color-picker.js';
 
 describe('accessibility', () => {
   let picker: RgbaColorPicker;
 
-  beforeEach(async () => {
-    picker = await fixture(html`<rgba-color-picker></rgba-color-picker>`);
+  beforeEach(() => {
+    picker = fixtureSync('<rgba-color-picker></rgba-color-picker>');
     picker.color = { r: 30, g: 136, b: 230, a: 1 };
   });
 
