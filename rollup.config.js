@@ -7,9 +7,5 @@ export default {
   output: {
     dir: './dist'
   },
-  plugins: [
-    html(),
-    nodeResolve(),
-    terser()
-  ]
+  plugins: [html(), nodeResolve(), terser()]
 };

@@ -53,5 +53,4 @@ export interface ColorPickerEventMap<T> extends HTMLElementEventMap {
 }
 
 export type ColorPickerEventListener<T> =
-  | ColorChangedEventListener<T>
-  | ColorChangedEventListenerObject<T>;
+  ColorChangedEventListener<T> | ColorChangedEventListenerObject<T>;

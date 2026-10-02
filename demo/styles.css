@@ -9,7 +9,11 @@
 body {
   background-color: #1e88e5;
   color: #fff;
-  font: normal 20px/1.4 "Recursive", Arial, Helvetica, sans-serif;
+  font:
+    normal 20px/1.4 'Recursive',
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 
 .wrapper {
@@ -34,19 +38,22 @@ rgba-color-picker:not(:defined) {
     top 0px left 0px,
     top 140px left 0px,
     top 152px left 0px;
-  background-size: 200px 140px, 200px 140px, 200px 12px, 200px 24px;
+  background-size:
+    200px 140px,
+    200px 140px,
+    200px 12px,
+    200px 24px;
   background-repeat: no-repeat;
   background-color: rgb(30, 136, 229);
   background-image:
     linear-gradient(to top, #000, rgba(0, 0, 0, 0)),
-    linear-gradient(to right, #fff, rgba(255, 255, 255, 0)),
-    linear-gradient(to right, #000, #000),
+    linear-gradient(to right, #fff, rgba(255, 255, 255, 0)), linear-gradient(to right, #000, #000),
     linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
 }
 
 rgba-color-picker:not(:defined)::after {
   display: block;
-  content: "";
+  content: '';
   position: absolute;
   border-radius: 0 0 9px 9px;
   top: 176px;
@@ -57,7 +64,7 @@ rgba-color-picker:not(:defined)::after {
 
 rgba-color-picker:not(:defined)::before {
   display: block;
-  content: "";
+  content: '';
   position: absolute;
   border-radius: 0 0 9px 9px;
   top: 176px;
