@@ -21,5 +21,5 @@ export default {
       functions: 100,
       lines: 100
     }
-  },
+  }
 };

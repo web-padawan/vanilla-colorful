@@ -34,11 +34,11 @@ export abstract class ColorPicker<C extends AnyColor> extends HTMLElement {
 
   protected abstract get colorModel(): ColorModel<C>;
 
-  private declare [$hsva]: HsvaColor;
+  declare private [$hsva]: HsvaColor;
 
-  private declare [$color]: C;
+  declare private [$color]: C;
 
-  private declare [$parts]: Slider[];
+  declare private [$parts]: Slider[];
 
   get color(): C {
     return this[$color];

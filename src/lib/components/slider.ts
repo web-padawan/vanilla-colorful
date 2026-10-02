@@ -51,22 +51,22 @@ const keyMove = (target: Slider, event: KeyboardEvent): void => {
           keyCode === 39 // Arrow Right
             ? 0.01
             : keyCode === 37 // Arrow Left
-            ? -0.01
-            : keyCode === 34 // Page Down
-            ? 0.05
-            : keyCode === 33 // Page Up
-            ? -0.05
-            : keyCode === 35 // End
-            ? 1
-            : keyCode === 36 // Home
-            ? -1
-            : 0,
+              ? -0.01
+              : keyCode === 34 // Page Down
+                ? 0.05
+                : keyCode === 33 // Page Up
+                  ? -0.05
+                  : keyCode === 35 // End
+                    ? 1
+                    : keyCode === 36 // Home
+                      ? -1
+                      : 0,
         y:
           keyCode === 40 // Arrow down
             ? 0.01
             : keyCode === 38 // Arrow Up
-            ? -0.01
-            : 0
+              ? -0.01
+              : 0
       },
       true
     )

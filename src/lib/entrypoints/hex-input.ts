@@ -33,15 +33,15 @@ export class HexInputBase extends HTMLElement {
     return ['alpha', 'color', 'prefixed'];
   }
 
-  private declare [$color]: string;
+  declare private [$color]: string;
 
-  private declare [$alpha]: boolean;
+  declare private [$alpha]: boolean;
 
-  private declare [$prefix]: boolean;
+  declare private [$prefix]: boolean;
 
-  private declare [$saved]: string;
+  declare private [$saved]: string;
 
-  private declare [$input]: HTMLInputElement;
+  declare private [$input]: HTMLInputElement;
 
   get color(): string {
     return this[$color];
